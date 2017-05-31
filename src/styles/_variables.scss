@@ -1,3 +1,5 @@
+/// Colors
+
 // Brand colors
 $dark-red: #83001f;
 $red: #db3e14;
@@ -10,3 +12,13 @@ $black: #333;
 
 // other colors
 $blue: #347bff;
+
+
+/// Breakpoints
+$breakpoints: (
+	xs: 0,
+	sm: 576px,
+	md: 768px,
+	lg: 992px,
+	xl: 1200px
+) !default;

@@ -1,0 +1,14 @@
+@import "variables";
+
+// Makes the @content apply to the given $breakpointName and wider.
+@mixin media-breakpoint-up($breakpointName) {
+	$width: map-get($breakpoints, $breakpointName);
+
+	@if $width {
+		@media (min-width: $width) {
+			@content;
+		}
+	} @else {
+		@error "Impossible to find breakpoint #{$breakpointName}";
+	}
+}
