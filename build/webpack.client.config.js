@@ -54,7 +54,7 @@ if (config.isProduction) {
 		}),
 		// auto generate service worker
 		new SWPrecachePlugin({
-			cacheId: "vue-webpack-ssr-fully-featured",
+			cacheId: "wikitolearn",
 			filename: "service-worker.js",
 			minify: true,
 

@@ -22,7 +22,7 @@ const clientMetaInfoMixin = {
 	mounted() {
 		const meta = getMeta(this)
 		if (meta) {
-			document.title = `${meta.title} - SiteName`
+			document.title = `${meta.title} - WikiToLearn`
 			document.querySelector("meta[name=description]")
 				.setAttribute("content", meta.description)
 		}

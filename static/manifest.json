@@ -1,6 +1,6 @@
 {
-	"name": "PWA",
-	"short_name": "PWA",
+	"name": "WikiToLearn",
+	"short_name": "WikiToLearn",
 	"icons": [],
 	"start_url": "/",
 	"background_color": "#f2f3f5",

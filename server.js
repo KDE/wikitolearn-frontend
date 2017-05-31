@@ -92,8 +92,8 @@ app.use("/manifest.json", serve("./static/manifest.json", true))
 app.get("*", (req, res) => {
 	const context = {
 		meta: {
-			title: "Default Title",
-			description: "Default description"
+			title: "WikiToLearn",
+			description: "WikiToLearn description"
 		},
 		url: req.url
 	}

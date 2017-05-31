@@ -1,6 +1,6 @@
-# vue-webpack-ssr-fully-featured
+# wikitolearn-frontend
 
-A fully featured boilerplate PWA project that uses Vue, Vuex, Vue-Router, vue-i18n (for localization), Server Side Rendering and much more
+This is the PWA that will be used as a frontend for WikiToLearn in the future. It is based on [vue-pwa-ssr-fully-featured](https://github.com/crisbal/vue-pwa-ssr-fully-featured)
 
 ## Todo
 
