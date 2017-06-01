@@ -2,9 +2,13 @@
 	main.view--Home
 		h1 Welcome to WikiToLearn!
 		router-link(to="/showcase") Go to showcase
+		// TODO: Move to BadgeContainer?
 		.badges
-			Badge(name="English")
-			Badge(name="Maths")
+			Badge(
+				v-for="badge in badges"
+				:name="badge.name"
+				:key="badge.name"
+			)
 </template>
 
 <script>
@@ -14,6 +18,12 @@ export default {
 	name: "Home",
 	components: {
 		Badge
+	},
+	computed: {
+		badges: () => [
+			{ name: "English" },
+			{ name: "Maths" }
+		]
 	},
 	meta() {
 		return {
