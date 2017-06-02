@@ -6,7 +6,7 @@
 		.badges
 			Badge(
 				v-for="badge in badges"
-				:name="badge.name"
+				:departmentName="badge.name"
 				:key="badge.name"
 			)
 </template>

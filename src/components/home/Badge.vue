@@ -1,7 +1,10 @@
 <template lang="pug">
 	.Badge
 		// TODO: replace with router-link
-		a.Badge__name(href="#") {{ name }}
+		router-link.Badge__name(:to=`{
+				name: 'Department',
+				params: { departmentName: departmentName }
+			}`) {{ departmentName }}
 </template>
 
 <style lang="scss">
@@ -16,7 +19,7 @@
 export default {
 	name: "Badge",
 	props: {
-		name: {
+		departmentName: {
 			type: String,
 			required: true
 		}

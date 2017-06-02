@@ -7,10 +7,12 @@ Vue.use(Router)
 // component code is loaded on-demand only when the route is visited.
 // When do you use on-demand load? When the view is not one of the important one. When a route is important? You decide
 import Home from "views/Home" // include in the main bundle
+import Department from "views/Department"
 const NotFound = () => System.import("views/NotFound") // load dynamically when needed
 
 let routes = [
-	{ path: "/", component: Home }
+	{ path: "/", component: Home, name: "Home" },
+	{ path: "/:departmentName", component: Department, name: "Department" }
 ]
 
 if (process.env.NODE_ENV !== "production") {
