@@ -1,11 +1,18 @@
 <template lang="pug">
-	<h1>Department of {{ departmentName }}</h1>
+	.Department
+		h1 Department of {{ departmentName }}
+		Category(
+			:categoryName="departmentName",
+			:showName="false")
 </template>
 
 
 <script>
+import Category from "components/Category"
+
 export default {
 	name: "Department",
+	components: { Category },
 	computed: {
 		departmentName() {
 			return this.$route.params.departmentName
