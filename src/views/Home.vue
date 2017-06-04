@@ -16,9 +16,7 @@ import Badge from "components/home/Badge"
 
 export default {
 	name: "Home",
-	components: {
-		Badge
-	},
+	components: { Badge },
 	computed: {
 		badges: () => [
 			{ name: "English" },
