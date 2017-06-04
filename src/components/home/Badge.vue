@@ -1,6 +1,5 @@
 <template lang="pug">
 	.Badge
-		// TODO: replace with router-link
 		router-link.Badge__name(:to=`{
 				name: 'Department',
 				params: { departmentName: departmentName }
