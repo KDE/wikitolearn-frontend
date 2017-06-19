@@ -1,11 +1,9 @@
 <template lang="pug">
 	.Category
-		h3.Category__name(v-if="showName") {{ categoryName }}
+		h3.Category__name(v-if="showName") {{ category.display_name }}
 		.Category__subcategories
 			b Categories
-			.Category__subcategory Programming
-			.Category__subcategory Database
-			.Category__subcategory Maths
+			.Category__subcategory(v-for="subcategory in category.subcategories") {{ subcategory.display_name }}
 		.Category__courses
 			b Uncategorized Courses
 			.Category__course Developing Android Apps
@@ -20,8 +18,8 @@
 export default {
 	name: "Category",
 	props: {
-		categoryName: {
-			type: String,
+		category: {
+			type: Object,
 			required: true
 		},
 		showName: {

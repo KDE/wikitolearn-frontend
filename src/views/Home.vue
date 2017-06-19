@@ -2,7 +2,6 @@
 	main.view--Home
 		h1 Welcome to WikiToLearn!
 		router-link(to="/showcase") Go to showcase
-		// TODO: Move to BadgeContainer?
 		.badges
 			Badge(
 				v-for="badge in badges"
@@ -18,10 +17,12 @@ export default {
 	name: "Home",
 	components: { Badge },
 	computed: {
-		badges: () => [
-			{ name: "English" },
-			{ name: "Maths" }
-		]
+		badges() {
+			return this.$store.state.rootCategories
+		}
+	},
+	asyncData({ store }) {
+		return store.dispatch("FETCH_ROOT_CATEGORIES")
 	},
 	meta() {
 		return {
