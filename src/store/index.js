@@ -9,7 +9,9 @@ Vue.use(Vuex)
 export function createStore() {
 	return new Vuex.Store({
 		state: {
-			modals: []
+			rootCategories: null,
+			categories: {},
+			counter: 12
 		},
 		actions,
 		mutations
