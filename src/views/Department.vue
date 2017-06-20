@@ -1,5 +1,5 @@
 <template lang="pug">
-	.Department
+	.view--Department
 		h1 Department of {{ category.name }}
 		Category(
 			:category="category",
@@ -8,7 +8,6 @@
 
 
 <script>
-
 import Category from "components/Category"
 
 export default {
@@ -25,7 +24,7 @@ export default {
 	meta() {
 		return {
 			title: this.category.display_name,
-			description: "This is the meta description for the home page"
+			description: "This is the meta description for the department page"
 		}
 	}
 }
