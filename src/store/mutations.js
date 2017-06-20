@@ -7,5 +7,9 @@ export const mutations = {
 
 	SET_CATEGORY(state, { category }) {
 		Vue.set(state.categories, category.name, category)
+	},
+
+	SET_COURSE(state, { course }) {
+		Vue.set(state.courses, course.name, course)
 	}
 }
