@@ -12,7 +12,10 @@
 			b Courses
 			ul
 				li(v-for="course in category.courses")
-					a.Category__course(href="#") {{ course.display_name }}
+					router-link.Category__course(:to=`{
+						name: 'Course',
+						params: { courseName: course.name }
+					}`) {{ course.display_name }}
 </template>
 
 <style lang="scss">
