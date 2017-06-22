@@ -11,7 +11,8 @@ export function createStore() {
 		state: {
 			rootCategories: null,
 			categories: {},
-			courses: {}
+			courses: {},
+			pages: {}
 		},
 		actions,
 		mutations

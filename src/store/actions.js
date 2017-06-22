@@ -1,5 +1,7 @@
 import { Categories } from "api/Categories"
 import { Courses } from "api/Courses"
+import { Pages } from "api/Pages"
+
 
 export const actions = {
 	FETCH_ROOT_CATEGORIES({ commit }) {
@@ -20,6 +22,13 @@ export const actions = {
 		return Courses.get(courseName)
 			.then((response) => {
 				commit("SET_COURSE", { course: response.data })
+			})
+	},
+
+	FETCH_PAGE({ commit }, { pageTitle }) {
+		return Pages.get(pageTitle)
+			.then((response) => {
+				commit("SET_PAGE", { page: response.data })
 			})
 	}
 }

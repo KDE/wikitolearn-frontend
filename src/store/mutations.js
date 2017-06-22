@@ -11,5 +11,9 @@ export const mutations = {
 
 	SET_COURSE(state, { course }) {
 		Vue.set(state.courses, course.name, course)
+	},
+
+	SET_PAGE(state, { page }) {
+		Vue.set(state.pages, page.title, page)
 	}
 }
