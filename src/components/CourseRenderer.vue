@@ -10,12 +10,14 @@
 				h3.CourseRenderer__level-two__title {{ levelTwoIndex+1 }}. {{ levelTwo }}
 				ul
 					li(v-for="levelThree in course.levelsThree[levelTwoIndex]")
-						a(href="#") {{ levelThree }}
+						router-link(:to=`{
+							name: 'Page',
+							params: { pageTitle: (course.root + "/" + levelTwo  + "/" + levelThree) }
+						}`) {{ levelThree }}
 </template>
 
 <style lang="scss">
 .CourseRenderer {
-
 	&__description {
 		font-style: italic;
 		margin: 1rem;

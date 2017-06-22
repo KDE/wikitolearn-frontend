@@ -10,13 +10,15 @@ Vue.use(Router)
 import Home from "views/Home"
 import Department from "views/Department"
 import Course from "views/Course"
+import Page from "views/Page"
 
 const NotFound = () => System.import("views/NotFound") // load dynamically when needed
 
 let routes = [
 	{ path: "/", component: Home, name: "Home" },
-	{ path: "/:departmentName", component: Department, name: "Department" },
-	{ path: "/c/:courseName", component: Course, name: "Course" }
+	{ path: "/d/:departmentName", component: Department, name: "Department" },
+	{ path: "/c/:courseName", component: Course, name: "Course" },
+	{ path: "/p/:pageTitle(.+)", component: Page, name: "Page" }
 ]
 
 if (process.env.NODE_ENV !== "production") {
