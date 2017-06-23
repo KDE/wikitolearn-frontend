@@ -14,17 +14,21 @@ import Page from "views/Page"
 
 const NotFound = () => System.import("views/NotFound") // load dynamically when needed
 
-let routes = [
+let routes = []
+
+if (process.env.NODE_ENV !== "production") {
+	const Showcase = () => System.import("views/dev/Showcase")
+	const UIDemo = () => System.import("views/dev/UIDemo")
+	routes.push({ path: "/showcase", component: Showcase })
+	routes.push({ path: "/uidemo", component: UIDemo })
+}
+
+routes = routes.concat([
 	{ path: "/", component: Home, name: "Home" },
 	{ path: "/d/:departmentName", component: Department, name: "Department" },
 	{ path: "/c/:courseName", component: Course, name: "Course" },
 	{ path: "/p/:pageTitle(.+)", component: Page, name: "Page" }
-]
-
-if (process.env.NODE_ENV !== "production") {
-	const Showcase = () => System.import("views/Showcase")
-	routes.push({ path: "/showcase", component: Showcase })
-}
+])
 
 // push as last element because the wildcard match will catch all the unknown urls
 routes.push({ path: "*", component: NotFound })
