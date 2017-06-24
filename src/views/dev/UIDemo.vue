@@ -3,21 +3,21 @@
 		h1 Demo for UI Elements
 		.UIDemo__section
 			h2 Buttons
-			Button Button
-			Button(type="green") Green Button
-			Button(type="blue") Blue Button
+			WTLButton Button
+			WTLButton(type="green") Green Button
+			WTLButton(type="blue") Blue Button
 </template>
 
 <style lang="scss">
 </style>
 
 <script>
-import Button from "components/ui/Button"
+import WTLButton from "components/ui/WTLButton"
 
 export default {
 	name: "UIDemo",
 	components: {
-		Button
+		WTLButton
 	},
 	meta() {
 		return {

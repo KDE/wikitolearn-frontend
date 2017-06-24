@@ -1,8 +1,9 @@
 <template lang="pug">
-	div.Button(
+	div.WTLButton(
 		:class=`[
-			type ? 'Button--' + type : '',
-		]`
+			type ? 'WTLButton--' + type : '',
+		]`,
+		@click="$emit('click')"
 	)
 		slot
 </template>
@@ -30,10 +31,9 @@
 	}
 }
 
-.Button {
+.WTLButton {
 	display: inline-block;
 	padding: 0.5rem 1rem;
-	margin-left: 0.5rem;
 	border-radius: 2px;
 	cursor: pointer;
 
@@ -57,7 +57,7 @@
 
 <script>
 export default {
-	name: "Button",
+	name: "WTLButton",
 	props: {
 		type: {
 			type: String,
