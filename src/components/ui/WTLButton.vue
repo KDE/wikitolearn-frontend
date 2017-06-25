@@ -1,5 +1,5 @@
 <template lang="pug">
-	div.WTLButton(
+	.WTLButton(
 		:class=`[
 			type ? 'WTLButton--' + type : '',
 		]`,
@@ -41,14 +41,26 @@
 		@include setBgColorAndHover(white, $amount: 10%, $border: true);
 	}
 
-	&--green {
+	&--success {
 		@include setBgColorAndHover($green);
 
 		color: white;
 	}
 
-	&--blue {
+	&--info {
 		@include setBgColorAndHover($blue);
+
+		color: white;
+	}
+
+	&--warning {
+		@include setBgColorAndHover($yellow);
+
+		color: white;
+	}
+
+	&--error {
+		@include setBgColorAndHover($red);
 
 		color: white;
 	}
