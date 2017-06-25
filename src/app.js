@@ -8,11 +8,14 @@ import { createRouter } from "./router"
 import App from "./App.vue"
 
 
-import metaInfo from "./utils/metaInfo.mixin"
+import metaInfo from "utils/metaInfo.mixin"
 Vue.mixin(metaInfo)
 
 // allow i18n for components
 Vue.use(VueI18n)
+
+import Dialog from "components/ui/Dialog"
+Vue.prototype.$dialog = Dialog
 
 // we use "primaryLanguage" as a key because it does not really matter
 // we can do this since the file is loaded using the `LANGUAGE_FILENAME` key
