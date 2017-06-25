@@ -5,12 +5,12 @@
 		]`
 	)
 		.Dialog__wrapper(v-if="active")
-				.Dialog__body
-					.Dialog__header {{ title }}
-					.Dialog__content {{ type }} {{ content }}
-					.Dialog__footer
-						WTLButton(v-if="dialogType == 'confirm'", @click="cancel()") Cancel
-						WTLButton(:type="type", @click="confirm()") OK
+			.Dialog__body
+				.Dialog__header {{ title }}
+				.Dialog__content {{ type }} {{ content }}
+				.Dialog__footer
+					WTLButton(v-if="dialogType == 'confirm'", @click="cancel()") Cancel
+					WTLButton(:type="type", @click="confirm()") OK
 </template>
 
 <style lang="scss">
@@ -57,6 +57,10 @@
 
 	&__footer {
 		text-align: right;
+
+		.WTLButton {
+			margin-left: 0.25rem;
+		}
 	}
 
 	&--error {
@@ -109,6 +113,12 @@ export default {
 		close() {
 			this.$emit("close")
 			this.active = false
+
+			// remove the dom element after 1sec
+			setTimeout(() => {
+				this.$destroy()
+				this.$el.remove()
+			}, 1000)
 		},
 		confirm() {
 			this.$emit("confirm")
