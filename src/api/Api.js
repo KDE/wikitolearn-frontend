@@ -1,9 +1,20 @@
 import axios from "axios"
 
-const config = {
-	protocol: "http",
-	host: "localhost:9000",
-	preamble: "api/v1"
+let config
+if (process.env.RUNNING_ENV === "docker") {
+	// we are running inside a docker, we need an external URL to reach the API
+	config = {
+		protocol: "http",
+		host: process.env.API_HOSTNAME,
+		preamble: "api/v1"
+	}
+}	else {
+	// we are running locally
+	config = {
+		protocol: "http",
+		host: "localhost:9000",
+		preamble: "api/v1"
+	}
 }
 
 class ApiClass {

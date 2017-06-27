@@ -29,7 +29,10 @@ const commonPlugins = [
 
 		"LANGUAGE_MAIN_FILENAME": JSON.stringify(config.language.filename),
 		"LANGUAGE_FALLBACK_FILENAME": config.fallbackLanguage ? JSON.stringify(config.fallbackLanguage.filename) : null,
-		"LANGUAGE_ISRTL": config.language.isRTL
+		"LANGUAGE_ISRTL": config.language.isRTL,
+
+		"process.env.RUNNING_ENV": JSON.stringify(config.runningEnv),
+		"process.env.API_HOSTNAME": JSON.stringify(config.apiHostname)
 	}),
 	new StyleLintPlugin({
 		files: ["src/**/*.vue", "src/**/*.scss"]
