@@ -1,29 +1,15 @@
 import Error from "components/Error"
 
 export default {
-	components: { Error },
-	mounted() {
-		const meta = getMeta(this)
-		if (meta) {
-			document.title = `${meta.title} - WikiToLearn`
-			document.querySelector("meta[name=description]")
-				.setAttribute("content", meta.description)
-		}
-	},
-	data() {
-		return {
-			internal_error: null
-		}
-	},
-	beforeMount() {
-		this.internal_error = this.$store.state.error
-	},
+	components: { Error }, // expose the component to visualize the error
 	beforeDestroy() {
-		this.$store.commit("CLEAR_ERROR")
+		if (!module.hot) { // don't clear the error in case of hot reload
+			this.$store.commit("CLEAR_ERROR") // unset the error in the store
+		}
 	},
 	computed: {
 		error() {
-			return this.internal_error || this.$store.state.error
+			return this.$store.state.error
 		}
 	}
 }
