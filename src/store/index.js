@@ -12,7 +12,8 @@ export function createStore() {
 			rootCategories: null,
 			categories: {},
 			courses: {},
-			pages: {}
+			pages: {},
+			error: null
 		},
 		actions,
 		mutations

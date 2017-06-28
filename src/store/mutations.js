@@ -15,5 +15,13 @@ export const mutations = {
 
 	SET_PAGE(state, { page }) {
 		Vue.set(state.pages, page.title, page)
+	},
+
+	SET_ERROR(state, { error }) {
+		state.error = Object.assign({}, error)
+	},
+
+	CLEAR_ERROR(state) {
+		state.error = null
 	}
 }

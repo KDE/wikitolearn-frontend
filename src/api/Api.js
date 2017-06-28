@@ -26,12 +26,18 @@ class ApiClass {
 		endpoint = this._cleanEndpoint(endpoint)
 
 		return axios.get(`${this.baseUrl}/${endpoint}`, options)
+			.then((response) => {
+				return Promise.resolve(response.data)
+			})
 	}
 
 	post(endpoint, data = {}, options = {}) {
 		endpoint = this._cleanEndpoint(endpoint)
 
 		return axios.get(`${this.baseUrl}/${endpoint}`, data, options)
+			.then((response) => {
+				return Promise.resolve(response.data)
+			})
 	}
 
 	_cleanEndpoint(endpoint) {
