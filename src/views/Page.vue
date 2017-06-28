@@ -1,12 +1,12 @@
 <template lang="pug">
 	.view--Page
-		PageRenderer(v-if="error == null", :page="page")
-		p(v-if="error != null") {{ error.error }}
+		Error(:error="error")
+		PageRenderer(v-if="!error", :page="page")
 </template>
 
 <style lang="scss">
 .view--Page {
-	.Page__PageRenderer {
+	.PageRenderer {
 		border: 1px solid black;
 	}
 }
@@ -14,23 +14,13 @@
 
 <script>
 import PageRenderer from "components/PageRenderer"
+import ErrorHandler from "mixins/errorHandler"
 
 export default {
 	name: "Page",
+	mixins: [ErrorHandler],
 	components: { PageRenderer },
-	data() {
-		return {
-			internal_error: null
-		}
-	},
-	beforeMount() {
-		this.internal_error = this.$store.state.error
-		this.$store.commit("CLEAR_ERROR")
-	},
 	computed: {
-		error() {
-			return this.internal_error || this.$store.state.error
-		},
 		page() {
 			return this.$store.state.pages[this.$route.params.pageTitle]
 		},
