@@ -2,6 +2,10 @@ import Vue from "vue"
 import "es6-promise/auto"
 import { createApp } from "./app"
 
+import ProgressBar from "components/ProgressBar"
+const bar = Vue.prototype.$bar = new Vue(ProgressBar).$mount()
+document.body.appendChild(bar.$el)
+
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
 	beforeRouteUpdate(to, from, next) {
@@ -36,19 +40,25 @@ router.onReady(() => {
 		const matched = router.getMatchedComponents(to)
 		const prevMatched = router.getMatchedComponents(from)
 		let diffed = false
-		const activated = matched.filter((component, i) => {
-			return diffed || (diffed = (prevMatched[i] !== component))
+		const activated = matched.filter((c, i) => {
+			return diffed || (diffed = (prevMatched[i] !== c))
 		})
-		if (!activated.length) {
+		const asyncDataHooks = activated.map((c) => c.asyncData).filter((_) => _)
+
+		if (!asyncDataHooks.length) {
 			return next()
 		}
-		Promise.all(activated.map((c) => {
-			if (c.asyncData) {
-				return c.asyncData({ store, route: to })
-			}
-		})).then(() => {
-			next()
-		}).catch(next)
+
+		bar.start()
+		Promise.all(asyncDataHooks.map((hook) => hook({ store, route: to })))
+			.then(() => {
+				bar.finish()
+				next()
+			})
+			.catch(() => {
+				bar.set(100)
+				bar.fail()
+			})
 	})
 
 	// actually mount to DOM
