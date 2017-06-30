@@ -12,16 +12,18 @@ import Department from "views/Department"
 import Course from "views/Course"
 import Page from "views/Page"
 
-const NotFound = () => System.import("views/NotFound") // load dynamically when needed
 
 let routes = []
 
 if (process.env.NODE_ENV !== "production") {
-	const Showcase = () => System.import("views/dev/Showcase")
+	const Showcase = () => System.import("views/dev/Showcase") // load dynamically when needed
 	const UIDemo = () => System.import("views/dev/UIDemo")
 	routes.push({ path: "/showcase", component: Showcase })
 	routes.push({ path: "/uidemo", component: UIDemo })
 }
+
+const NotFound = () => System.import("views/NotFound")
+routes.push({ path: "/404", component: NotFound, name: "NotFound" })
 
 routes = routes.concat([
 	{ path: "/", component: Home, name: "Home" },

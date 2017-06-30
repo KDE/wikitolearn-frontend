@@ -10,7 +10,8 @@ export default {
 	meta() {
 		return {
 			title: "Not Found",
-			description: "Page was not found"
+			description: "Page was not found",
+			httpCode: 404
 		}
 	}
 }

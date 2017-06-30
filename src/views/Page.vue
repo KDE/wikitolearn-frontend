@@ -41,7 +41,8 @@ export default {
 	meta() {
 		return {
 			title: this.pageTitle,
-			description: "This is the meta description for the page"
+			description: "This is the meta description for the page",
+			httpStatusCode: this.page ? 200 : 404
 		}
 	}
 }
