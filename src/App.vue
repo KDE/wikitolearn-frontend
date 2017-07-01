@@ -2,7 +2,7 @@
 	#app.App(:class="{ 'App--rtl': isRTL }")
 		noscript Your browser does not have JS enabled, you are still able to browse the website but you won't be able to access advanced features such as editing or loggin-in.
 		AppHeader
-		.content
+		.App__content
 			transition(name="fade", mode="out-in")
 				router-view.view
 </template>
@@ -18,7 +18,7 @@ noscript {
 	font-size: 1.5rem;
 }
 
-.content {
+.App__content {
 	padding: 1rem;
 }
 
