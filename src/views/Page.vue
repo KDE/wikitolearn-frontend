@@ -1,7 +1,10 @@
 <template lang="pug">
 	.view--Page
+		PageRenderer(
+			v-if="!error && page",
+			:page="page"
+		)
 		Error(:error="error")
-		PageRenderer(v-if="!error", :page="page")
 </template>
 
 <style lang="scss">

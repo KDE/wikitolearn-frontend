@@ -1,29 +1,44 @@
 <template lang="pug">
 	.view--Course
-		h1 {{ course.name }}
+		h1 {{ courseName }}
 		CourseRenderer(
+			v-if="!error && course",
 			:course="course",
-			:showName="false")
+			:showName="false"
+		)
+		Error(:error="error")
 </template>
 
 
 <script>
 import CourseRenderer from "components/CourseRenderer"
+import ErrorHandler from "mixins/errorHandler"
 
 export default {
 	name: "Course",
+	mixins: [ErrorHandler],
 	components: { CourseRenderer },
 	computed: {
+		courseName() {
+			if (this.course) {
+				return this.course.displayTitle
+			} else {
+				return this.$route.params.courseName
+			}
+		},
 		course() {
 			return this.$store.state.courses[this.$route.params.courseName]
 		}
 	},
 	asyncData({ store, route }) {
 		return store.dispatch("FETCH_COURSE", { courseName: route.params.courseName })
+			.catch((error) => {
+				return store.commit("SET_ERROR", { error: error.response.data })
+			})
 	},
 	meta() {
 		return {
-			title: this.course.name,
+			title: this.courseName,
 			description: "This is the meta description for the course page"
 		}
 	}
