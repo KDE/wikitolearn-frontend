@@ -21,7 +21,7 @@ export default {
 	computed: {
 		courseName() {
 			if (this.course) {
-				return this.course.displayTitle
+				return this.course.name
 			} else {
 				return this.$route.params.courseName
 			}
