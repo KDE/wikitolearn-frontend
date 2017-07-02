@@ -39,37 +39,17 @@ if (config.isProduction) {
 			compress: {
 				warnings: false
 			}
-		}),
-		// auto generate service worker
-		new SWPrecachePlugin({
-			cacheId: "wikitolearn",
-			filename: "service-worker.js",
-			minify: true,
-
-			staticFileGlobs: [
-				"dist/**.css",
-				"dist/**.js",
-				"dist/img/**/*"
-			],
-
-			runtimeCaching: [{
-				urlPattern: /\/.*/,
-				handler: "networkFirst"
-			}],
-
-			dontCacheBustUrlsMatching: /./,
-			navigateFallback: "/"
 		})
 	)
 }
 
-if(!config.isTesting) {
+if (!config.isTesting) {
 	clientConfig.plugins.push(
 		// extract vendor chunks for better caching
 		// https://github.com/Narkoleptika/webpack-everything/commit/b7902f60806cf40b9d1abf8d6bb2a094d924fff7
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "vendor",
-			minChunks: function(module) {
+			minChunks: function (module) {
 				return module.context && module.context.indexOf("node_modules") !== -1
 			}
 		}),
@@ -80,9 +60,30 @@ if(!config.isTesting) {
 	)
 }
 
-if(config.isProduction) {
+if (config.isProduction) {
 	clientConfig.plugins.push(
-			new webpack.optimize.ModuleConcatenationPlugin()
+		// auto generate service worker
+		new SWPrecachePlugin({
+			cacheId: "wikitolearn",
+			filename: "service-worker.js",
+			staticFileGlobs: [
+				"dist/img/**/*",
+				"dist/**/*.{html,js,css}"
+			],
+			minify: true,
+			dontCacheBustUrlsMatching: /./,
+			runtimeCaching: [
+				{
+					urlPattern: '/',
+					handler: 'networkFirst'
+				},
+				{
+					urlPattern: /\/api\/.*/,
+					handler: 'networkFirst'
+				}
+			]
+		}),
+		new webpack.optimize.ModuleConcatenationPlugin()
 	)
 }
 
