@@ -11,6 +11,7 @@ import Home from "views/Home"
 import Department from "views/Department"
 import Course from "views/Course"
 import Page from "views/Page"
+import EditPage from "views/EditPage"
 
 
 let routes = []
@@ -29,6 +30,7 @@ routes = routes.concat([
 	{ path: "/", component: Home, name: "Home" },
 	{ path: "/d/:departmentName", component: Department, name: "Department" },
 	{ path: "/c/:courseName", component: Course, name: "Course" },
+	{ path: "/p/:pageTitle(.+)/edit", component: EditPage, name: "EditPage" },
 	{ path: "/p/:pageTitle(.+)", component: Page, name: "Page" }
 ])
 

@@ -1,37 +1,24 @@
 <template lang="pug">
-	.view--Page
-		template(v-if="!error && page")
-			router-link(
-				:to=`{
-					name: 'EditPage',
-					params: { pageTitle: $route.params.pageTitle }
-				}`
-			)
-				WTLButton(type="success") Edit Page
-			PageRenderer(
-				v-if="!error && page",
-				:page="page"
-			)
-
+	.view--EditPage
+		h1.EditPage__title {{ pageTitle }}
+		Editor(
+			v-if="!error && page",
+			:content="page.content"
+		)
 		Error(:error="error")
 </template>
 
 <style lang="scss">
-.view--Page {
-	.PageRenderer {
-		border: 1px solid black;
-	}
-}
 </style>
 
 <script>
-import PageRenderer from "components/PageRenderer"
+import Editor from "components/Editor"
 import ErrorHandler from "mixins/errorHandler"
 
 export default {
-	name: "Page",
+	name: "EditPage",
 	mixins: [ErrorHandler],
-	components: { PageRenderer },
+	components: { Editor },
 	computed: {
 		page() {
 			return this.$store.state.pages[this.$route.params.pageTitle]
@@ -52,7 +39,7 @@ export default {
 	},
 	meta() {
 		return {
-			title: this.pageTitle,
+			title: "Editing: " + this.pageTitle,
 			description: "This is the meta description for the page",
 			httpStatusCode: this.page ? 200 : 404
 		}

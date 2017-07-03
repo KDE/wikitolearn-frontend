@@ -17,6 +17,9 @@ Vue.use(VueI18n)
 import Dialog from "components/ui/Dialog"
 Vue.prototype.$dialog = Dialog
 
+import WTLButton from "components/ui/WTLButton"
+Vue.component("WTLButton", WTLButton)
+
 // we use "primaryLanguage" as a key because it does not really matter
 // we can do this since the file is loaded using the `LANGUAGE_FILENAME` key
 const messages = {
