@@ -29,7 +29,7 @@ const createRenderer = (bundle, options) => {
 }
 
 const serve = (path, cache) => express.static(resolve(path), {
-	maxAge: cache && isProduction ? 60 * 60 * 24 * 30 : 0
+	maxAge: cache && isProduction ? 60 * 60 * 24 * 30 * 1000 : 0
 })
 
 let renderer
