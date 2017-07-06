@@ -1,6 +1,7 @@
 import { Categories } from "api/Categories"
 import { Courses } from "api/Courses"
 import { Pages } from "api/Pages"
+import { Polling } from "api/Polling"
 
 
 export const actions = {
@@ -29,6 +30,22 @@ export const actions = {
 		return Pages.get(pageTitle)
 			.then((response) => {
 				commit("SET_PAGE", { page: response.data })
+			})
+	},
+
+	START_POLLING({ commit }) {
+		return Polling.start()
+			.then((response) => {
+				const pollingId = response.data.pollingId
+
+				const pollTimer = setInterval(() => {
+					Polling.getStatus(pollingId)
+						.then((response) => {
+							commit("UPDATE_POLLING", { pollingId, progress: response.data.progress })
+						})
+				}, 500)
+
+				commit("CREATE_POLLING", { pollingId, pollTimer })
 			})
 	}
 }

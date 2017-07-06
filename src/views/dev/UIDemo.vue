@@ -16,7 +16,9 @@
 			WTLButton(@click="$dialog.alert({ content: 'Something yellow', type: 'warning' })") Open warning Alert
 			h2 Confirm
 			WTLButton(@click="$dialog.confirm({ content: 'Are you sure?' })") Open confirm dialog
-
+		.UIDemo__section
+			h2 Async
+			WTLButton(@click="$store.dispatch('START_POLLING')") Start async
 </template>
 
 <style lang="scss">
@@ -28,13 +30,9 @@
 </style>
 
 <script>
-import WTLButton from "components/ui/WTLButton"
 
 export default {
 	name: "UIDemo",
-	components: {
-		WTLButton
-	},
 	methods: {
 		openAlert(propsData) {
 			this.$dialog.alert(propsData)

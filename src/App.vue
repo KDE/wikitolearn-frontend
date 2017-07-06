@@ -5,6 +5,8 @@
 		.App__content
 			transition(name="fade", mode="out-in")
 				router-view.view
+		.App__polling-operations
+			PollingBar
 </template>
 
 <style lang="scss">
@@ -34,13 +36,12 @@ noscript {
 </style>
 
 <script>
-import AppHeader from "components/AppHeader.vue"
+import AppHeader from "components/AppHeader"
+import PollingBar from "components/PollingBar"
 
 export default {
 	name: "App",
-	components: {
-		AppHeader
-	},
+	components: { AppHeader, PollingBar },
 	data: () => {
 		return {
 			isRTL: LANGUAGE_ISRTL

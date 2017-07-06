@@ -13,6 +13,8 @@ export function createStore() {
 			categories: {},
 			courses: {},
 			pages: {},
+
+			pollingOperations: {},
 			error: null
 		},
 		actions,
