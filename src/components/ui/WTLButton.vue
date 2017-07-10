@@ -3,7 +3,7 @@
 		:class=`[
 			type ? 'WTLButton--' + type : '',
 		]`,
-		@click="$emit('click')"
+		@click="click"
 	)
 		slot
 </template>
@@ -74,6 +74,23 @@ export default {
 		type: {
 			type: String,
 			default: "default"
+		},
+		disabled: {
+			type: Boolean,
+			default: false
+		}
+	},
+	computed: {
+		isDisabled() {
+			return this.disabled
+		}
+	},
+	methods: {
+		click(e) {
+			if (this.isDisabled) {
+				return
+			}
+			this.$emit("click")
 		}
 	}
 }

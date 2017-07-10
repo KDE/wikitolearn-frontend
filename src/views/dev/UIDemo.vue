@@ -8,6 +8,7 @@
 			WTLButton(type="info") Blue Button
 			WTLButton(type="warning") Yellow Button
 			WTLButton(type="error") Red Button
+			WTLButton(disabled=true) Disabled Button
 		.UIDemo__section
 			h2 Alert
 			WTLButton(@click="$dialog.alert({ content: ' Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid optio odit maiores doloribus id officia porro veritatis pariatur dolorem, cumque illum eum commodi nostrum distinctio praesentium natus, accusantium rerum atque.' })") Open generic Alert
