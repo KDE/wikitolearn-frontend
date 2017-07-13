@@ -1,6 +1,6 @@
 <template lang="pug">
-	.Editor
-		NoSSR
+	NoSSR
+		.Editor
 			textarea(id="foo", :value="content")
 </template>
 
