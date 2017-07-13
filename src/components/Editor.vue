@@ -7,11 +7,9 @@
 
 <script>
 import Vue from "vue"
-import NoSSR from "vue-no-ssr"
 
 export default {
 	name: "Editor",
-	components: { NoSSR },
 	props: {
 		content: {
 			type: String

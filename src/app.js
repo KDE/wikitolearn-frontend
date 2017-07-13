@@ -20,6 +20,9 @@ Vue.prototype.$dialog = Dialog
 import WTLButton from "components/ui/WTLButton"
 Vue.component("WTLButton", WTLButton)
 
+import NoSSR from "vue-no-ssr"
+Vue.component("NoSSR", NoSSR)
+
 // we use "primaryLanguage" as a key because it does not really matter
 // we can do this since the file is loaded using the `LANGUAGE_FILENAME` key
 const messages = {

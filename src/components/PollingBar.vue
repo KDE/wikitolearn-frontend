@@ -55,11 +55,8 @@
 </style>
 
 <script>
-import NoSSR from "vue-no-ssr"
-
 export default {
 	name: "PollingBar",
-	components: { NoSSR },
 	computed: {
 		pollingOperations() {
 			return this.$store.state.pollingOperations
