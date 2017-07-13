@@ -23,6 +23,14 @@ Vue.mixin({
 
 const { app, router, store } = createApp()
 
+Vue.router = router
+Vue.use(require("@websanova/vue-auth"), {
+	auth: require("@websanova/vue-auth/drivers/auth/bearer.js"),
+	http: require("@websanova/vue-auth/drivers/http/axios.1.x.js"),
+	router: require("@websanova/vue-auth/drivers/router/vue-router.2.x.js"),
+	rolesVar: "type"
+})
+
 // prime the store with server-initialized state.
 // the state is determined during SSR and inlined in the page markup.
 if (window.__INITIAL_STATE__) {

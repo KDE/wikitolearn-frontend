@@ -1,4 +1,4 @@
-import axios from "axios"
+import Vue from "vue"
 
 let config
 if (process.env.RUNNING_ENV === "docker") {
@@ -25,7 +25,7 @@ class ApiClass {
 	get(endpoint, options = {}) {
 		endpoint = this._cleanEndpoint(endpoint)
 
-		return axios.get(`${this.baseUrl}/${endpoint}`, options)
+		return Vue.axios.get(`${this.baseUrl}/${endpoint}`, options)
 			.then((response) => {
 				return Promise.resolve(response.data)
 			})
@@ -34,7 +34,7 @@ class ApiClass {
 	post(endpoint, data = {}, options = {}) {
 		endpoint = this._cleanEndpoint(endpoint)
 
-		return axios.get(`${this.baseUrl}/${endpoint}`, data, options)
+		return Vue.axios.get(`${this.baseUrl}/${endpoint}`, data, options)
 			.then((response) => {
 				return Promise.resolve(response.data)
 			})

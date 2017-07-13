@@ -1,5 +1,4 @@
 import Vue from "vue"
-import VueI18n from "vue-i18n"
 import { sync } from "vuex-router-sync"
 
 import { createStore } from "./store"
@@ -8,11 +7,20 @@ import { createRouter } from "./router"
 import App from "./App.vue"
 
 
-import metaInfo from "mixins/metaInfo"
-Vue.mixin(metaInfo)
+import Router from "vue-router"
+Vue.use(Router)
 
 // allow i18n for components
+import VueI18n from "vue-i18n"
 Vue.use(VueI18n)
+
+/* eslint-disable */
+import axios from "axios"
+import VueAxios from "vue-axios"
+Vue.use(VueAxios, axios)
+
+import metaInfo from "mixins/metaInfo"
+Vue.mixin(metaInfo)
 
 import Dialog from "components/ui/Dialog"
 Vue.prototype.$dialog = Dialog
@@ -54,7 +62,6 @@ export function createApp(ssrContext) {
 		ssrContext,
 		render: (h) => h(App)
 	})
-
 	// expose the app, the router and the store.
 	// note we are not mounting the app here, since bootstrapping will be
 	// different depending on whether we are in a browser or on the server.

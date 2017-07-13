@@ -1,7 +1,4 @@
-import Vue from "vue"
 import Router from "vue-router"
-
-Vue.use(Router)
 
 // We are also using Webpack code splitting here so that each route's associated
 // component code is loaded on-demand only when the route is visited.
