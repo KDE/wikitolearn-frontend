@@ -65,6 +65,11 @@
 
 		color: white;
 	}
+
+	&.disabled {
+		color: $disabled-fg;
+		background-color: $disabled-bg;
+	}
 }
 </style>
 
