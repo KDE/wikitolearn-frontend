@@ -20,6 +20,12 @@
 		.UIDemo__section
 			h2 Async
 			WTLButton(@click="$store.dispatch('START_POLLING')") Start async
+		.UIDemo__section
+			h2 WTLInput
+			WTLInput(placeholder="Type: number [0-5]", type="number", min=0, max=5)
+			br
+			WTLInput(value="Disabled text", disabled=true)
+			WTLInput(placeholder="text, length[0-10]", maxlength=10)
 </template>
 
 <style lang="scss">
@@ -31,7 +37,6 @@
 </style>
 
 <script>
-
 export default {
 	name: "UIDemo",
 	methods: {

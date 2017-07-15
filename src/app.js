@@ -27,6 +27,8 @@ Vue.prototype.$dialog = Dialog
 
 import WTLButton from "components/ui/WTLButton"
 Vue.component("WTLButton", WTLButton)
+import WTLInput from "components/ui/WTLInput"
+Vue.component("WTLInput", WTLInput)
 
 import NoSSR from "vue-no-ssr"
 Vue.component("NoSSR", NoSSR)
