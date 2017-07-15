@@ -9,10 +9,15 @@ $dark-green: #00613a;
 
 // typography
 $black: #333;
+$gray: #888;
 
 // other colors
 $blue: #347bff;
 $lightgray: darken(white, 5%);
+
+$disabled-bg: $lightgray;
+$disabled-fg: $gray;
+$input-border-color: #dbdbdb;
 
 /// Breakpoints
 $breakpoints: (
