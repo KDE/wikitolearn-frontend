@@ -67,6 +67,7 @@
 	}
 
 	&.disabled {
+		cursor: default;
 		color: $disabled-fg;
 		background-color: $disabled-bg;
 	}

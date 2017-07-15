@@ -1,8 +1,7 @@
 <template lang="pug">
-	input(
-		class="WTLInput"
+	input.WTLInput(
 		:class=`[
-				{ "disabled": disabled }
+				{ "WTLInput--disabled": disabled }
 			]`
 		:placeholder="placeholder"
 		:type="inputType"
@@ -82,19 +81,18 @@ export default {
 <style lang="scss">
 @import "~styles/declarations";
 
+$input-border-color: #dbdbdb;
+
 .WTLInput {
-	border: 1px solid $input-border-color;
-	border-radius: 3px;
-	font-size: 1rem;
-	display: inline-flex;
-	padding: calc(0.375em - 1px) calc(0.625em - 1px);
 	position: relative;
-	height: 2.25em;
+	padding: 0.5rem;
+	border: 1px solid $input-border-color;
+	border-radius: 2px;
+	font-size: 1rem;
 	box-shadow: inset 0 1px 2px hsla(0, 0%, 4%, 0.1);
 	background-color: #fff;
-	margin: 0%;
 
-	.full-width {
+	&--full-width {
 		width: 100%;
 	}
 
@@ -107,7 +105,7 @@ export default {
 	}
 
 	&:focus {
-		border-color: #7957d5;
+		outline: 1px solid $blue;
 	}
 
 	&:disabled {
