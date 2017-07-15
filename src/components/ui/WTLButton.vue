@@ -2,6 +2,7 @@
 	.WTLButton(
 		:class=`[
 			type ? 'WTLButton--' + type : '',
+			{ 'disabled': disabled }
 		]`,
 		@click="click"
 	)
@@ -21,7 +22,7 @@
 		border: 1px solid $baseColor;
 	}
 
-	&:hover {
+	&:hover:not(.disabled) {
 		background-color: darken($baseColor, $amount);
 
 		/* fake border */
@@ -80,16 +81,10 @@ export default {
 			default: false
 		}
 	},
-	computed: {
-		isDisabled() {
-			return this.disabled
-		}
-	},
 	methods: {
 		click(e) {
-			if (this.isDisabled) {
-				return
-			}
+			if (this.disabled) return
+
 			this.$emit("click")
 		}
 	}
