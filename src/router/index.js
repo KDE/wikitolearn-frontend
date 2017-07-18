@@ -16,8 +16,23 @@ let routes = []
 if (process.env.NODE_ENV !== "production") {
 	const Showcase = () => System.import("views/dev/Showcase") // load dynamically when needed
 	const UIDemo = () => System.import("views/dev/UIDemo")
+	const UIDemoComponentsList = () => System.import("views/dev/ui/ComponentsList.vue")
+	const UIDemoButton = () => System.import("views/dev/ui/Button.vue")
+	const UIDemoDialog = () => System.import("views/dev/ui/Dialog.vue")
+	const UIDemoAsync = () => System.import("views/dev/ui/Async.vue")
+	const UIDemoInput = () => System.import("views/dev/ui/Input.vue")
+
 	routes.push({ path: "/showcase", component: Showcase })
-	routes.push({ path: "/uidemo", component: UIDemo })
+	routes.push({
+		path: "/uidemo", component: UIDemo,
+		children: [
+			{ path: "", component: UIDemoComponentsList },
+			{ path: "button", component: UIDemoButton },
+			{ path: "dialog", component: UIDemoDialog },
+			{ path: "async", component: UIDemoAsync },
+			{ path: "input", component: UIDemoInput }
+		]
+	})
 }
 
 const NotFound = () => System.import("views/NotFound")
