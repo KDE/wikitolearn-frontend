@@ -1,36 +1,50 @@
 <template lang="pug">
 	header.AppHeader
-		.AppHeader__left
-			router-link.AppHeader__link(to="/")
-				img.AppHeader__logo(src="~images/logo.png", alt="Logo")
-				div.AppHeader__name
-					h3.AppHeader__title WikiToLearn
-					div.AppHeader__subtitle $ts("site_subtitle")
-		.AppHeader__right
-			SessionInfo
+		.AppHeader__content
+			.AppHeader__left
+				router-link.AppHeader__link(to="/")
+					img.AppHeader__logo(src="~images/logo.png", alt="WikiToLearn - collaborative textbooks")
+					img.AppHeader__name(src="~images/name.svg", alt="WikiToLearn - collaborative textbooks")
+			.AppHeader__right(v-if="false")
+				SessionInfo
 </template>
 
 <style lang="scss">
+@import "~styles/declarations";
+
 .AppHeader {
+	position: fixed;
 	display: flex;
-	padding: 1rem 2rem;
+	align-items: center;
+	padding: 0.5rem 0;
+	width: 100%;
+	top: 0;
+	left: 0;
 	font-size: 1.5rem;
-	background-color: whitesmoke;
+	background-color: white;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+
+	&__content {
+		@include container();
+	}
 
 	&__left {
 		flex: 1;
+		font-size: 0;
 	}
 
 	&__link {
 		display: inline-flex;
 		align-items: center;
-		color: black;
-		text-decoration: none;
 	}
 
 	&__logo {
-		width: 2.5rem;
+		height: 2.5rem;
 		margin-right: 0.5rem;
+	}
+
+	&__name {
+		height: 1.8rem;
 	}
 }
 </style>

@@ -1,14 +1,26 @@
 <template lang="pug">
 	main.view--Home
 		h1 Welcome to WikiToLearn!
-		router-link(to="/showcase") Go to showcase
+		h2 Departments
 		.badges
 			Badge(
 				v-for="badge in badges"
-				:departmentName="badge.name"
+				:departmentName="badge.displayName"
 				:key="badge.name"
 			)
+		h2 Other Links
+		router-link(to="/showcase") Go to feature showcase
+		br
+		router-link(to="/uidemo") Go to UI elements showcase
 </template>
+
+<style lang="scss">
+.view--Home {
+	h1 {
+		text-align: center;
+	}
+}
+</style>
 
 <script>
 import Badge from "components/home/Badge"

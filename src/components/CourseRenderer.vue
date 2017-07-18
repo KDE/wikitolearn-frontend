@@ -18,9 +18,11 @@
 
 <style lang="scss">
 .CourseRenderer {
+	padding: 2rem;
+
 	&__description {
 		font-style: italic;
-		margin: 1rem;
+		margin-bottom: 2rem;
 		padding: 1rem;
 		background-color: whitesmoke;
 		border: 1px solid gray;

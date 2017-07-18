@@ -11,6 +11,7 @@
 
 <style lang="scss">
 @import "~styles/global";
+@import "~styles/declarations";
 
 noscript {
 	display: block;
@@ -20,8 +21,30 @@ noscript {
 	font-size: 1.5rem;
 }
 
+.App {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
 .App__content {
-	padding: 1rem;
+	flex: 1;
+	background-color: #f8f8fb;
+
+	a {
+		color: $blue;
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.view {
+		@include container();
+
+		padding-top: 5rem;
+	}
 }
 
 .fade-enter-active,

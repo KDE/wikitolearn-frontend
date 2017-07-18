@@ -8,9 +8,13 @@
 
 <style lang="scss">
 .Badge {
-	padding: 1rem;
+	display: inline-block;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	padding: 1rem 2rem;
 	margin-bottom: 1rem;
-	border: 1px solid black;
+	margin-right: 1rem;
+	margin-top: 1rem;
+	background-color: white;
 }
 </style>
 

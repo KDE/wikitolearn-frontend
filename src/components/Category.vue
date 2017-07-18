@@ -15,14 +15,13 @@
 					router-link.Category__course(:to=`{
 						name: 'Course',
 						params: { courseName: course.name }
-					}`) {{ course.display_name }}
+					}`) {{ course.displayName }}
 </template>
 
 <style lang="scss">
 .Category {
 	padding: 1rem;
 	margin-bottom: 2rem;
-	border: 1px solid black;
 
 	&__subcategories {
 		margin-bottom: 1rem;

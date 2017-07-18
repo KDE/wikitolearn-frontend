@@ -1,13 +1,14 @@
 <template lang="pug">
 	.view--Page
 		template(v-if="!error && page")
-			router-link(
-				:to=`{
-					name: 'EditPage',
-					params: { pageTitle: $route.params.pageTitle }
-				}`
-			)
-				WTLButton(type="success") Edit Page
+			.view--Page__buttons
+				router-link(
+					:to=`{
+						name: 'EditPage',
+						params: { pageTitle: $route.params.pageTitle }
+					}`
+				)
+					WTLButton(type="success", icon="mode_edit") Edit Page
 			PageRenderer(
 				v-if="!error && page",
 				:page="page"
@@ -19,7 +20,12 @@
 <style lang="scss">
 .view--Page {
 	.PageRenderer {
-		border: 1px solid black;
+		background-color: white;
+	}
+
+	&__buttons {
+		margin-bottom: 1rem;
+		text-align: right;
 	}
 }
 </style>

@@ -6,6 +6,7 @@
 		]`,
 		@click="click"
 	)
+		WTLIcon(v-if="icon") {{ icon }}
 		slot
 </template>
 
@@ -33,10 +34,16 @@
 }
 
 .WTLButton {
-	display: inline-block;
+	display: inline-flex;
+	align-items: center;
+	vertical-align: middle;
 	padding: 0.5rem 1rem;
 	border-radius: 2px;
 	cursor: pointer;
+
+	.WTLIcon {
+		margin-right: 0.25rem;
+	}
 
 	&--default {
 		@include setBgColorAndHover(white, $amount: 10%, $border: true);
@@ -85,6 +92,9 @@ export default {
 		disabled: {
 			type: Boolean,
 			default: false
+		},
+		icon: {
+			type: String
 		}
 	},
 	methods: {

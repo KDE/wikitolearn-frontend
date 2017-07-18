@@ -6,7 +6,24 @@
 
 <style lang="scss">
 .PageRenderer {
-	padding: 1rem;
+	padding: 2rem;
+
+	&__title {
+		text-align: center;
+	}
+
+	&__content {
+		pre {
+			background: whitesmoke;
+			padding: 1rem;
+			border: 1px solid gray;
+			border-radius: 3px;
+		}
+
+		.mw-editsection {
+			display: none;
+		}
+	}
 }
 </style>
 

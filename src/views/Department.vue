@@ -1,10 +1,24 @@
 <template lang="pug">
 	.view--Department
-		h1 Department of {{ category.name }}
+		h1 Department of {{ category.displayName }}
 		Category(
 			:category="category",
 			:showName="false")
 </template>
+
+<style lang="scss">
+.view--Department {
+	h1 {
+		text-align: center;
+		margin-bottom: 1rem;
+	}
+
+	.Category {
+		background-color: white;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	}
+}
+</style>
 
 
 <script>
@@ -23,7 +37,7 @@ export default {
 	},
 	meta() {
 		return {
-			title: this.category.display_name,
+			title: this.category.displayName,
 			description: "This is the meta description for the department page"
 		}
 	}
