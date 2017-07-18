@@ -8,11 +8,6 @@
 <script>
 export default {
 	name: "UIDemo",
-	methods: {
-		openAlert(propsData) {
-			this.$dialog.alert(propsData)
-		}
-	},
 	meta() {
 		return {
 			title: "UI Demo",
