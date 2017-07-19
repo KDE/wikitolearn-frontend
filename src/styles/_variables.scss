@@ -19,6 +19,10 @@ $disabled-bg: $lightgray;
 $disabled-fg: $gray;
 $disabled-border: darken(white, 10%);
 
+// global styles
+$input-radius: 2px;
+$weight-semibold: 700;
+
 /// Breakpoints
 $breakpoints: (
 	xs: 0,

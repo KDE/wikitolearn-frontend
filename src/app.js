@@ -30,6 +30,9 @@ import WTLInput from "components/ui/WTLInput"
 Vue.component("WTLInput", WTLInput)
 import WTLIcon from "components/ui/WTLIcon"
 Vue.component("WTLIcon", WTLIcon)
+import WTLField from "components/ui/WTLField"
+Vue.component("WTLField", WTLField)
+
 
 import NoSSR from "vue-no-ssr"
 Vue.component("NoSSR", NoSSR)
