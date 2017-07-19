@@ -17,6 +17,7 @@ $lightgray: darken(white, 5%);
 
 $disabled-bg: $lightgray;
 $disabled-fg: $gray;
+$disabled-border: darken(white, 10%);
 
 /// Breakpoints
 $breakpoints: (

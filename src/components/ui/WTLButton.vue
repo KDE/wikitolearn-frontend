@@ -77,6 +77,7 @@
 		cursor: default;
 		color: $disabled-fg;
 		background-color: $disabled-bg;
+		border-color: $disabled-border;
 	}
 }
 </style>
