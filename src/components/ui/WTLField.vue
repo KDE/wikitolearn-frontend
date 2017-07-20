@@ -1,8 +1,9 @@
 <template lang="pug">
-	.field(:class="[fieldType, addonsPosition, { 'is-expanded': expanded }]")
-		label.label(v-if="label") {{ label }}
-		slot
-		p.help(:class="newType", v-if="newMessage") {{ newMessage }}
+	.WTLField(:class="[fieldType, addonsPosition]")
+		label.WTLField__label(v-if="label") {{ label }}
+		.WTLField__content
+			slot
+		p.WTLField__help(:class="newType", v-if="newMessage") {{ newMessage }}
 		// TODO with v-tooltip(v-if="message") {{ message }}
 </template>
 
@@ -13,9 +14,7 @@ export default {
 		type: String,
 		label: String,
 		message: String,
-		grouped: Boolean,
-		position: String,
-		expanded: Boolean
+		grouped: Boolean
 	},
 	data() {
 		return {
@@ -33,20 +32,11 @@ export default {
 		}
 	},
 	computed: {
-		addonsPosition() {
-			if (this.position === undefined) return
-
-			const position = this.position.split("-")
-			if (position.length < 1) return
-
-			if (this.position) return "has-addons-" + position[1]
-		},
-
 		fieldType() {
 			if (this.grouped) {
-				return "is-grouped"
+				return "WTLField__is-grouped"
 			} else if (this.$slots.default !== undefined && this.$slots.default.length > 1) {
-				return "has-addons"
+				return "WTLField__has-addons"
 			}
 		}
 	}
@@ -56,65 +46,30 @@ export default {
 <style lang="scss">
 @import "~styles/declarations";
 
-.label {
-	font-weight: $weight-semibold;
+.WTLField__label {
+	font-weight: $font-weight-semibold;
 }
 
-.field {
-	&.is-grouped {
-		.field {
-			flex-shrink: 0;
-
-			& + .field {
-				margin-left: 0.75rem;
-			}
-
-			&.is-expanded {
-				flex-grow: 1;
-				flex-shrink: 1;
-			}
+.WTLField {
+	&.WTLField__is-grouped {
+		.WTLField__content > *:not(:first-child) {
+			margin-left: 0.75rem;
 		}
 	}
 
-	&.has-addons .control {
-		&:first-child > .control {
-			.WTLButton,
-			.WTLInput,
-			.WTLSelect select {
-				border-bottom-left-radius: $input-radius;
-				border-top-left-radius: $input-radius;
-			}
+	&.WTLField__has-addons .WTLField__content {
+		> * {
+			border-radius: 0;
 		}
 
-		&:last-child > .control {
-			.WTLButton,
-			.WTLInput,
-			.WTLSelect select {
-				border-bottom-right-radius: $input-radius;
-				border-top-right-radius: $input-radius;
-			}
+		> *:first-child {
+			border-bottom-left-radius: $input-radius;
+			border-top-left-radius: $input-radius;
 		}
 
-		> .control {
-			.WTLButton,
-			.WTLInput,
-			.WTLSelect select {
-				border-radius: 0;
-			}
-		}
-	}
-}
-
-.control {
-	.help.counter {
-		float: right;
-		margin-left: 0.5em;
-	}
-
-	.icon {
-		&.is-clickable {
-			pointer-events: auto;
-			cursor: pointer;
+		> *:last-child {
+			border-bottom-right-radius: $input-radius;
+			border-top-right-radius: $input-radius;
 		}
 	}
 }

@@ -1,10 +1,11 @@
 <template lang="pug">
 	div
 		h2 Field
-		WTLField(grouped=true, label="Label")
+		WTLField(label="Label")
 			WTLInput(placeholder="Search...")
-			div.control
-				WTLButton(icon="delete", type="error") Delete all
-			div.control
-				WTLButton(icon="menu", type="success") Open menu
+			WTLButton(icon="delete", type="error") Delete all
+		WTLField(label="Grouped Field", grouped=true, message="Example message")
+			WTLInput(placeholder="Search...", type="search")
+			WTLInput(placeholder="Search...")
+			WTLButton(icon="delete", type="error") Delete all
 </template>
