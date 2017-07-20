@@ -20,8 +20,9 @@ $disabled-fg: $gray;
 $disabled-border: darken(white, 10%);
 
 // global styles
-$input-radius: 2px;
-$weight-semibold: 700;
+$input-radius: 0.25rem;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
 
 /// Breakpoints
 $breakpoints: (

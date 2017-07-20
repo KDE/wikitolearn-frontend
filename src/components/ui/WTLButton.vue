@@ -38,6 +38,7 @@
 	align-items: center;
 	vertical-align: middle;
 	padding: 0.5rem 1rem;
+	font-size: 1rem;
 	border-radius: $input-radius;
 	cursor: pointer;
 

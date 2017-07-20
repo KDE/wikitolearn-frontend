@@ -84,11 +84,12 @@ export default {
 $input-border-color: #dbdbdb;
 
 .WTLInput {
-	position: relative;
-	padding: 0.5rem;
+	display: inline-flex;
+	padding: 0.5rem 1rem;
 	border: 1px solid $input-border-color;
-	border-radius: 2px;
+	border-radius: $input-radius;
 	font-size: 1rem;
+	height: 40px;
 	box-shadow: inset 0 1px 2px hsla(0, 0%, 4%, 0.1);
 	background-color: #fff;
 
