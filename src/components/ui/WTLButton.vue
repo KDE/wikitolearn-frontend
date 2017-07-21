@@ -6,7 +6,7 @@
 		]`,
 		@click="click"
 	)
-		WTLIcon(v-if="icon") {{ icon }}
+		WTLIcon(v-if="icon", :icon="icon")
 		slot
 </template>
 

@@ -5,5 +5,7 @@
 		br
 		WTLInput(value="Disabled text", disabled=true)
 		WTLInput(placeholder="text, length[0-10]", maxlength=10)
-		WTLInput(placeholder="password", type="password")
+		WTLInput(placeholder="password", type="password", icon="lock")
+		WTLInput(placeholder="password", type="password", icon="lock", iconPosition="right")
+
 </template>

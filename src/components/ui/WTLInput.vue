@@ -1,20 +1,23 @@
 <template lang="pug">
-	input.WTLInput(
-		:class=`[
-				{ "WTLInput--disabled": disabled }
-			]`
-		:placeholder="placeholder"
-		:type="inputType"
-		:disabled="disabled"
-		:readonly="readonly"
-		:min="min"
-		:max="max"
-		:minlength="minlength"
-		:maxlength="maxlength"
-		:required="required"
-		:value="inputValue"
-		@input="input"
-	)
+	div(:class="{ 'WTLInput--has-icon': icon }")
+		WTLIcon(v-if="icon", :icon="icon", :position="iconPosition")
+		input.WTLInput(
+			:class=`[
+					{ "WTLInput--disabled": disabled }
+				]`
+			:placeholder="placeholder"
+			:type="inputType"
+			:icon="icon"
+			:disabled="disabled"
+			:readonly="readonly"
+			:min="min"
+			:max="max"
+			:minlength="minlength"
+			:maxlength="maxlength"
+			:required="required"
+			:value="inputValue"
+			@input="input"
+		)
 </template>
 
 <script>
@@ -36,7 +39,9 @@ export default {
 		minlength: [Number, String],
 		readonly: Boolean,
 		min: [Number, String],
-		max: [Number, String]
+		max: [Number, String],
+		icon: String,
+		iconPosition: String
 	},
 	data() {
 		return {
@@ -112,6 +117,17 @@ $input-border-color: #dbdbdb;
 	&:focus {
 		outline: 0;
 		border-color: $blue;
+	}
+
+	&--has-icon {
+		position: relative;
+		display: inline-flex;
+
+		.WTLIcon--is-left {
+			+ .WTLInput {
+				padding-left: 1.9rem;
+			}
+		}
 	}
 }
 </style>
