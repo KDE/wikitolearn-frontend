@@ -21,6 +21,8 @@ export default {
 	text-align: center;
 	font-size: 1rem !important;
 	width: 2rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
 
 	&__span {
 		position: absolute;

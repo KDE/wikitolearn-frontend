@@ -3,7 +3,8 @@
 		:class=`[
 			type ? 'WTLButton--' + type : '',
 			{ 'disabled': disabled },
-			{ 'WTLButton--has-icon': icon }
+			{ 'WTLButton--has-icon': icon },
+			{ 'WTLButton--no-text': !$slots.default }
 		]`,
 		@click="click"
 	)
@@ -43,10 +44,16 @@
 	font-size: 1rem;
 	cursor: pointer;
 	-webkit-appearance: none;
+	position: relative;
+	text-transform: uppercase;
+
 
 	&--has-icon {
-		position: relative;
-		padding-left: 1.9em;
+		padding-left: 1.9rem;
+	}
+
+	&--no-text {
+		padding: 1.0675rem;
 	}
 
 	&--default {

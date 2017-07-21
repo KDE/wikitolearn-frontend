@@ -9,6 +9,7 @@
 		WTLButton(disabled=true) Disabled Button
 		WTLButton(icon="done", type="success") Button with icon
 		WTLButton(icon="done", disabled=true) Disabled button with icon
+		WTLButton(icon="done")
 </template>
 
 <style lang="scss">
