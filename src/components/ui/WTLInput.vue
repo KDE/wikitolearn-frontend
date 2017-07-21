@@ -85,7 +85,7 @@ $input-border-color: #dbdbdb;
 
 .WTLInput {
 	display: inline-flex;
-	padding: 0.5rem 1rem;
+	padding: 0.5rem;
 	border: 1px solid $input-border-color;
 	border-radius: $input-radius;
 	font-size: 1rem;
@@ -107,6 +107,11 @@ $input-border-color: #dbdbdb;
 	&:disabled {
 		background-color: $disabled-bg;
 		color: $disabled-fg;
+	}
+
+	&:focus {
+		outline: 0;
+		border-color: $blue;
 	}
 }
 </style>
