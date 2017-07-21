@@ -1,9 +1,9 @@
 <template lang="pug">
-	.WTLField(:class="[fieldType, addonsPosition]")
+	.WTLField(:class="[fieldType]")
 		label.WTLField__label(v-if="label") {{ label }}
 		.WTLField__content
 			slot
-		p.WTLField__help(:class="newType", v-if="newMessage") {{ newMessage }}
+		.WTLField__help(:class="newType", v-if="newMessage") {{ newMessage }}
 		// TODO with v-tooltip(v-if="message") {{ message }}
 </template>
 
@@ -34,9 +34,9 @@ export default {
 	computed: {
 		fieldType() {
 			if (this.grouped) {
-				return "WTLField__is-grouped"
+				return "WTLField--is-grouped"
 			} else if (this.$slots.default !== undefined && this.$slots.default.length > 1) {
-				return "WTLField__has-addons"
+				return "WTLField--has-addons"
 			}
 		}
 	}
@@ -46,18 +46,16 @@ export default {
 <style lang="scss">
 @import "~styles/declarations";
 
-.WTLField__label {
-	font-weight: $font-weight-semibold;
-}
-
 .WTLField {
-	&.WTLField__is-grouped {
+	margin-bottom: 0.5rem;
+
+	&.WTLField--is-grouped {
 		.WTLField__content > *:not(:first-child) {
 			margin-left: 0.75rem;
 		}
 	}
 
-	&.WTLField__has-addons .WTLField__content {
+	&.WTLField--has-addons .WTLField__content {
 		> * {
 			border-radius: 0;
 		}
@@ -71,6 +69,19 @@ export default {
 			border-bottom-right-radius: $input-radius;
 			border-top-right-radius: $input-radius;
 		}
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	&__label {
+		display: inline-block;
+		font-weight: $font-weight-semibold;
+		margin-bottom: 0.2rem;
 	}
 }
 </style>

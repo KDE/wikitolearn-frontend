@@ -8,4 +8,6 @@
 			router-link(to="/uidemo/async") Async
 		li
 			router-link(to="/uidemo/input") Input box
+		li
+			router-link(to="/uidemo/field") Field
 </template>

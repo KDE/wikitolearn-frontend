@@ -89,9 +89,8 @@ $input-border-color: #dbdbdb;
 	border: 1px solid $input-border-color;
 	border-radius: $input-radius;
 	font-size: 1rem;
-	height: 40px;
-	box-shadow: inset 0 1px 2px hsla(0, 0%, 4%, 0.1);
 	background-color: #fff;
+	-webkit-appearance: none;
 
 	&--full-width {
 		width: 100%;
@@ -103,10 +102,6 @@ $input-border-color: #dbdbdb;
 
 	&--has-success {
 		border-color: $green;
-	}
-
-	&:focus {
-		outline: 1px solid $blue;
 	}
 
 	&:disabled {

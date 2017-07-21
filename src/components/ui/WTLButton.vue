@@ -1,5 +1,5 @@
 <template lang="pug">
-	.WTLButton(
+	button.WTLButton(
 		:class=`[
 			type ? 'WTLButton--' + type : '',
 			{ 'disabled': disabled }
@@ -38,9 +38,10 @@
 	align-items: center;
 	vertical-align: middle;
 	padding: 0.5rem 1rem;
-	font-size: 1rem;
 	border-radius: $input-radius;
+	font-size: 1rem;
 	cursor: pointer;
+	-webkit-appearance: none;
 
 	.WTLIcon {
 		margin-right: 0.25rem;
