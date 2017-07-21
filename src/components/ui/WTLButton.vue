@@ -2,7 +2,8 @@
 	button.WTLButton(
 		:class=`[
 			type ? 'WTLButton--' + type : '',
-			{ 'disabled': disabled }
+			{ 'disabled': disabled },
+			{ 'WTLButton--has-icon': icon }
 		]`,
 		@click="click"
 	)
@@ -43,8 +44,9 @@
 	cursor: pointer;
 	-webkit-appearance: none;
 
-	.WTLIcon {
-		margin-right: 0.25rem;
+	&--has-icon {
+		position: relative;
+		padding-left: 1.9em;
 	}
 
 	&--default {
