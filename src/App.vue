@@ -1,5 +1,6 @@
 <template lang="pug">
 	#app.App(:class="{ 'App--rtl': isRTL }")
+		AuthCheck
 		noscript Your browser does not have JS enabled, you are still able to browse the website but you won't be able to access advanced features such as editing or loggin-in.
 		AppHeader
 		.App__content
@@ -61,10 +62,11 @@ noscript {
 <script>
 import AppHeader from "components/AppHeader"
 import PollingBar from "components/PollingBar"
+import AuthCheck from "components/utils/AuthCheck"
 
 export default {
 	name: "App",
-	components: { AppHeader, PollingBar },
+	components: { AppHeader, PollingBar, AuthCheck },
 	data: () => {
 		return {
 			isRTL: LANGUAGE_ISRTL
