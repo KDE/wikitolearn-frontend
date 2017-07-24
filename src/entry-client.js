@@ -27,8 +27,7 @@ Vue.router = router
 Vue.use(require("@websanova/vue-auth"), {
 	auth: require("@websanova/vue-auth/drivers/auth/bearer.js"),
 	http: require("@websanova/vue-auth/drivers/http/axios.1.x.js"),
-	router: require("@websanova/vue-auth/drivers/router/vue-router.2.x.js"),
-	rolesVar: "type"
+	router: require("@websanova/vue-auth/drivers/router/vue-router.2.x.js")
 })
 
 // prime the store with server-initialized state.

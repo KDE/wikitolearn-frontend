@@ -5,7 +5,7 @@
 				router-link.AppHeader__link(to="/")
 					img.AppHeader__logo(src="~images/logo.png", alt="WikiToLearn - collaborative textbooks")
 					img.AppHeader__name(src="~images/name.svg", alt="WikiToLearn - collaborative textbooks")
-			.AppHeader__right(v-if="false")
+			.AppHeader__right
 				SessionInfo
 </template>
 
@@ -14,8 +14,6 @@
 
 .AppHeader {
 	position: fixed;
-	display: flex;
-	align-items: center;
 	padding: 0.5rem 0;
 	width: 100%;
 	top: 0;
@@ -26,6 +24,9 @@
 
 	&__content {
 		@include container();
+
+		display: flex;
+		align-items: center;
 	}
 
 	&__left {

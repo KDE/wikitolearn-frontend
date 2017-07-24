@@ -13,7 +13,6 @@ Vue.use(Router)
 import VueI18n from "vue-i18n"
 Vue.use(VueI18n)
 
-/* eslint-disable */
 import axios from "axios"
 import VueAxios from "vue-axios"
 Vue.use(VueAxios, axios)

@@ -1,9 +1,9 @@
 <template lang="pug">
 	NoSSR
 		.SessionInfo
-			p LoginStatus
-			div(v-if="$auth && $auth.ready()")
-				a(v-if="!$auth.check()") login
+			div(v-if="$auth")
+				a(v-if="!$auth.check()") Not logged in
+				a(v-if="$auth.check()") You are logged in
 </template>
 
 <script>
