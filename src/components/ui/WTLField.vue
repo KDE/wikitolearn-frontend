@@ -50,24 +50,35 @@ export default {
 	margin-bottom: 0.5rem;
 
 	&.WTLField--is-grouped {
-		.WTLField__content > *:not(:first-child) {
-			margin-left: 0.75rem;
+		.WTLField__content > *:not(:last-child) {
+			margin-right: 0.75rem;
 		}
 	}
 
 	&.WTLField--has-addons .WTLField__content {
-		> * {
+		> *,
+		.WTLInput {
 			border-radius: 0;
 		}
 
 		> *:first-child {
 			border-bottom-left-radius: $input-radius;
 			border-top-left-radius: $input-radius;
+
+			.WTLInput {
+				border-bottom-left-radius: $input-radius;
+				border-top-left-radius: $input-radius;
+			}
 		}
 
 		> *:last-child {
 			border-bottom-right-radius: $input-radius;
 			border-top-right-radius: $input-radius;
+
+			.WTLInput {
+				border-bottom-right-radius: $input-radius;
+				border-top-right-radius: $input-radius;
+			}
 		}
 	}
 

@@ -3,7 +3,8 @@
 		h2 Field
 		WTLField(label="Label")
 			WTLInput(placeholder="Search...")
-			WTLButton(icon="info", type="info") Ok
+			WTLButton(icon="lock", type="info")
+			WTLInput(icon="lock", placeholder="Let's break field tag")
 		WTLField(label="Grouped Field", grouped=true, message="Example message")
 			WTLInput(placeholder="Search...", type="search")
 			WTLInput(placeholder="Search...")
