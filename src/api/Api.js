@@ -19,13 +19,13 @@ if (process.env.RUNNING_ENV === "docker") {
 
 class ApiClass {
 	constructor() {
-		this.baseUrl = `${config.protocol}://${config.host}/${config.preamble}`
+		this.baseURL = `${config.protocol}://${config.host}/${config.preamble}`
 	}
 
 	get(endpoint, options = {}) {
 		endpoint = this._cleanEndpoint(endpoint)
 
-		return Vue.axios.get(`${this.baseUrl}/${endpoint}`, options)
+		return Vue.axios.get(`${this.baseURL}/${endpoint}`, options)
 			.then((response) => {
 				return Promise.resolve(response.data)
 			})
@@ -34,7 +34,7 @@ class ApiClass {
 	post(endpoint, data = {}, options = {}) {
 		endpoint = this._cleanEndpoint(endpoint)
 
-		return Vue.axios.get(`${this.baseUrl}/${endpoint}`, data, options)
+		return Vue.axios.get(`${this.baseURL}/${endpoint}`, data, options)
 			.then((response) => {
 				return Promise.resolve(response.data)
 			})

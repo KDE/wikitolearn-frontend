@@ -8,7 +8,6 @@ export default {
 			},
 			error: () => {
 				this.handleRedirect()
-				this.$auth.logout() // not sure about this, I just want to unset the token
 			}
 		})
 	},

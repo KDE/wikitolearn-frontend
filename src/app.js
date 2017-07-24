@@ -17,6 +17,9 @@ import axios from "axios"
 import VueAxios from "vue-axios"
 Vue.use(VueAxios, axios)
 
+import { Api } from "api/Api"
+Vue.axios.defaults.baseURL = Api.baseURL
+
 import metaInfo from "mixins/metaInfo"
 Vue.mixin(metaInfo)
 
