@@ -61,24 +61,16 @@ export default {
 			border-radius: 0;
 		}
 
-		> *:first-child {
+		> *:first-child,
+		> *:first-child .WTLInput {
 			border-bottom-left-radius: $input-radius;
 			border-top-left-radius: $input-radius;
-
-			.WTLInput {
-				border-bottom-left-radius: $input-radius;
-				border-top-left-radius: $input-radius;
-			}
 		}
 
-		> *:last-child {
+		> *:last-child,
+		> *:last-child .WTLInput {
 			border-bottom-right-radius: $input-radius;
 			border-top-right-radius: $input-radius;
-
-			.WTLInput {
-				border-bottom-right-radius: $input-radius;
-				border-top-right-radius: $input-radius;
-			}
 		}
 	}
 
