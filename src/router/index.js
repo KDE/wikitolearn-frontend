@@ -21,6 +21,7 @@ if (process.env.NODE_ENV !== "production") {
 	const UIDemoDialog = () => System.import("views/dev/ui/Dialog.vue")
 	const UIDemoAsync = () => System.import("views/dev/ui/Async.vue")
 	const UIDemoInput = () => System.import("views/dev/ui/Input.vue")
+	const UIDemoField = () => System.import("views/dev/ui/Field.vue")
 
 	routes.push({ path: "/showcase", component: Showcase })
 	routes.push({
@@ -30,7 +31,8 @@ if (process.env.NODE_ENV !== "production") {
 			{ path: "button", component: UIDemoButton },
 			{ path: "dialog", component: UIDemoDialog },
 			{ path: "async", component: UIDemoAsync },
-			{ path: "input", component: UIDemoInput }
+			{ path: "input", component: UIDemoInput },
+			{ path: "field", component: UIDemoField }
 		]
 	})
 }

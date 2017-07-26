@@ -17,6 +17,12 @@ $lightgray: darken(white, 5%);
 
 $disabled-bg: $lightgray;
 $disabled-fg: $gray;
+$disabled-border: darken(white, 10%);
+
+// global styles
+$input-radius: 0.25rem;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
 
 /// Breakpoints
 $breakpoints: (

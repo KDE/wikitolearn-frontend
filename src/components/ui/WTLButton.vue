@@ -1,12 +1,14 @@
 <template lang="pug">
-	.WTLButton(
+	button.WTLButton(
 		:class=`[
 			type ? 'WTLButton--' + type : '',
-			{ 'disabled': disabled }
+			{ 'disabled': disabled },
+			{ 'WTLButton--has-icon': icon },
+			{ 'WTLButton--no-text': !$slots.default }
 		]`,
 		@click="click"
 	)
-		WTLIcon(v-if="icon") {{ icon }}
+		WTLIcon(v-if="icon", :icon="icon")
 		slot
 </template>
 
@@ -38,11 +40,23 @@
 	align-items: center;
 	vertical-align: middle;
 	padding: 0.5rem 1rem;
-	border-radius: 2px;
+	border-radius: $input-radius;
+	font-size: 1rem;
 	cursor: pointer;
+	-webkit-appearance: none;
+	position: relative;
+	text-transform: uppercase;
 
-	.WTLIcon {
-		margin-right: 0.25rem;
+	&--has-icon {
+		padding-left: 1.9rem;
+	}
+
+	&--no-text {
+		padding: 1.0675rem;
+
+		.WTLIcon__span {
+			width: 100%;
+		}
 	}
 
 	&--default {
@@ -77,6 +91,7 @@
 		cursor: default;
 		color: $disabled-fg;
 		background-color: $disabled-bg;
+		border-color: $disabled-border;
 	}
 }
 </style>

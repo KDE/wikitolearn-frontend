@@ -16,3 +16,12 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+.view--UIDemo {
+	h2 {
+		margin-bottom: 1rem;
+	}
+}
+</style>
+
