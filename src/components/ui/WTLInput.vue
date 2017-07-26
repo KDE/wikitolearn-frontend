@@ -1,13 +1,16 @@
 <template lang="pug">
-	div(:class="{ 'WTLInput--has-icon': icon }")
-		WTLIcon(v-if="icon", :icon="icon", :position="iconPosition")
-		input.WTLInput(
+	div.WTLInput(:class=`[
+			{ "WTLInput--disabled": disabled }
+		]`
+	)
+		WTLIcon.WTLInput__icon(v-if="icon", :icon="icon", :class="'WTLInput__icon--' + iconPosition")
+		input.WTLInput__input(
 			:class=`[
-					{ "WTLInput--disabled": disabled }
+					{ 'WTLInput__input--has-icon': icon },
+					icon ? 'WTLInput__input--has-icon--' + iconPosition : ''
 				]`
 			:placeholder="placeholder"
 			:type="inputType"
-			:icon="icon"
 			:disabled="disabled"
 			:readonly="readonly"
 			:min="min"
@@ -16,7 +19,7 @@
 			:maxlength="maxlength"
 			:required="required"
 			:value="inputValue"
-			@input="input"
+			@input="input()"
 		)
 </template>
 
@@ -41,7 +44,10 @@ export default {
 		min: [Number, String],
 		max: [Number, String],
 		icon: String,
-		iconPosition: String
+		iconPosition: {
+			type: String,
+			default: "left"
+		}
 	},
 	data() {
 		return {
@@ -90,43 +96,62 @@ $input-border-color: #dbdbdb;
 
 .WTLInput {
 	display: inline-flex;
-	padding: 0.5rem;
-	border: 1px solid $input-border-color;
-	border-radius: $input-radius;
-	font-size: 1rem;
-	background-color: #fff;
-	-webkit-appearance: none;
+	align-items: center;
+	position: relative;
+	min-width: 12.5rem;
 
-	&--full-width {
+	&__input {
 		width: 100%;
-	}
+		padding: 0.5rem;
+		border: 1px solid $input-border-color;
+		border-radius: $input-radius;
+		font-size: 1rem;
+		background-color: #fff;
+		-webkit-appearance: none;
 
-	&--has-error {
-		border-color: $red;
-	}
-
-	&--has-success {
-		border-color: $green;
-	}
-
-	&:disabled {
-		background-color: $disabled-bg;
-		color: $disabled-fg;
-	}
-
-	&:focus {
-		outline: 0;
-		border-color: $blue;
-	}
-
-	&--has-icon {
-		position: relative;
-		display: inline-flex;
-
-		.WTLIcon--is-left {
-			+ .WTLInput {
-				padding-left: 1.9rem;
+		&--has-icon {
+			&--left {
+				padding-left: 1.75rem;
 			}
+
+			&--right {
+				padding-right: 1.75rem;
+			}
+		}
+
+		&--full-width {
+			width: 100%;
+		}
+
+		&--has-error {
+			border-color: $red;
+		}
+
+		&--has-success {
+			border-color: $green;
+		}
+
+		&:disabled {
+			background-color: $disabled-bg;
+			color: $disabled-fg;
+		}
+
+		&:focus {
+			outline: 0;
+			border-color: $blue;
+		}
+	}
+
+	&__icon {
+		position: absolute;
+		font-size: 1.25rem !important;
+
+		&--left {
+			left: 0;
+		}
+
+		&--right {
+			right: 0;
 		}
 	}
 }

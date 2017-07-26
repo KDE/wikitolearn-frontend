@@ -1,44 +1,24 @@
 <template lang="pug">
-	span.WTLIcon__span(:class=`"WTLIcon--is-" + position`)
-		i.material-icons.WTLIcon {{ icon }}
+	i.material-icons.WTLIcon {{ icon }}
 </template>
 
 <script>
 export default {
 	name: "WTLIcon",
 	props: {
-		icon: String,
-		position: {
-			type: String,
-			default: "left"
-		}
+		icon: String
 	}
 }
 </script>
 
 <style lang="scss">
-.WTLIcon {
-	text-align: center;
-	font-size: 1rem !important;
+.WTLIcon.material-icons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	font-size: 1rem;
 	width: 2rem;
-	padding-top: 0.5rem;
-	padding-bottom: 0.5rem;
-
-	&__span {
-		position: absolute;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		height: 100%;
-	}
-
-	&--is-left {
-		left: 0;
-	}
-
-	&--is-right {
-		right: 0;
-	}
 }
 
 

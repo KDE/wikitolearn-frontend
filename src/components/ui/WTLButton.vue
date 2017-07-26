@@ -44,19 +44,10 @@
 	font-size: 1rem;
 	cursor: pointer;
 	-webkit-appearance: none;
-	position: relative;
 	text-transform: uppercase;
 
-	&--has-icon {
-		padding-left: 1.9rem;
-	}
-
 	&--no-text {
-		padding: 1.0675rem;
-
-		.WTLIcon__span {
-			width: 100%;
-		}
+		padding: 0.5rem;
 	}
 
 	&--default {
