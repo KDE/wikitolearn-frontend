@@ -37,8 +37,13 @@ noscript {
 		text-decoration: none;
 
 		&:hover {
-			text-decoration: underline;
+			text-decoration: none;
 		}
+	}
+
+	ul,
+	ol {
+		margin-left: 1.5rem;
 	}
 
 	.view {

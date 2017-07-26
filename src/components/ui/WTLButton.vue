@@ -2,10 +2,10 @@
 	button.WTLButton(
 		:class=`[
 			type ? 'WTLButton--' + type : '',
-			{ 'disabled': disabled },
 			{ 'WTLButton--has-icon': icon },
 			{ 'WTLButton--no-text': !$slots.default }
-		]`,
+		]`
+		:disabled="disabled"
 		@click="click"
 	)
 		WTLIcon(v-if="icon", :icon="icon")
@@ -25,7 +25,7 @@
 		border: 1px solid $baseColor;
 	}
 
-	&:hover:not(.disabled) {
+	&:hover:not(:disabled) {
 		background-color: darken($baseColor, $amount);
 
 		/* fake border */
@@ -44,10 +44,13 @@
 	font-size: 1rem;
 	cursor: pointer;
 	-webkit-appearance: none;
-	text-transform: uppercase;
 
 	&--no-text {
 		padding: 0.5rem;
+	}
+
+	&--has-icon:not(&--no-text) {
+		padding-left: 0.4rem;
 	}
 
 	&--default {
@@ -78,7 +81,7 @@
 		color: white;
 	}
 
-	&.disabled {
+	&:disabled {
 		cursor: default;
 		color: $disabled-fg;
 		background-color: $disabled-bg;
