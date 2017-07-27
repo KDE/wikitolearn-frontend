@@ -44,6 +44,8 @@
 	font-size: 1rem;
 	cursor: pointer;
 	-webkit-appearance: none;
+	-moz-appearance: none;
+	line-height: 100%;
 
 	&--no-text {
 		padding: 0.5rem;

@@ -57,18 +57,18 @@ export default {
 
 	&.WTLField--has-addons .WTLField__content {
 		> *,
-		.WTLInput {
+		.WTLInput__input {
 			border-radius: 0;
 		}
 
 		> *:first-child,
-		> *:first-child .WTLInput {
+		> *:first-child .WTLInput__input {
 			border-bottom-left-radius: $input-radius;
 			border-top-left-radius: $input-radius;
 		}
 
 		> *:last-child,
-		> *:last-child .WTLInput {
+		> *:last-child .WTLInput__input {
 			border-bottom-right-radius: $input-radius;
 			border-top-right-radius: $input-radius;
 		}

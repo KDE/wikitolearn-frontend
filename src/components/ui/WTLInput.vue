@@ -108,6 +108,7 @@ $input-border-color: #dbdbdb;
 		font-size: 1rem;
 		background-color: #fff;
 		-webkit-appearance: none;
+		-moz-appearance: none;
 
 		&--has-icon {
 			&--left {
@@ -144,7 +145,6 @@ $input-border-color: #dbdbdb;
 
 	&__icon {
 		position: absolute;
-		font-size: 1.25rem !important;
 
 		&--left {
 			left: 0;
