@@ -4,10 +4,10 @@
 			h2 WikiToLearn login form
 			.Login__grid
 				WTLField(label="Username")
-					WTLInput(placeholder="Username")
+					WTLInput.WTLInput--full-width(placeholder="Username")
 				WTLField(label="Password")
-					WTLInput(placeholder="Password", type="password")
-				WTLButton.WTLButton--fixed-width(type="info") Log In
+					WTLInput.WTLInput--full-width(placeholder="Password", type="password")
+				WTLButton.WTLButton--full-width(type="info") Log In
 </template>
 
 <style lang="scss">
@@ -23,11 +23,14 @@
 
 		.Login__grid {
 			display: grid;
-			grid-template-columns: repeat(2, 1fr);
+			grid-template-columns: repeat(1, 1fr);
 			grid-gap: 0.5rem;
 			align-items: center;
-			justify-items: center;
+			justify-items: stretch;
 
+			@include media-breakpoint-up("sm") {
+				grid-template-columns: repeat(2, 1fr);
+			}
 
 			@include media-breakpoint-up("md") {
 				grid-template-columns: repeat(3, 1fr);

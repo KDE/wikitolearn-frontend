@@ -100,6 +100,10 @@ $input-border-color: #dbdbdb;
 	position: relative;
 	min-width: 12.5rem;
 
+	&--full-width {
+		width: 100%;
+	}
+
 	&__input {
 		width: 100%;
 		padding: 0.5rem;
@@ -118,10 +122,6 @@ $input-border-color: #dbdbdb;
 			&--right {
 				padding-right: 1.75rem;
 			}
-		}
-
-		&--full-width {
-			width: 100%;
 		}
 
 		&--has-error {
