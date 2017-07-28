@@ -45,7 +45,10 @@
 	cursor: pointer;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	line-height: 100%;
+
+	&--fixed-width {
+		width: 12.5rem;
+	}
 
 	&--no-text {
 		padding: 0.5rem;

@@ -47,8 +47,6 @@ export default {
 @import "~styles/declarations";
 
 .WTLField {
-	margin-bottom: 0.5rem;
-
 	&.WTLField--is-grouped {
 		.WTLField__content > *:not(:last-child) {
 			margin-right: 0.75rem;
