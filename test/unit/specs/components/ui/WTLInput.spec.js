@@ -23,4 +23,28 @@ describe("WTLInput", () => {
 
 		expect(input.vm.value).to.equal("New Value")
 	})
+
+	it("validates data with external validator", () => {
+		const input = mount(WTLInput, {
+			propsData: {
+				validator: (value) => {
+					return value === "test"
+				}
+			}
+		})
+		expect(input.hasClass("WTLInput--invalid")).to.equal(false)
+		expect(input.hasClass("WTLInput--valid")).to.equal(false)
+
+		input.setProps({
+			value: "fail validator"
+		})
+		expect(input.hasClass("WTLInput--invalid")).to.equal(true)
+		expect(input.hasClass("WTLInput--valid")).to.equal(false)
+
+		input.setProps({
+			value: "test"
+		})
+		expect(input.hasClass("WTLInput--invalid")).to.equal(false)
+		expect(input.hasClass("WTLInput--valid")).to.equal(true)
+	})
 })
