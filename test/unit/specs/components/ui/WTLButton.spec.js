@@ -37,7 +37,7 @@ describe("WTLButton", () => {
 			}
 		})
 		const clickHandler = sinon.stub()
-		button.vm.$on("click", function() {
+		button.vm.$on("click", () => {
 			clickHandler()
 		})
 		button.trigger("click")
