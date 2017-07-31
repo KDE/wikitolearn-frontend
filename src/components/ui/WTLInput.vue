@@ -62,6 +62,12 @@ export default {
 			invalid: false
 		}
 	},
+	watch: {
+		value(newValue) {
+			this.inputValue = newValue
+			this.checkValidity()
+		}
+	},
 	methods: {
 		/*
 		* Input's input listener.
