@@ -1,6 +1,8 @@
 <template lang="pug">
 	div.WTLInput(:class=`[
-			{ "WTLInput--disabled": disabled }
+			{ "WTLInput--disabled": disabled },
+			{ "WTLInput--valid": valid },
+			{ "WTLInput--invalid": invalid }
 		]`
 	)
 		WTLIcon.WTLInput__icon(v-if="icon", :icon="icon", :class="'WTLInput__icon--' + iconPosition")
@@ -19,7 +21,7 @@
 			:maxlength="maxlength"
 			:required="required"
 			:value="inputValue"
-			@input="input()"
+			@input="input"
 		)
 </template>
 
@@ -47,43 +49,43 @@ export default {
 		iconPosition: {
 			type: String,
 			default: "left"
+		},
+		validator: {
+			type: Function
 		}
 	},
 	data() {
 		return {
 			inputValue: this.value,
 			inputType: this.type,
-			valid: true
-		}
-	},
-	computed: {
-		valueLength() {
-			return this.inputValue ? this.inputValue.length : 0
-		}
-	},
-	watch: {
-		value(value) {
-			/**
-				* When v-model is changed:
-				*	1. Set internal value.
-				*	2. If it's invalid, validate again.
-				*/
-			this.inputValue = value
-			// TODO: check validity of `value`
-			// !this.valid && this.checkHtml5Validity()
+			valid: false,
+			invalid: false
 		}
 	},
 	methods: {
+		/*
+		* Input's input listener.
+		*
+		*   1. Emit input event to update the user v-model.
+		*   2. If it's invalid, validate again.
+		*/
 		input(event) {
-			/**
-				* Emit `input` event with associated `value`
-				* Check validity of `value`
-				*/
 			const value = event.target.value
 			this.inputValue = value
+			this.checkValidity()
 			this.$emit("input", value)
-			// TODO: check validity of `value`
-			// !this.valid && this.checkHtml5Validity()
+		},
+
+		checkValidity() {
+			if (this.validator && typeof this.validator === "function") {
+				if (this.validator(this.inputValue)) {
+					this.valid = true
+					this.invalid = false
+				} else {
+					this.valid = false
+					this.invalid = true
+				}
+			}
 		}
 	}
 }
@@ -123,14 +125,6 @@ $input-border-color: #dbdbdb;
 			width: 100%;
 		}
 
-		&--has-error {
-			border-color: $red;
-		}
-
-		&--has-success {
-			border-color: $green;
-		}
-
 		&:disabled {
 			background-color: $disabled-bg;
 			color: $disabled-fg;
@@ -152,6 +146,18 @@ $input-border-color: #dbdbdb;
 
 		&--right {
 			right: 0;
+		}
+	}
+
+	&--valid {
+		.WTLInput__input {
+			border-color: $green;
+		}
+	}
+
+	&--invalid {
+		.WTLInput__input {
+			border-color: $red;
 		}
 	}
 }

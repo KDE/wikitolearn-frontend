@@ -7,5 +7,12 @@
 		WTLInput(placeholder="text, length[0-10]", maxlength=10)
 		WTLInput(placeholder="password", type="password", icon="lock")
 		WTLInput(placeholder="password", type="password", icon="lock", iconPosition="right")
+		h3 Check Validity
+		WTLInput(
+			type="text"
+			placeholder="check if text is 'test'"
+			:validator=`(text) => {
+				return text === "test"
+			}`)
 
 </template>
