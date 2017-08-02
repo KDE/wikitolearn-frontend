@@ -44,6 +44,11 @@
 	font-size: 1rem;
 	cursor: pointer;
 	-webkit-appearance: none;
+	-moz-appearance: none;
+
+	&--fixed-width {
+		width: 12.5rem;
+	}
 
 	&--no-text {
 		padding: 0.5rem;

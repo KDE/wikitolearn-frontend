@@ -15,6 +15,7 @@ let routes = []
 
 if (process.env.NODE_ENV !== "production") {
 	const Showcase = () => System.import("views/dev/Showcase") // load dynamically when needed
+	const Login = () => System.import("views/dev/Login")
 	const UIDemo = () => System.import("views/dev/UIDemo")
 	const UIDemoComponentsList = () => System.import("views/dev/ui/ComponentsList.vue")
 	const UIDemoButton = () => System.import("views/dev/ui/Button.vue")
@@ -24,6 +25,7 @@ if (process.env.NODE_ENV !== "production") {
 	const UIDemoField = () => System.import("views/dev/ui/Field.vue")
 
 	routes.push({ path: "/showcase", component: Showcase })
+	routes.push({ path: "/login", component: Login })
 	routes.push({
 		path: "/uidemo", component: UIDemo,
 		children: [

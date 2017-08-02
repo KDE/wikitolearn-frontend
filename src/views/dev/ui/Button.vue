@@ -13,9 +13,4 @@
 </template>
 
 <style lang="scss">
-.view--UIDemo {
-	.WTLButton {
-		margin-right: 0.25rem;
-	}
-}
 </style>
