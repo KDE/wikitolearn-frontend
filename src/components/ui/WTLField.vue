@@ -3,33 +3,16 @@
 		label.WTLField__label(v-if="label") {{ label }}
 		.WTLField__content
 			slot
-		.WTLField__help(:class="newType", v-if="newMessage") {{ newMessage }}
-		// TODO with v-tooltip(v-if="message") {{ message }}
+		.WTLField__message(v-if="message") {{ message }}
 </template>
 
 <script>
 export default {
 	name: "WTLField",
 	props: {
-		type: String,
 		label: String,
 		message: String,
 		grouped: Boolean
-	},
-	data() {
-		return {
-			newType: this.type,
-			newMessage: this.message,
-			_isField: true
-		}
-	},
-	watch: {
-		type(value) {
-			this.newType = value
-		},
-		message(value) {
-			this.newMessage = value
-		}
 	},
 	computed: {
 		fieldType() {
