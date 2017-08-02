@@ -16,22 +16,25 @@
 		"at-rule-empty-line-before": [
 			"always",
 			{
-				ignore: ["after-comment", "blockless-after-same-name-blockless"],
-				ignoreAtRules: ["else"],
-				except: ["first-nested"]
+				"ignore": ["after-comment", "blockless-after-same-name-blockless"],
+				"ignoreAtRules": ["else"],
+				"except": ["first-nested"]
 			}
 		],
+		"at-rule-no-unknown": [ true, {
+      "ignoreAtRules": ["extend", "at-root", "debug", "warn", "error", "if", "else", "for", "each", "while", "mixin", "include", "content", "return", "function"]
+    }],
 		"rule-empty-line-before": [
 			"always",
 			{
-				ignore: ["after-comment"],
-				except: ["first-nested"]
+				"ignore": ["after-comment"],
+				"except": ["first-nested"]
 			}
 		],
 		"block-closing-brace-newline-after": [
 			"always",
 			{
-				ignoreAtRules: ["if"]
+				"ignoreAtRules": ["if"]
 			}
 		]
 	}
