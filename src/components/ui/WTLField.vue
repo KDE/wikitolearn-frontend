@@ -76,8 +76,7 @@ export default {
 
 	&__content {
 		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
+		flex-flow: row wrap;
 		align-items: center;
 	}
 
