@@ -5,7 +5,6 @@
 			{ "WTLInput--invalid": invalid }
 		]`
 	)
-		WTLIcon.WTLInput__icon(v-if="icon", :icon="icon", :class="'WTLInput__icon--' + iconPosition")
 		input.WTLInput__input(
 			:class=`[
 					{ 'WTLInput__input--has-icon': icon },
@@ -23,6 +22,7 @@
 			:value="inputValue"
 			@input="input"
 		)
+		WTLIcon.WTLInput__icon(v-if="icon", :icon="icon", :class="'WTLInput__icon--' + iconPosition")
 </template>
 
 <script>
@@ -113,22 +113,19 @@ $input-border-color: #dbdbdb;
 	}
 
 	&__input {
+		@include input();
+
 		width: 100%;
-		padding: 0.5rem;
 		border: 1px solid $input-border-color;
 		border-radius: $input-radius;
-		font-size: 1rem;
-		background-color: #fff;
-		-webkit-appearance: none;
-		-moz-appearance: none;
 
 		&--has-icon {
 			&--left {
-				padding-left: 1.75rem;
+				padding-left: 2rem;
 			}
 
 			&--right {
-				padding-right: 1.75rem;
+				padding-right: 2rem;
 			}
 		}
 
@@ -144,18 +141,23 @@ $input-border-color: #dbdbdb;
 		&:focus {
 			outline: 0;
 			border-color: $blue;
+
+			& ~ .WTLInput__icon {
+				color: $black;
+			}
 		}
 	}
 
 	&__icon {
 		position: absolute;
+		color: #dbdbdb;
 
 		&--left {
-			left: 0;
+			left: 0.1rem;
 		}
 
 		&--right {
-			right: 0;
+			right: 0.1rem;
 		}
 	}
 

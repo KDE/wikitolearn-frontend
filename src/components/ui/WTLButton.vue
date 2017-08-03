@@ -9,7 +9,8 @@
 		@click="click"
 	)
 		WTLIcon(v-if="icon", :icon="icon")
-		slot
+		.WTLButton__content
+			slot
 </template>
 
 <style lang="scss">
@@ -36,19 +37,10 @@
 }
 
 .WTLButton {
-	display: inline-flex;
-	align-items: center;
-	vertical-align: middle;
-	padding: 0.5rem 1rem;
-	border-radius: $input-radius;
-	font-size: 1rem;
-	cursor: pointer;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+	@include input();
 
-	&--fixed-width {
-		width: 12.5rem;
-	}
+	cursor: pointer;
+	border-radius: $input-radius;
 
 	&--no-text {
 		padding: 0.5rem;
@@ -87,7 +79,6 @@
 	}
 
 	&:disabled {
-		cursor: default;
 		color: $disabled-fg;
 		background-color: $disabled-bg;
 		border-color: $disabled-border;

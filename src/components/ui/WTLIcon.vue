@@ -19,6 +19,7 @@ export default {
 	height: 100%;
 	font-size: 1.125rem;
 	width: 2rem;
+	pointer-events: none;
 }
 
 
