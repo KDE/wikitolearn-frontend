@@ -1,30 +1,33 @@
+/// Values
+$body-size: 16px !default;
+
 /// Colors
 
 // Brand colors
-$dark-red: #83001f;
-$red: #db3e14;
-$yellow: #ffbc31;
-$green: #6ab141;
-$dark-green: #00613a;
+$dark-red: #83001f !default;
+$red: #db3e14 !default;
+$yellow: #ffbc31 !default;
+$green: #6ab141 !default;
+$dark-green: #00613a !default;
 
 // typography
-$black: #333;
-$gray: #888;
+$black: #333 !default;
+$gray: #888 !default;
 
 // other colors
-$blue: #347bff;
-$lightgray: darken(white, 5%);
+$blue: #347bff !default;
+$lightgray: darken(white, 5%) !default;
 
-$disabled-bg: $lightgray;
-$disabled-fg: $gray;
-$disabled-border: darken(white, 10%);
+$disabled-bg: $lightgray !default;
+$disabled-fg: $gray !default;
+$disabled-border: darken(white, 10%) !default;
 
-$card-bg: #f2f2f2;
+$card-bg: #f2f2f2 !default;
 
 // global styles
-$input-radius: 0.25rem;
-$font-weight-semibold: 600;
-$font-weight-bold: 700;
+$input-radius: 0.25rem !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
 
 /// Breakpoints
 $breakpoints: (
