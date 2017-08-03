@@ -2,7 +2,8 @@
 	main.view--UIDemo
 		h1
 			router-link(to="/uidemo") Demo for UI Elements
-		router-view
+		transition(name="fade", mode="out-in")
+			router-view
 </template>
 
 <script>
