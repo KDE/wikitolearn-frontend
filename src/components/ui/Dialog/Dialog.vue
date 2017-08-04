@@ -90,6 +90,10 @@ export default {
 			type: Boolean,
 			default: false
 		},
+		title: {
+			type: String,
+			default: "No Title"
+		},
 		content: String,
 		type: {
 			type: String,
@@ -99,19 +103,22 @@ export default {
 			type: String,
 			required: true
 		},
+		onConfirm: {
+			type: Function,
+			default: () => {}
+		},
+		onCancel: {
+			type: Function,
+			default: () => {}
+		},
 		onClose: {
 			type: Function,
 			default: () => {}
 		}
 	},
-	computed: {
-		title() {
-			return "No title"
-		}
-	},
 	methods: {
 		close() {
-			this.$emit("close")
+			this.onClose()
 			this.active = false
 
 			// remove the dom element after 1sec
@@ -121,11 +128,11 @@ export default {
 			}, 1000)
 		},
 		confirm() {
-			this.$emit("confirm")
+			this.onConfirm()
 			this.close()
 		},
 		cancel() {
-			this.$emit("cancel")
+			this.onCancel()
 			this.close()
 		}
 	},
