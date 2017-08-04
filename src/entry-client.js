@@ -56,6 +56,7 @@ router.onReady(() => {
 
 		const asyncDataHooks = activated.map((c) => c.asyncData).filter((_) => _)
 		if (!asyncDataHooks.length) {
+			bar.hide(true)
 			return next()
 		}
 

@@ -64,9 +64,12 @@ export default {
 			clearInterval(this._timer)
 			return this
 		},
-		hide() {
+		hide(fastHide=true) {
 			clearInterval(this._timer)
 			this._timer = null
+
+			if (fastHide) this.show = false
+
 			setTimeout(() => {
 				this.show = false
 				this.$nextTick(() => {
