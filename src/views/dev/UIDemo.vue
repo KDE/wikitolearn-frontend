@@ -21,7 +21,7 @@ export default {
 <style lang="scss">
 .view--UIDemo {
 	h2 {
-		margin-bottom: 1rem;
+		margin-top: 1rem;
 	}
 }
 </style>
