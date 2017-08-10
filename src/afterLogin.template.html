@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>WikiToLearn - collaborative textbooks</title>
+	<script src="/static/scripts/keycloak/keycloak.js"></script>
+</head>
+<body>
+	<h1>WikiToLearn - Logging in, please wait</h1>
+	<script>
+		var keycloak = Keycloak({
+			"realm": "WikiTest",
+			"url": "http://<%=htmlWebpackPlugin.options.config.authHostname%>/auth",
+			"ssl-required": "external",
+			"resource": "JSClient",
+			"public-client": true,
+			"clientId": "JSClient"
+		})
+		keycloak.init({ onLoad: 'check-sso' })
+			.success(function(auth) {
+					window.location.href = "/uidemo"
+				}
+			)
+	</script>
+</body>
+</html>
