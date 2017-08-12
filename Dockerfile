@@ -1,10 +1,10 @@
-FROM node:8.1-alpine
+FROM node:alpine
 
 RUN mkdir -p /opt/frontend
 WORKDIR /opt/frontend
 
 ADD package.json /opt/frontend
-RUN npm install
+RUN yarn
 
 ARG CLIENT_API_HOSTNAME
 ENV CLIENT_API_HOSTNAME=${CLIENT_API_HOSTNAME}
@@ -19,7 +19,7 @@ ENV SERVER_AUTH_HOSTNAME=${SERVER_AUTH_HOSTNAME}
 ENV RUNNING_ENV="docker"
 
 ADD . .
-RUN npm run build
+RUN yarn run build
 
 EXPOSE 8080
 
