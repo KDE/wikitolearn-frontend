@@ -6,6 +6,12 @@ import ProgressBar from "components/ProgressBar"
 const bar = Vue.prototype.$bar = new Vue(ProgressBar).$mount()
 document.body.appendChild(bar.$el)
 
+if (!window.location.origin) {
+	window.location.origin = window.location.protocol + "//"
+		+ window.location.hostname
+		+ (window.location.port ? ":" + window.location.port : "")
+}
+
 // a global mixin that calls `asyncData` when a route component's params change
 Vue.mixin({
 	beforeRouteUpdate(to, from, next) {

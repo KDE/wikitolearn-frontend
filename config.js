@@ -30,8 +30,8 @@ const runningEnv = process.env.RUNNING_ENV || "local"
 const clientApiHostname = process.env.CLIENT_API_HOSTNAME || process.env.API_HOSTNAME || "http://localhost:9000"
 const serverApiHostname = process.env.SERVER_API_HOSTNAME || process.env.API_HOSTNAME || "http://localhost:9000"
 
-const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://localhost:5555"
-const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://localhost:5555"
+const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "http://localhost:5555"
+const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "http://localhost:5555"
 
 const useCerts = process.env.USE_CERTS || "false"
 const certsCa = process.env.CERTS_CA || ""

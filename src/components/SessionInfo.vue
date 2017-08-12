@@ -4,9 +4,7 @@
 			template(v-if="$keycloak")
 				a(v-if="authenticated()") You are logged in
 				a(v-else) Not logged in
-				WTLButton(@click=`$keycloak.login({
-					redirectUri: "http://localhost:8080/afterLogin"
-				})`) Login
+				WTLButton(@click=`doLogin()`) Login
 				WTLButton(@click=`$keycloak.logout()`) Logout
 				WTLButton(@click=`authenticated()`) Check
 				p {{ $keycloak.authenticated }}
@@ -19,6 +17,11 @@ export default {
 		authenticated() {
 			console.log(this.$keycloak.authenticated)
 			return this.$keycloak.authenticated
+		},
+		doLogin() {
+			this.$keycloak.login({
+				redirectUri: `${window.location.origin}/afterLogin`
+			})
 		}
 	}
 }
