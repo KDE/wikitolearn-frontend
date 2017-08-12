@@ -32,7 +32,8 @@ const commonPlugins = [
 		"LANGUAGE_ISRTL": config.language.isRTL,
 
 		"process.env.RUNNING_ENV": JSON.stringify(config.runningEnv),
-		"process.env.API_HOSTNAME": JSON.stringify(config.apiHostname)
+		"process.env.API_HOSTNAME": JSON.stringify(config.apiHostname),
+		"process.env.AUTH_HOSTNAME": JSON.stringify(config.authHostname)
 	}),
 	new StyleLintPlugin({
 		files: ["src/**/*.vue", "src/**/*.scss"]
@@ -85,13 +86,13 @@ module.exports = {
 			"styles": path.resolve(__dirname, "../src/styles"),
 			"mixins": path.resolve(__dirname, "../src/mixins"),
 			"views": path.resolve(__dirname, "../src/views"),
-			"api": path.resolve(__dirname, "../src/api"),
+			"api": path.resolve(__dirname, "../src/api")
 		},
-    extensions: ['.js', '.vue', '.scss']
+		extensions: [".js", ".vue", ".scss"]
 	},
 	resolveLoader: {
 		alias: {
-			'scss-loader': 'sass-loader'
+			"scss-loader": "sass-loader"
 		}
 	},
 	module: {
@@ -113,14 +114,14 @@ module.exports = {
 					},
 					preserveWhitespace: false,
 					postcss: [
-						require("autoprefixer")({browsers: ["last 3 versions"]}),
+						require("autoprefixer")({ browsers: ["last 3 versions"] }),
 						require("cssnano")
 					]
 				}
 			},
 			{
 				test: /\.js$/,
-				loader: 'babel-loader',
+				loader: "babel-loader",
 				exclude: /node_modules/
 			},
 			{

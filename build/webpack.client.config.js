@@ -2,6 +2,7 @@ const webpack = require("webpack")
 const merge = require("webpack-merge")
 
 const HTMLPlugin = require("html-webpack-plugin")
+const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin")
 const SWPrecachePlugin = require("sw-precache-webpack-plugin")
 
 const base = require("./webpack.base.config")
@@ -26,8 +27,20 @@ const clientConfig = merge(base, {
 		// generate output HTML
 		new HTMLPlugin({
 			template: "src/index.template.html",
-			minify: config.isProduction ? minifyOptions : {}
+			minify: config.isProduction ? minifyOptions : {},
+			alwaysWriteToDisk: false,
+			config
 		}),
+		// generate afterLogin HTML
+		new HTMLPlugin({
+			filename: "afterLogin.html",
+			template: "src/afterLogin.template.html",
+			minify: config.isProduction ? minifyOptions : {},
+			inject: false,
+			alwaysWriteToDisk: true,
+			config
+		}),
+		new HtmlWebpackHarddiskPlugin(),
 		new VueSSRClientPlugin()
 	]
 })
@@ -49,7 +62,7 @@ if (!config.isTesting) {
 		// https://github.com/Narkoleptika/webpack-everything/commit/b7902f60806cf40b9d1abf8d6bb2a094d924fff7
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "vendor",
-			minChunks: function (module) {
+			minChunks: function(module) {
 				return module.context && module.context.indexOf("node_modules") !== -1
 			}
 		}),
@@ -74,12 +87,12 @@ if (config.isProduction) {
 			dontCacheBustUrlsMatching: /./,
 			runtimeCaching: [
 				{
-					urlPattern: '/',
-					handler: 'networkFirst'
+					urlPattern: "/",
+					handler: "networkFirst"
 				},
 				{
 					urlPattern: /\/api\/.*/,
-					handler: 'networkFirst'
+					handler: "networkFirst"
 				}
 			]
 		}),

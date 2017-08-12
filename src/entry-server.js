@@ -3,7 +3,7 @@ import { createApp } from "./app"
 const isDev = process.env.NODE_ENV !== "production"
 
 import Vue from "vue"
-Vue.prototype.$auth = null // this is to avoid undefined variables when SSRendering and referencing $auth
+Vue.prototype.$keycloak = null
 
 // This exported function will be called by `bundleRenderer`.
 // This is where we perform data-prefetching to determine the

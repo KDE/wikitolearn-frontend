@@ -4,7 +4,7 @@ const compression = require("compression")
 const express = require("express")
 const app = express()
 
-const favicon = require('serve-favicon')
+const favicon = require("serve-favicon")
 
 const resolve = (file) => path.resolve(__dirname, file)
 
@@ -80,21 +80,23 @@ const render = (req, res, context) => {
 
 		console.log(`Whole request: ${Date.now() - s}ms`)
 	})
-
 }
 
 app.use(compression({ threshold: 0 }))
-app.use(favicon('./static/favicon.png'))
+app.use(favicon("./static/favicon.png"))
 
 app.use("/dist", serve("./dist", true))
 app.use("/static", serve("./static", true))
 app.use("/service-worker.js", serve("./dist/service-worker.js"))
 
+app.get("/afterLogin", function(req, res) {
+	res.sendFile("dist/afterLogin.html", { "root": __dirname })
+})
+
 app.get("*", (req, res) => {
 	const context = {
 		url: req.url
 	}
-
 	isProduction ?
 		render(req, res, context) :
 		readyPromise.then(() => render(req, res, context))

@@ -1,14 +1,8 @@
 <script>
-export default {
+/* export default {
 	name: "AuthCheck",
-	beforeMount() { // before mounting the component start refreshing the token and call ` handleRedirect()`
-		this.$auth.refresh({
-			success: () => {
-				this.handleRedirect()
-			},
-			error: () => {
-				this.handleRedirect()
-			}
+	beforeMount() {
+		this.$keycloak.init({ onLoad: "check-sso" }).success((authenticated) => {
 		})
 	},
 	methods: {
@@ -31,5 +25,5 @@ export default {
 		// this will render nothing
 		return h(null)
 	}
-}
+} */
 </script>

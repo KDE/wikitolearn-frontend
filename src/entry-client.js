@@ -23,12 +23,16 @@ Vue.mixin({
 
 const { app, router, store } = createApp()
 
-Vue.router = router
-Vue.use(require("@websanova/vue-auth"), {
-	auth: require("@websanova/vue-auth/drivers/auth/bearer.js"),
-	http: require("@websanova/vue-auth/drivers/http/axios.1.x.js"),
-	router: require("@websanova/vue-auth/drivers/router/vue-router.2.x.js")
+Vue.prototype.$keycloak = Keycloak({
+	"realm": "WikiTest",
+	"url": "http://localhost:5555/auth",
+	"ssl-required": "external",
+	"resource": "JSClient",
+	"public-client": true,
+	"clientId": "JSClient"
 })
+Vue.prototype.$keycloak.init({ onLoad: "check-sso" })
+console.log(Vue.prototype.$keycloak)
 
 // prime the store with server-initialized state.
 // the state is determined during SSR and inlined in the page markup.

@@ -12,7 +12,7 @@
 	<script>
 		var keycloak = Keycloak({
 			"realm": "WikiTest",
-			"url": "http://<%=htmlWebpackPlugin.options.config.authHostname%>/auth",
+			"url": "<%=htmlWebpackPlugin.options.config.authHostname%>/auth",
 			"ssl-required": "external",
 			"resource": "JSClient",
 			"public-client": true,

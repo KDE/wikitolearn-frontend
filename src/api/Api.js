@@ -1,14 +1,13 @@
 import Vue from "vue"
 
 const	config = {
-	protocol: "http",
-	host: process.env.API_HOSTNAME,
+	hostname: process.env.API_HOSTNAME,
 	preamble: "api/v1"
 }
 
 class ApiClass {
 	constructor() {
-		this.baseURL = `${config.protocol}://${config.host}/${config.preamble}`
+		this.baseURL = `${config.hostname}/${config.preamble}`
 	}
 
 	get(endpoint, options = {}) {
