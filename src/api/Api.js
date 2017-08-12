@@ -5,6 +5,22 @@ const	config = {
 	preamble: "api/v1"
 }
 
+let defaultOptions = {}
+if (process.env.VUE_ENV === "server" && process.env.USE_CERTS === "true") {
+	https = require("https")
+	fs = require("fs")
+	const httpsAgent = new https.Agent({
+		keepAlive: true,
+		ca: fs.readFileSync(process.env.CERTS_CA),
+		cert: fs.readFileSync(process.env.CERTS_CERT),
+		key: fs.readFileSync(process.env.CERTS_KEY)
+	})
+
+	defaultOptions = {
+		httpsAgent
+	}
+}
+
 class ApiClass {
 	constructor() {
 		this.baseURL = `${config.hostname}/${config.preamble}`
@@ -12,6 +28,8 @@ class ApiClass {
 
 	get(endpoint, options = {}) {
 		endpoint = this._cleanEndpoint(endpoint)
+
+		options = Object.assign(options, defaultOptions)
 
 		return Vue.axios.get(`${this.baseURL}/${endpoint}`, options)
 			.then((response) => {
@@ -21,6 +39,8 @@ class ApiClass {
 
 	post(endpoint, data = {}, options = {}) {
 		endpoint = this._cleanEndpoint(endpoint)
+
+		options = Object.assign(options, defaultOptions)
 
 		return Vue.axios.get(`${this.baseURL}/${endpoint}`, data, options)
 			.then((response) => {

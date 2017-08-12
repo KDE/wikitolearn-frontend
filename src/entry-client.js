@@ -24,12 +24,12 @@ Vue.mixin({
 const { app, router, store } = createApp()
 
 Vue.prototype.$keycloak = Keycloak({
-	"realm": "WikiTest",
+	"realm": "WikiToLearn",
 	"url": `${process.env.AUTH_HOSTNAME}/auth`,
 	"ssl-required": "external",
-	"resource": "JSClient",
+	"resource": "WikiToLearn",
 	"public-client": true,
-	"clientId": "JSClient"
+	"clientId": "WikiToLearn"
 })
 Vue.prototype.$keycloak.init({ onLoad: "check-sso" })
 console.log(Vue.prototype.$keycloak)

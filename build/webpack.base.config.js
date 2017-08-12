@@ -11,7 +11,8 @@ const config = require("../config")
 
 const messages = {
 	main:	require(`../i18n/${config.language.filename}`),
-	fallback: config.fallbackLanguage ? require(`../i18n/${config.fallbackLanguage.filename}`) : null
+	fallback: config.fallbackLanguage ?
+		require(`../i18n/${config.fallbackLanguage.filename}`) : null
 }
 
 Vue.use(VueI18n)
@@ -31,7 +32,12 @@ const commonPlugins = [
 		"LANGUAGE_FALLBACK_FILENAME": config.fallbackLanguage ? JSON.stringify(config.fallbackLanguage.filename) : null,
 		"LANGUAGE_ISRTL": config.language.isRTL,
 
-		"process.env.RUNNING_ENV": JSON.stringify(config.runningEnv)
+		"process.env.RUNNING_ENV": JSON.stringify(config.runningEnv),
+
+		"process.env.USE_CERTS": JSON.stringify(config.useCerts),
+		"process.env.CERTS_CA": JSON.stringify(config.certsCa),
+		"process.env.CERTS_CERT": JSON.stringify(config.certsCert),
+		"process.env.CERTS_KEY": JSON.stringify(config.certsKey)
 	}),
 	new StyleLintPlugin({
 		files: ["src/**/*.vue", "src/**/*.scss"]

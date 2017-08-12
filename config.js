@@ -33,6 +33,12 @@ const serverApiHostname = process.env.SERVER_API_HOSTNAME || process.env.API_HOS
 const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://localhost:5555"
 const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://localhost:5555"
 
+const useCerts = process.env.USE_CERTS || "false"
+const certsCa = process.env.CERTS_CA || ""
+const certsCert = process.env.CERTS_CERT || ""
+const certsKey = process.env.CERTS_KEY || ""
+
+
 module.exports = {
 	language,
 	fallbackLanguage,
@@ -49,5 +55,10 @@ module.exports = {
 	clientApiHostname,
 	serverApiHostname,
 	clientAuthHostname,
-	serverAuthHostname
+	serverAuthHostname,
+
+	useCerts,
+	certsCa,
+	certsCert,
+	certsKey
 }
