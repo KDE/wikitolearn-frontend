@@ -1,5 +1,11 @@
 FROM node:8.1-alpine
 
+RUN mkdir -p /opt/frontend
+WORKDIR /opt/frontend
+
+ADD package.json /opt/frontend
+RUN npm install
+
 ARG CLIENT_API_HOSTNAME
 ENV CLIENT_API_HOSTNAME=${CLIENT_API_HOSTNAME}
 ARG CLIENT_AUTH_HOSTNAME
@@ -11,12 +17,6 @@ ARG SERVER_AUTH_HOSTNAME
 ENV SERVER_AUTH_HOSTNAME=${SERVER_AUTH_HOSTNAME}
 
 ENV RUNNING_ENV="docker"
-
-RUN mkdir -p /opt/frontend
-WORKDIR /opt/frontend
-
-ADD package.json /opt/frontend
-RUN npm install
 
 ADD . .
 RUN npm run build
