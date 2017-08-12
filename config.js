@@ -27,8 +27,11 @@ const fallbackLanguage = languages[language.fallback] || null
 // the environment that will be considered when building the skin, either `production` or `development`
 const nodeEnv = process.env.NODE_ENV || "development"
 const runningEnv = process.env.RUNNING_ENV || "local"
-const apiHostname = process.env.API_HOSTNAME || "http://localhost:9000"
-const authHostname = process.env.AUTH_HOSTNAME || "https://localhost:5555"
+const clientApiHostname = process.env.CLIENT_API_HOSTNAME || process.env.API_HOSTNAME || "http://localhost:9000"
+const serverApiHostname = process.env.SERVER_API_HOSTNAME || process.env.API_HOSTNAME || "http://localhost:9000"
+
+const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://localhost:5555"
+const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://localhost:5555"
 
 module.exports = {
 	language,
@@ -43,6 +46,8 @@ module.exports = {
 	},
 
 	runningEnv,
-	apiHostname,
-	authHostname
+	clientApiHostname,
+	serverApiHostname,
+	clientAuthHostname,
+	serverAuthHostname
 }

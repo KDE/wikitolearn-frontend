@@ -22,7 +22,9 @@ const clientConfig = merge(base, {
 	plugins: [
 		// strip dev-only code in Vue source
 		new webpack.DefinePlugin({
-			"process.env.VUE_ENV": "'client'"
+			"process.env.VUE_ENV": "'client'",
+			"process.env.API_HOSTNAME": JSON.stringify(config.clientApiHostname),
+			"process.env.AUTH_HOSTNAME": JSON.stringify(config.clientAuthHostname)
 		}),
 		// generate output HTML
 		new HTMLPlugin({

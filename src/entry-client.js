@@ -25,7 +25,7 @@ const { app, router, store } = createApp()
 
 Vue.prototype.$keycloak = Keycloak({
 	"realm": "WikiTest",
-	"url": "http://localhost:5555/auth",
+	"url": `${process.env.AUTH_HOSTNAME}/auth`,
 	"ssl-required": "external",
 	"resource": "JSClient",
 	"public-client": true,
