@@ -1,10 +1,13 @@
 <template lang="pug">
 	NoSSR
 		.SessionInfo
-			template(v-if="$keycloak")
-				WTLButton(@click=`doLogin()`) Login
-				WTLButton(@click=`$keycloak.logout()`) Logout
-				WTLButton(@click=`checkLogin()`) Get User Data
+			template(v-if="$keycloak && $keycloak.ready")
+				WTLButton(v-if="!$keycloak.authenticated", @click=`doLogin()`) Login
+				template(v-if="$keycloak.authenticated")
+					span {{ $keycloak.user.username }}
+						small ({{ $keycloak.user.email }})
+					WTLButton(@click=`$keycloak.logout()`) Logout
+					WTLButton(@click=`checkLogin()`) Get User Data
 </template>
 
 <script>

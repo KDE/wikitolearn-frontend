@@ -29,16 +29,21 @@ Vue.mixin({
 
 const { app, router, store } = createApp()
 
-Vue.prototype.$keycloak = Keycloak({
-	"realm": "WikiToLearn",
-	"url": `${process.env.AUTH_HOSTNAME}/auth`,
-	"ssl-required": "external",
-	"resource": "WikiToLearn",
-	"public-client": true,
-	"clientId": "WikiToLearn"
+import VueKeycloak from "vue-keycloak"
+
+Vue.use(VueKeycloak, {
+	keycloakOptions: {
+		"realm": "WikiToLearn",
+		"url": `${process.env.AUTH_HOSTNAME}/auth`,
+		"ssl-required": "external",
+		"resource": "WikiToLearn",
+		"public-client": true,
+		"clientId": "WikiToLearn"
+	},
+	keycloakInitOptions: {
+		onLoad: "check-sso"
+	}
 })
-Vue.prototype.$keycloak.init({ onLoad: "check-sso" })
-console.log(Vue.prototype.$keycloak)
 
 // prime the store with server-initialized state.
 // the state is determined during SSR and inlined in the page markup.
