@@ -4,6 +4,7 @@ const merge = require("webpack-merge")
 const HTMLPlugin = require("html-webpack-plugin")
 const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin")
 const SWPrecachePlugin = require("sw-precache-webpack-plugin")
+const BabiliPlugin = require("babili-webpack-plugin");
 
 const base = require("./webpack.base.config")
 const config = require("../config")
@@ -50,11 +51,7 @@ const clientConfig = merge(base, {
 if (config.isProduction) {
 	clientConfig.plugins.push(
 		// minify JS
-		new webpack.optimize.UglifyJsPlugin({
-			compress: {
-				warnings: false
-			}
-		})
+		new BabiliPlugin()
 	)
 }
 
