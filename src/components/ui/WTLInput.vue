@@ -112,6 +112,19 @@ $input-border-color: #dbdbdb;
 		width: 100%;
 	}
 
+	&__icon {
+		position: absolute;
+		color: #dbdbdb;
+
+		&--left {
+			left: 0.1rem;
+		}
+
+		&--right {
+			right: 0.1rem;
+		}
+	}
+
 	&__input {
 		@include input();
 
@@ -145,19 +158,6 @@ $input-border-color: #dbdbdb;
 			& ~ .WTLInput__icon {
 				color: $black;
 			}
-		}
-	}
-
-	&__icon {
-		position: absolute;
-		color: #dbdbdb;
-
-		&--left {
-			left: 0.1rem;
-		}
-
-		&--right {
-			right: 0.1rem;
 		}
 	}
 

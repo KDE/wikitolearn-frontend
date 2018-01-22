@@ -30,10 +30,10 @@ export default {
 @import "~styles/declarations";
 
 .WTLField {
-	&.WTLField--is-grouped {
-		.WTLField__content > *:not(:last-child) {
-			margin-right: 0.75rem;
-		}
+	&__content {
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
 	}
 
 	&.WTLField--has-addons .WTLField__content {
@@ -55,10 +55,10 @@ export default {
 		}
 	}
 
-	&__content {
-		display: flex;
-		flex-flow: row wrap;
-		align-items: center;
+	&.WTLField--is-grouped {
+		.WTLField__content > *:not(:last-child) {
+			margin-right: 0.75rem;
+		}
 	}
 
 	&__label {
