@@ -33,9 +33,9 @@ export default {
 			return this.$store.state.rootCategories
 		}
 	},
-	asyncData({ store }) {
+	/* asyncData({ store }) {
 		return store.dispatch("FETCH_ROOT_CATEGORIES")
-	},
+	},*/
 	meta() {
 		return {
 			title: "Home",

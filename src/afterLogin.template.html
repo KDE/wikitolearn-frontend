@@ -16,7 +16,7 @@
 			"ssl-required": "external",
 			"resource": "WikiToLearn",
 			"public-client": true,
-			"clientId": "WikiToLearn"
+			"clientId": "<%=htmlWebpackPlugin.options.config.clientAuthId%>"
 		})
 		keycloak.init({ onLoad: 'check-sso' })
 			.success(function(auth) {

@@ -2,7 +2,7 @@ import Vue from "vue"
 
 const	config = {
 	hostname: process.env.API_HOSTNAME,
-	preamble: "api/v1"
+	preamble: "v1"
 }
 
 let defaultOptions = {}
