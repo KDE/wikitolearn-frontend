@@ -34,7 +34,7 @@ export default {
 	computed: {
 		courseName() {
 			if (this.course) {
-				return this.course.name
+				return this.course.title
 			} else {
 				return this.$route.params.courseName
 			}
@@ -46,7 +46,7 @@ export default {
 	asyncData({ store, route }) {
 		return store.dispatch("FETCH_COURSE", { courseName: route.params.courseName })
 			.catch((error) => {
-				return store.commit("SET_ERROR", { error: error.response.data })
+				return store.commit("SET_ERROR", { error: error })
 			})
 	},
 	meta() {
