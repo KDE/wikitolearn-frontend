@@ -53,7 +53,8 @@ module.exports = {
 	isTesting: nodeEnv === "testing",
 
 	server: {
-		port: process.env.SERVER_PORT || 4138
+		port: process.env.SERVER_PORT || 4138,
+		hostname: process.env.SERVER_HOSTNAME || "0.0.0.0"
 	},
 
 	runningEnv,
