@@ -1,9 +1,9 @@
 <template lang="pug">
 	.Badge
 		router-link.Badge__name(:to=`{
-				name: view,
-				params: params
-			}`) {{ title }}
+				name: 'Department',
+				params: { departmentName: departmentName }
+			}`) {{ departmentName }}
 </template>
 
 <style lang="scss">
@@ -22,17 +22,9 @@
 export default {
 	name: "Badge",
 	props: {
-		link: {
-			type: Object,
+		departmentName: {
+			type: String,
 			required: true
-		}
-	},
-	data() {
-		return {
-			api: this.link.href ? this.link.href : "",
-			view: this.link.view,
-			title: this.link.title,
-			params: this.link.params ? link.params : {}
 		}
 	}
 }

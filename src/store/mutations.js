@@ -5,16 +5,12 @@ export const mutations = {
 		state.rootCategories = categories
 	},
 
-	SET_NAVIGATION_LINKS(state, { navigationLinks }) {
-		state.navigationLinks = navigationLinks
-	},
-
 	SET_CATEGORY(state, { category }) {
 		Vue.set(state.categories, category.name, category)
 	},
 
 	SET_COURSE(state, { course }) {
-		Vue.set(state.courses, course._id, course)
+		Vue.set(state.courses, course.name, course)
 	},
 
 	SET_PAGE(state, { page }) {
@@ -27,10 +23,6 @@ export const mutations = {
 
 	CLEAR_ERROR(state) {
 		state.error = null
-	},
-
-	CLEAR_COURSES(state) {
-		state.courses = {}
 	},
 
 	CREATE_POLLING(state, { pollingId, pollTimer }) {

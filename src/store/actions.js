@@ -2,17 +2,9 @@ import { Categories } from "api/Categories"
 import { Courses } from "api/Courses"
 import { Pages } from "api/Pages"
 import { Polling } from "api/Polling"
-import { Api } from "api/Api"
 
 
 export const actions = {
-	FETCH_HOME({ commit }) {
-		return Api.get("")
-			.then((response) => {
-				commit("SET_NAVIGATION_LINKS", { navigationLinks: response._links })
-			})
-	},
-
 	FETCH_ROOT_CATEGORIES({ commit }) {
 		return Categories.getRootCategories()
 			.then((response) => {
@@ -30,25 +22,7 @@ export const actions = {
 	FETCH_COURSE({ commit }, { courseName }) {
 		return Courses.get(courseName)
 			.then((response) => {
-				const resp = Object.assign({}, response)
-				commit("SET_COURSE", { course: resp })
-				return response
-			}).then((response) => {
-				commit("SET_NAVIGATION_LINKS", { navigationLinks: response._links })
-			})
-	},
-
-	FETCH_COURSES({ commit }, { page }) {
-		return Courses.getAll(page)
-			.then((response) => {
-				const resp = Object.assign({}, response)
-				commit("CLEAR_COURSES")
-				for (const course of resp._items) {
-					commit("SET_COURSE", { course: course })
-				}
-				return response
-			}).then((response) => {
-				commit("SET_NAVIGATION_LINKS", { navigationLinks: response._links })
+				commit("SET_COURSE", { course: response.data })
 			})
 	},
 
