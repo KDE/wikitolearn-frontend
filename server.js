@@ -103,8 +103,9 @@ app.get("*", (req, res) => {
 })
 
 const port = config.server.port
-let server = app.listen(port, () => {
-	console.log(`Server started at localhost:${port}`)
+const hostname = config.server.hostname
+let server = app.listen(port, hostname, () => {
+	console.log(`Server started at ${hostname}:${port}`)
 })
 
 module.exports = {

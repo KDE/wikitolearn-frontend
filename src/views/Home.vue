@@ -1,12 +1,10 @@
 <template lang="pug">
 	main.view--Home
 		h1 Welcome to WikiToLearn!
-		h2 Departments
+		h2 Sections
 		.badges
 			Badge(
-				v-for="badge in badges"
-				:departmentName="badge.displayName"
-				:key="badge.name"
+				:link="coursesLink"
 			)
 		h2 Other Links
 		router-link(to="/showcase") Go to feature showcase
@@ -28,14 +26,22 @@ import Badge from "components/home/Badge"
 export default {
 	name: "Home",
 	components: { Badge },
-	computed: {
-		badges() {
-			return this.$store.state.rootCategories
+	data() {
+		return {
+			coursesLink: {
+				view: "Courses",
+				title: "All courses"
+			}
 		}
 	},
-	asyncData({ store }) {
-		return store.dispatch("FETCH_ROOT_CATEGORIES")
+	computed: {
+		/* navigationLinks() {
+			return this.$store.state.navigationLinks
+		}*/
 	},
+	/* asyncData({ store }) {
+		return store.dispatch("FETCH_HOME")
+	},*/
 	meta() {
 		return {
 			title: "Home",

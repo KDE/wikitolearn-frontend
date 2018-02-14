@@ -38,7 +38,7 @@ Vue.use(VueKeycloak, {
 		"ssl-required": "external",
 		"resource": "WikiToLearn",
 		"public-client": true,
-		"clientId": "WikiToLearn"
+		"clientId": process.env.CLIENT_AUTH_ID
 	},
 	keycloakInitOptions: {
 		onLoad: "check-sso"

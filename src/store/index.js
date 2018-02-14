@@ -15,6 +15,7 @@ export function createStore() {
 			pages: {},
 
 			pollingOperations: {},
+			navigationLinks: {},
 			error: null
 		},
 		actions,
