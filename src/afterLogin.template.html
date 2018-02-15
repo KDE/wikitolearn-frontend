@@ -11,16 +11,16 @@
 	<h1>WikiToLearn - Logging in, please wait</h1>
 	<script>
 		var keycloak = Keycloak({
-			"realm": "WikiToLearn",
+			"realm": "<%=htmlWebpackPlugin.options.config.clientAuthRealm%>",
 			"url": "<%=htmlWebpackPlugin.options.config.clientAuthHostname%>/auth",
 			"ssl-required": "external",
-			"resource": "WikiToLearn",
+			"resource": "<%=htmlWebpackPlugin.options.config.clientAuthRealm%>",
 			"public-client": true,
 			"clientId": "<%=htmlWebpackPlugin.options.config.clientAuthId%>"
 		})
 		keycloak.init({ onLoad: 'check-sso' })
 			.success(function(auth) {
-					window.location.href = "/uidemo"
+					window.location.href = "/"
 				}
 			)
 	</script>

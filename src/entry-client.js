@@ -33,10 +33,10 @@ import VueKeycloak from "vue-keycloak"
 
 Vue.use(VueKeycloak, {
 	keycloakOptions: {
-		"realm": "wikitolearn",
+		"realm": process.env.CLIENT_AUTH_REALM,
 		"url": `${process.env.AUTH_HOSTNAME}/auth`,
 		"ssl-required": "external",
-		"resource": "wikitolearn",
+		"resource": process.env.CLIENT_AUTH_REALM,
 		"public-client": true,
 		"clientId": process.env.CLIENT_AUTH_ID
 	},

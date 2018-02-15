@@ -37,6 +37,7 @@ const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_
 const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "http://localhost:9080"
 // const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://login.wtl2.wikitolearn-test.org"
 const clientAuthId = process.env.CLIENT_AUTH_ID || "sgametrio-test"
+const clientAuthRealm = process.env.CLIENT_AUTH_REALM || "wikitolearn"
 
 const useCerts = process.env.USE_CERTS || "false"
 const certsCa = process.env.CERTS_CA || ""
@@ -63,6 +64,7 @@ module.exports = {
 	clientAuthHostname,
 	serverAuthHostname,
 	clientAuthId,
+	clientAuthRealm,
 
 	useCerts,
 	certsCa,
