@@ -6,7 +6,11 @@ class CoursesClass {
 	}
 
 	getAll(page=1) {
-		return Api.get(`courses?page=${page}`)
+		if (page === 1) {
+			return Api.get("courses")
+		} else {
+			return Api.get(`courses?page=${page}`)
+		}
 	}
 }
 

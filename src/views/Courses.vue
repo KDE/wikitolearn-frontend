@@ -11,7 +11,20 @@
 					courseName: course._id
 				}
 			}`) {{ course.title }}
+		//
+			ul
+				li(
+					v-for="chapter in course.chapters"
+				)
+					router-link(:to=`{
+						name: "Chapter",
+						append: true,
+						params: {
+							chapterName: chapter._id
+						}
+					}`) {{ chapter.title }}
 		Error(:error="error")
+	//
 		WTLButton(
 			v-if="links.prev"
 			@click="fetchCoursesPage(page-1)"
@@ -47,10 +60,10 @@ export default {
 	computed: {
 		courses() {
 			return this.$store.state.courses
-		},
+		}/* ,
 		links() {
 			return this.$store.state.navigationLinks
-		}
+		}*/
 	},
 	asyncData({ store, route }) {
 		return store.dispatch("FETCH_COURSES", { page: 1 })

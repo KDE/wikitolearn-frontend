@@ -27,15 +27,15 @@ const fallbackLanguage = languages[language.fallback] || null
 // the environment that will be considered when building the skin, either `production` or `development`
 const nodeEnv = process.env.NODE_ENV || "development"
 const runningEnv = process.env.RUNNING_ENV || "local"
-// const clientApiHostname = process.env.CLIENT_API_HOSTNAME || process.env.API_HOSTNAME || "http://localhost:9000"
-const clientApiHostname = process.env.CLIENT_API_HOSTNAME || process.env.API_HOSTNAME || "https://mig-output.wtl2.wikitolearn-test.org"
-// const serverApiHostname = process.env.SERVER_API_HOSTNAME || process.env.API_HOSTNAME || "http://localhost:9000"
-const serverApiHostname = process.env.SERVER_API_HOSTNAME || process.env.API_HOSTNAME || "https://mig-output.wtl2.wikitolearn-test.org"
+const clientApiHostname = process.env.CLIENT_API_HOSTNAME || process.env.API_HOSTNAME || "http://localhost:12000"
+// const clientApiHostname = process.env.CLIENT_API_HOSTNAME || process.env.API_HOSTNAME || "https://mig-output.wtl2.wikitolearn-test.org"
+const serverApiHostname = process.env.SERVER_API_HOSTNAME || process.env.API_HOSTNAME || "http://localhost:12000"
+// const serverApiHostname = process.env.SERVER_API_HOSTNAME || process.env.API_HOSTNAME || "https://mig-output.wtl2.wikitolearn-test.org"
 
-// const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "http://localhost:5555"
-const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://login.wtl2.wikitolearn-test.org"
-// const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "http://localhost:5555"
-const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://login.wtl2.wikitolearn-test.org"
+const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "http://localhost:9080"
+// const clientAuthHostname = process.env.CLIENT_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://login.wtl2.wikitolearn-test.org"
+const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "http://localhost:9080"
+// const serverAuthHostname = process.env.SERVER_AUTH_HOSTNAME || process.env.AUTH_HOSTNAME || "https://login.wtl2.wikitolearn-test.org"
 const clientAuthId = process.env.CLIENT_AUTH_ID || "sgametrio-test"
 
 const useCerts = process.env.USE_CERTS || "false"

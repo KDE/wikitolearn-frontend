@@ -5,6 +5,10 @@ export const mutations = {
 		state.rootCategories = categories
 	},
 
+	SET_CHAPTER(state, { chapter }) {
+		Vue.set(state.chapters, chapter._id, chapter)
+	},
+
 	SET_NAVIGATION_LINKS(state, { navigationLinks }) {
 		state.navigationLinks = navigationLinks
 	},
@@ -18,7 +22,7 @@ export const mutations = {
 	},
 
 	SET_PAGE(state, { page }) {
-		Vue.set(state.pages, page.title, page)
+		Vue.set(state.pages, page._id, page)
 	},
 
 	SET_ERROR(state, { error }) {

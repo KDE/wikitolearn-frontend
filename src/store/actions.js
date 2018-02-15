@@ -1,6 +1,7 @@
 import { Categories } from "api/Categories"
 import { Courses } from "api/Courses"
 import { Pages } from "api/Pages"
+import { Chapters } from "api/Chapters"
 import { Polling } from "api/Polling"
 import { Api } from "api/Api"
 
@@ -32,6 +33,9 @@ export const actions = {
 			.then((response) => {
 				const resp = Object.assign({}, response)
 				commit("SET_COURSE", { course: resp })
+				for (const chapter of resp.chapters) {
+					commit("SET_CHAPTER", { chapter: chapter })
+				}
 				return response
 			}).then((response) => {
 				commit("SET_NAVIGATION_LINKS", { navigationLinks: response._links })
@@ -55,7 +59,18 @@ export const actions = {
 	FETCH_PAGE({ commit }, { pageTitle }) {
 		return Pages.get(pageTitle)
 			.then((response) => {
-				commit("SET_PAGE", { page: response.data })
+				commit("SET_PAGE", { page: response })
+			})
+	},
+
+	FETCH_CHAPTER({ commit }, { chapterName }) {
+		return Chapters.get(chapterName)
+			.then((response) => {
+				const resp = Object.assign({}, response)
+				commit("SET_CHAPTER", { page: resp })
+				for (const page of resp.pages) {
+					commit("SET_PAGE", { page: page })
+				}
 			})
 	},
 

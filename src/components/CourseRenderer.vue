@@ -1,6 +1,18 @@
 <template lang="pug">
 	.CourseRenderer
 		h3.CourseRenderer__name(v-if="showName") {{ course.name }}
+		ul
+			li(
+				v-for="chapter in course.chapters"
+			)
+				router-link(:to=`{
+					name: "Chapter",
+					append: true,
+					params: {
+						chapterName: chapter._id
+					}
+				}`) {{ chapter.title }}
+	//
 		.CourseRenderer__description
 			b Description
 			br

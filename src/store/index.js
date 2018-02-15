@@ -13,6 +13,7 @@ export function createStore() {
 			categories: {},
 			courses: {},
 			pages: {},
+			chapters: {},
 
 			pollingOperations: {},
 			navigationLinks: {},

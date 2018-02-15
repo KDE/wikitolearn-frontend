@@ -1,6 +1,6 @@
 <template lang="pug">
 	.PageRenderer
-		h1.PageRenderer__title(v-if="showName") {{ page.displayTitle }}
+		h1.PageRenderer__title(v-if="showName") {{ page.title }}
 		.PageRenderer__content(v-html="page.content")
 </template>
 

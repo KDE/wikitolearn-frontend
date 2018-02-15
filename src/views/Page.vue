@@ -53,7 +53,7 @@ export default {
 	asyncData({ store, route }) {
 		return store.dispatch("FETCH_PAGE", { pageTitle: route.params.pageTitle })
 			.catch((error) => {
-				return store.commit("SET_ERROR", { error: error.response.data })
+				return store.commit("SET_ERROR", { error: error })
 			})
 	},
 	meta() {
