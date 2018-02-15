@@ -1,6 +1,6 @@
 version: "3.4"
 services:
-  pwa:
+  frontend:
     build:
       context: ./
       args:
@@ -11,7 +11,7 @@ services:
         CLIENT_AUTH_ID: ${CLIENT_AUTH_ID}
         SERVER_API_HOSTNAME: ${SERVER_API_HOSTNAME}
         SERVER_AUTH_HOSTNAME: ${SERVER_AUTH_HOSTNAME}
-    image: wikitolearn/pwa
+    image: wikitolearn/frontend
     ports:
       - "${SERVICE_PORT}:${SERVICE_PORT}"
     environment:
