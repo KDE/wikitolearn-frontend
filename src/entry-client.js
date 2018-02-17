@@ -33,12 +33,12 @@ import VueKeycloak from "vue-keycloak"
 
 Vue.use(VueKeycloak, {
 	keycloakOptions: {
-		"realm": process.env.CLIENT_AUTH_REALM,
+		"realm": process.env.KEYCLOAK_AUTH_REALM,
 		"url": `${process.env.AUTH_HOSTNAME}/auth`,
 		"ssl-required": "external",
-		"resource": process.env.CLIENT_AUTH_REALM,
+		"resource": process.env.KEYCLOAK_AUTH_REALM,
 		"public-client": true,
-		"clientId": process.env.CLIENT_AUTH_ID
+		"clientId": process.env.KEYCLOAK_FRONTEND_CLIENT_ID
 	},
 	keycloakInitOptions: {
 		onLoad: "check-sso"

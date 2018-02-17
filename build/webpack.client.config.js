@@ -25,8 +25,8 @@ const clientConfig = merge(base, {
 		new webpack.DefinePlugin({
 			"process.env.VUE_ENV": "'client'",
 			"process.env.API_HOSTNAME": JSON.stringify(config.clientApiHostname),
-			"process.env.CLIENT_AUTH_ID": JSON.stringify(config.clientAuthId),
-			"process.env.CLIENT_AUTH_REALM": JSON.stringify(config.clientAuthRealm),
+			"process.env.KEYCLOAK_FRONTEND_CLIENT_ID": JSON.stringify(config.clientAuthId),
+			"process.env.KEYCLOAK_AUTH_REALM": JSON.stringify(config.clientAuthRealm),
 			"process.env.AUTH_HOSTNAME": JSON.stringify(config.clientAuthHostname)
 		}),
 		// generate output HTML
