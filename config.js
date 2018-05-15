@@ -1,3 +1,4 @@
+const assertEnv = require("require-env")
 /* Each language object has 3 attributes:
 	+ filename, for specifying which file inside the `i18n` directory should be used
 	+ fallback, another language key that will be used as a fallback, if null the raw translation key will be used
@@ -27,17 +28,13 @@ const fallbackLanguage = languages[language.fallback] || null
 // the environment that will be considered when building the skin, either `production` or `development`
 const nodeEnv = process.env.NODE_ENV || "development"
 const runningEnv = process.env.RUNNING_ENV || "local"
-const clientApiHostname = process.env.PUBLIC_PWA_GATEWAY_URI || process.env.API_HOSTNAME || "http://localhost:12000"
-// const clientApiHostname = process.env.PUBLIC_PWA_GATEWAY_URI || process.env.API_HOSTNAME || "https://mig-output.wtl2.wikitolearn-test.org"
-const serverApiHostname = process.env.PWA_GATEWAY_URI || process.env.API_HOSTNAME || "http://localhost:12000"
-// const serverApiHostname = process.env.PWA_GATEWAY_URI || process.env.API_HOSTNAME || "https://mig-output.wtl2.wikitolearn-test.org"
+const clientApiHostname = assertEnv.require("PUBLIC_PWA_GATEWAY_URI")
+const serverApiHostname = assertEnv.require("PWA_GATEWAY_URI")
+const clientAuthHostname = assertEnv.require("PUBLIC_KEYCLOAK_URI")
 
-const clientAuthHostname = process.env.PUBLIC_KEYCLOAK_URI || process.env.AUTH_HOSTNAME || "http://localhost:9080"
-// const clientAuthHostname = process.env.PUBLIC_KEYCLOAK_URI || process.env.AUTH_HOSTNAME || "https://login.wtl2.wikitolearn-test.org"
-const serverAuthHostname = process.env.KEYCLOAK_URI || process.env.AUTH_HOSTNAME || "http://localhost:9080"
-// const serverAuthHostname = process.env.KEYCLOAK_URI || process.env.AUTH_HOSTNAME || "https://login.wtl2.wikitolearn-test.org"
-const clientAuthId = process.env.KEYCLOAK_FRONTEND_CLIENT_ID || "sgametrio-test"
-const clientAuthRealm = process.env.KEYCLOAK_AUTH_REALM || "wikitolearn"
+const serverAuthHostname = assertEnv.require("KEYCLOAK_URI")
+const clientAuthId = assertEnv.require("KEYCLOAK_FRONTEND_CLIENT_ID")
+const clientAuthRealm = assertEnv.require("KEYCLOAK_AUTH_REALM")
 
 const useCerts = process.env.USE_CERTS || "false"
 const certsCa = process.env.CERTS_CA || ""
@@ -54,7 +51,7 @@ module.exports = {
 	isTesting: nodeEnv === "testing",
 
 	server: {
-		port: process.env.SERVICE_PORT || 4138,
+		port: assertEnv.require("SERVICE_PORT"),
 		hostname: process.env.SERVER_HOSTNAME || "0.0.0.0"
 	},
 
