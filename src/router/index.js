@@ -12,7 +12,7 @@ import Course from "views/Course"
 import Chapter from "views/Chapter"
 import Courses from "views/Courses"
 import Page from "views/Page"
-const EditPage = () => System.import("views/EditPage")
+const EditPage = () => import("views/EditPage")
 
 routes = routes.concat([
 	{ path: "/", component: Home, name: "Home" },
@@ -25,20 +25,20 @@ routes = routes.concat([
 ])
 
 if (process.env.NODE_ENV !== "production") {
-	const Showcase = () => System.import("views/dev/Showcase") // load dynamically when needed
-	const Login = () => System.import("views/dev/Login")
+	const Showcase = () => import("views/dev/Showcase") // load dynamically when needed
+	const Login = () => import("views/dev/Login")
 
 	routes.push({ path: "/showcase", component: Showcase })
 	routes.push({ path: "/login", component: Login })
 }
 
-const UIDemo = () => System.import("views/dev/UIDemo")
-const UIDemoComponentsList = () => System.import("views/dev/ui/ComponentsList")
-const UIDemoButton = () => System.import("views/dev/ui/Button")
-const UIDemoDialog = () => System.import("views/dev/ui/Dialog")
-const UIDemoAsync = () => System.import("views/dev/ui/Async")
-const UIDemoInput = () => System.import("views/dev/ui/Input")
-const UIDemoField = () => System.import("views/dev/ui/Field")
+const UIDemo = () => import("views/dev/UIDemo")
+const UIDemoComponentsList = () => import("views/dev/ui/ComponentsList")
+const UIDemoButton = () => import("views/dev/ui/Button")
+const UIDemoDialog = () => import("views/dev/ui/Dialog")
+const UIDemoAsync = () => import("views/dev/ui/Async")
+const UIDemoInput = () => import("views/dev/ui/Input")
+const UIDemoField = () => import("views/dev/ui/Field")
 routes.push({
 	path: "/uidemo", component: UIDemo,
 	children: [
@@ -51,7 +51,7 @@ routes.push({
 	]
 })
 
-const NotFound = () => System.import("views/NotFound")
+const NotFound = () => import("views/NotFound")
 routes.push({ path: "/404", component: NotFound, name: "NotFound" })
 
 // push as last element because the wildcard match will catch all the unknown urls

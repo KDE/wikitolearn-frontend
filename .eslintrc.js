@@ -1,6 +1,7 @@
 const config = require("./config")
 
 module.exports = {
+	parser: "babel-eslint",
 	parserOptions: {
 		sourceType: "module"
 	},
@@ -21,6 +22,7 @@ module.exports = {
 
 	// add your custom rules here
 	rules: {
+		"strict": 0,
 		// don"t allow semicolons
 		"semi": ["error", "never"],
 
