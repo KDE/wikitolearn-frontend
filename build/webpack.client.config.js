@@ -58,7 +58,7 @@ if (config.isProduction) {
 }
 
 if (!config.isTesting) {
-	clientConfig.plugins.push(
+	/*clientConfig.plugins.push(
 		// extract vendor chunks for better caching
 		// https://github.com/Narkoleptika/webpack-everything/commit/b7902f60806cf40b9d1abf8d6bb2a094d924fff7
 		new webpack.optimize.CommonsChunkPlugin({
@@ -71,7 +71,8 @@ if (!config.isTesting) {
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "manifest"
 		})
-	)
+	)*/
+	//clientConfig.optimization.push()
 }
 
 if (config.isProduction) {
@@ -96,8 +97,9 @@ if (config.isProduction) {
 					handler: "networkFirst"
 				}
 			]
-		}),
-		new webpack.optimize.ModuleConcatenationPlugin()
+		})
+		// On by default on "mode: production"
+		//new webpack.optimize.ModuleConcatenationPlugin()
 	)
 }
 
