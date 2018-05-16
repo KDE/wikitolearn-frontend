@@ -4,7 +4,7 @@ const merge = require("webpack-merge")
 const HTMLPlugin = require("html-webpack-plugin")
 const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin")
 const SWPrecachePlugin = require("sw-precache-webpack-plugin")
-const BabiliPlugin = require("babili-webpack-plugin");
+//const BabiliPlugin = require("babili-webpack-plugin");
 
 const base = require("./webpack.base.config")
 const config = require("../config")
@@ -50,14 +50,22 @@ const clientConfig = merge(base, {
 	]
 })
 
-if (config.isProduction) {
+// Minifying JS is handled by "mode: production"
+/*if (config.isProduction) {
 	clientConfig.plugins.push(
 		// minify JS
 		new BabiliPlugin()
 	)
-}
+}*/
 
+// WIP: splitChunks optimization if necessary
 if (!config.isTesting) {
+	clientConfig.optimization = {
+		splitChunks: {
+			// Enable optimization for initial chunks too
+			chunks: "all"
+		}
+	}
 	/*clientConfig.plugins.push(
 		// extract vendor chunks for better caching
 		// https://github.com/Narkoleptika/webpack-everything/commit/b7902f60806cf40b9d1abf8d6bb2a094d924fff7
@@ -72,7 +80,6 @@ if (!config.isTesting) {
 			name: "manifest"
 		})
 	)*/
-	//clientConfig.optimization.push()
 }
 
 if (config.isProduction) {
@@ -98,9 +105,10 @@ if (config.isProduction) {
 				}
 			]
 		})
-		// On by default on "mode: production"
 		//new webpack.optimize.ModuleConcatenationPlugin()
 	)
+	// On by default on "mode: production"
+	//clientConfig.optimization.concatenateModules = true
 }
 
 module.exports = clientConfig

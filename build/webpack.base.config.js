@@ -79,6 +79,8 @@ module.exports = {
 		filename: "js/[name].[chunkhash:16].js"
 	},
 
+	mode: config.isProduction ? "production" : "development",
+
 	resolve: {
 		alias: {
 			"static": path.resolve(__dirname, "../static"),
