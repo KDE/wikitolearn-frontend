@@ -1,10 +1,16 @@
 <template lang="pug">
 	.CourseRenderer
 		h3.CourseRenderer__name(v-if="showName") {{ course.name }}
-		ul
-			li(
-				v-for="chapter in course.chapters"
+		ul.CourseRenderer__chapters
+			li.CourseRenderer__chapter(
+				v-for="(chapter, index) in course.chapters"
+				:key="chapter._id"
 			)
+				ChapterPages(
+					:chapter="chapter"
+					:number="index + 1"
+				)
+			//
 				router-link(:to=`{
 					name: "Chapter",
 					append: true,
@@ -12,23 +18,11 @@
 						chapterName: chapter._id
 					}
 				}`) {{ chapter.title }}
-	//
-		.CourseRenderer__description
-			b Description
-			br
-			| Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic sunt illo repellat delectus labore ipsam, ad exercitationem ullam quod error aperiam ex saepe fuga in animi minus maiores. Eligendi, eius!
-		.CourseRenderer__level-two__container
-			.CourseRenderer__level-two(v-for="(levelTwo, levelTwoIndex) in course.levelsTwo")
-				h3.CourseRenderer__level-two__title {{ levelTwoIndex+1 }}. {{ levelTwo }}
-				ul
-					li(v-for="levelThree in course.levelsThree[levelTwoIndex]")
-						router-link(:to=`{
-							name: 'Page',
-							params: { pageTitle: (course.root + "/" + levelTwo  + "/" + levelThree) }
-						}`) {{ levelThree }}
 </template>
 
 <style lang="scss">
+@import "~styles/declarations";
+
 .CourseRenderer {
 	padding: 2rem;
 
@@ -40,21 +34,36 @@
 		border: 1px solid gray;
 	}
 
-	&__level-two {
-		margin-bottom: 1rem;
-		flex: 0 0 33%;
+	&__chapters {
+		display: flex;
+		flex-wrap: wrap;
+	}
 
-		&__container {
-			display: flex;
-			flex-wrap: wrap;
+	&__chapter {
+		flex: 0 0 95%;
+	}
+
+	@include media-breakpoint-up(md) {
+		&__chapter {
+			margin: 0 .5rem .5rem .5rem;
+			flex: 0 0 42%;
+		}
+	}
+
+	@include media-breakpoint-up(xl) {
+		&__chapter {
+			flex: 0 0 30%;
 		}
 	}
 }
 </style>
 
 <script>
+import ChapterPages from "components/ChapterPages"
+
 export default {
 	name: "CourseRenderer",
+	components: { ChapterPages },
 	props: {
 		course: {
 			type: Object,
