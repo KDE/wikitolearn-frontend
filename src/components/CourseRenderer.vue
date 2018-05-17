@@ -45,7 +45,7 @@
 
 	@include media-breakpoint-up(md) {
 		&__chapter {
-			margin: 0 .5rem .5rem .5rem;
+			margin: 0 0.5rem 0.5rem 0.5rem;
 			flex: 0 0 42%;
 		}
 	}
