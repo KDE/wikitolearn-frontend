@@ -39,6 +39,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "~styles/_variables";
+
 .spinner{
 	display: flex;
 	justify-content: center;
@@ -77,35 +79,35 @@ export default {
 	animation: circle-9-loading 5s infinite linear;
 }
 .spin-1{
-	border: 5px solid #f7484e ;
+	border: 5px solid $dark-red;
 	border-top: 5px solid transparent;
 	border-left: 5px solid transparent;
 	width: 120px;
 	height: 120px;
 }
 .spin-2{
-	border: 5px solid #41b883 ;
+	border: 5px solid $red;
 	border-bottom: 5px solid transparent;
 	border-right: 5px solid transparent;
 	width: 100px;
 	height: 100px;
 }
 .spin-3{
-	border: 5px solid #d2d947 ;
+	border: 5px solid $yellow;
 	border-top: 5px solid transparent;
 	border-left: 5px solid transparent;
 	width: 80px;
 	height: 80px;
 }
 .spin-4{
-	border: 5px solid #f2a342 ;
+	border: 5px solid $green;
 	border-bottom: 5px solid transparent;
 	border-right: 5px solid transparent;
 	width: 60px;
 	height: 60px;
 }
 .spin-5{
-	border: 5px solid #34495e ;
+	border: 5px solid $dark-green;
 	border-top: 5px solid transparent;
 	border-left: 5px solid transparent;
 	width: 40px;

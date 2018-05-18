@@ -24,34 +24,35 @@ module.exports = {
 	rules: {
 		"strict": 0,
 		// don"t allow semicolons
-		"semi": ["error", "never"],
+		"semi": ["warn", "never"],
 
 		// don"t require comma in the last line of an object/dictionary declaration
-		"comma-dangle": ["error", "never"],
+		"comma-dangle": ["warn", "never"],
 
 		// ignore max-len for comments
 		"max-len": [
-			"error",
+			"warn",
 			{ "code": 100, "ignoreComments": true, "ignoreTrailingComments": true, "ignoreUrls": true, "ignoreStrings": true }
 		],
 
 		// force space after and before curly braces in object/dict declarations
-		"object-curly-spacing": ["error", "always"],
+		"object-curly-spacing": ["warn", "always"],
 
 		// allow debugger; instruction during development
 		"no-debugger": config.isProduction ? 2 : 0,
 
 		// force "===" in comparisons when ambiguous
-		"eqeqeq": ["error", "smart"],
+		"eqeqeq": ["warn", "smart"],
 
 		// force double quotes
-		"quotes": ["error", "double"],
+		"quotes": ["warn", "double"],
 
-		"indent": ["error", "tab"],
+		"indent": ["warn", "tab"],
 		"no-tabs": 0,
 
 		"require-jsdoc": 0,
 
-		"new-cap": ["error", { "capIsNew": false }]
+		"new-cap": ["warn", { "capIsNew": false }],
+		"curly": ["warn"]
 	}
 }

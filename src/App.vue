@@ -6,9 +6,10 @@
 		.App__content
 			transition(name="fade", mode="out-in")
 				router-view.view
-		WTLSpinner.App__spinner(
-			v-if="activeRequests"
-		)
+		transition(name="bounce")
+			WTLSpinner.App__spinner(
+				v-if="activeRequests"
+			)
 	//
 		.App__polling-operations
 			PollingBar
