@@ -5,6 +5,7 @@
 				:disabled="current_page <= 1"
 				@click="fetchPage(current_page-1)"
 			) Pagina precedente
+			.Pagination__current-page Pagina {{ current_page }} / {{ last_page }}
 			WTLButton(
 				:disabled="current_page >= last_page"
 				@click="fetchPage(current_page+1)"
@@ -58,8 +59,12 @@ export default {
 	&__container {
 		display: flex;
 		justify-content: center;
-		border: 1px solid $lightgray;
-		background-color: white;
+		align-items: center;
+	}
+
+	&__current-page {
+		align-self: center;
+		padding: 1rem;
 	}
 }
 </style>

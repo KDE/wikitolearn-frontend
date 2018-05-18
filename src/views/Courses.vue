@@ -16,7 +16,6 @@
 		Error(:error="error")
 		Pagination(
 			resource="COURSE"
-			:page="page"
 			:last_page="lastPage"
 		)
 </template>
@@ -56,6 +55,9 @@ export default {
 			return this.$store.state.meta
 		},
 		lastPage() {
+			if (this.coursesMeta.total === 0) {
+				return 1
+			}
 			let page = parseInt(this.coursesMeta.total / this.coursesMeta.max_results)
 			if (this.coursesMeta.total % this.coursesMeta.max_results > 0) {
 				page += 1
