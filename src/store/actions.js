@@ -53,6 +53,9 @@ export const actions = {
 				return response
 			}).then((response) => {
 				commit("SET_NAVIGATION_LINKS", { navigationLinks: response._links })
+				return response
+			}).then((response) => {
+				commit("SET_META", { meta: response._meta })
 			})
 	},
 
@@ -88,5 +91,9 @@ export const actions = {
 
 				commit("CREATE_POLLING", { pollingId, pollTimer })
 			})
+	},
+
+	UPDATE_ACTIVE_REQUESTS({ commit }, { add }) {
+		commit("UPDATE_ACTIVE_REQUESTS", { addNewRequest: add })
 	}
 }

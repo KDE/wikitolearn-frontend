@@ -53,5 +53,13 @@ export const mutations = {
 	DELETE_POLLING(state, { id }) {
 		clearTimeout(state.pollingOperations[id].timer)
 		Vue.delete(state.pollingOperations, id)
+	},
+
+	UPDATE_ACTIVE_REQUESTS(state, { addNewRequest }) {
+		state.activeApiRequests += addNewRequest
+	},
+
+	SET_META(state, { meta }) {
+		state.meta = meta
 	}
 }

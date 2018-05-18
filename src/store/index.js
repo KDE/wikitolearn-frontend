@@ -17,7 +17,9 @@ export function createStore() {
 
 			pollingOperations: {},
 			navigationLinks: {},
-			error: null
+			meta: {},
+			error: null,
+			activeApiRequests: 0
 		},
 		actions,
 		mutations

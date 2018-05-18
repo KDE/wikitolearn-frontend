@@ -16,17 +16,9 @@
 		Error(:error="error")
 		Pagination(
 			resource="COURSE"
-			:last_page="12"
+			:page="page"
+			:last_page="lastPage"
 		)
-	//
-		WTLButton(
-			v-if="links.prev"
-			@click="fetchCoursesPage(page-1)"
-		) Prev page
-		WTLButton(
-			v-if="links.next"
-			@click="fetchCoursesPage(page+1)"
-		) Next page
 </template>
 
 <style lang="scss">
@@ -59,6 +51,16 @@ export default {
 	computed: {
 		courses() {
 			return this.$store.state.courses
+		},
+		coursesMeta() {
+			return this.$store.state.meta
+		},
+		lastPage() {
+			let page = parseInt(this.coursesMeta.total / this.coursesMeta.max_results)
+			if (this.coursesMeta.total % this.coursesMeta.max_results > 0) {
+				page += 1
+			}
+			return page
 		}/* ,
 		links() {
 			return this.$store.state.navigationLinks
