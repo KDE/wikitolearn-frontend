@@ -3,7 +3,7 @@ FROM node:alpine
 RUN mkdir -p /opt/frontend
 WORKDIR /opt/frontend
 
-ADD package.json /opt/frontend
+ADD package.json yarn.lock /opt/frontend/
 RUN yarn
 
 #ARG PUBLIC_PWA_GATEWAY_URI
