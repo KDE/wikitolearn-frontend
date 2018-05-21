@@ -7,6 +7,12 @@ services:
         SERVICE_PORT: ${SERVICE_PORT}
         BUILD_LANGUAGE: ${PWA_BUILD_LANGUAGE}
     image: "${DOCKER_REGISTRY}wikitolearn/frontend-${PWA_BUILD_LANGUAGE}:${DOCKER_IMAGE_FRONTEND_TAG}"
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 1
+        delay: 120s
+        order: start-first
     environment:
       PUBLIC_PWA_GATEWAY_URI: ${PUBLIC_PWA_GATEWAY_URI}
       PUBLIC_KEYCLOAK_URI: ${PUBLIC_KEYCLOAK_URI}
