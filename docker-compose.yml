@@ -6,7 +6,7 @@ services:
       args:
         SERVICE_PORT: ${SERVICE_PORT}
         BUILD_LANGUAGE: ${PWA_BUILD_LANGUAGE}
-    image: "${DOCKER_REGISTRY}wikitolearn/frontend-${PWA_BUILD_LANGUAGE}"
+    image: "${DOCKER_REGISTRY}wikitolearn/frontend-${PWA_BUILD_LANGUAGE}:${DOCKER_IMAGE_FRONTEND_TAG}"
     environment:
       PUBLIC_PWA_GATEWAY_URI: ${PUBLIC_PWA_GATEWAY_URI}
       PUBLIC_KEYCLOAK_URI: ${PUBLIC_KEYCLOAK_URI}
