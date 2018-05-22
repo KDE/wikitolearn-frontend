@@ -1,5 +1,7 @@
 <template lang="pug">
-	.Pagination
+	.Pagination(
+		v-if="!isNaN(last_page)"
+	)
 		.Pagination__container
 			WTLButton(
 				:disabled="current_page <= 1"
