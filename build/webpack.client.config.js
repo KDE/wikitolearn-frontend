@@ -3,7 +3,8 @@ const merge = require("webpack-merge")
 
 const HTMLPlugin = require("html-webpack-plugin")
 const HtmlWebpackHarddiskPlugin = require("html-webpack-harddisk-plugin")
-const SWPrecachePlugin = require("sw-precache-webpack-plugin")
+// const SWPrecachePlugin = require("sw-precache-webpack-plugin")
+const WorkboxPlugin = require("workbox-webpack-plugin")
 //const BabiliPlugin = require("babili-webpack-plugin");
 
 const base = require("./webpack.base.config")
@@ -85,26 +86,27 @@ if (!config.isTesting) {
 if (config.isProduction) {
 	clientConfig.plugins.push(
 		// auto generate service worker
-		new SWPrecachePlugin({
-			cacheId: "wikitolearn",
-			filename: "service-worker.js",
-			staticFileGlobs: [
-				"dist/img/**/*",
-				"dist/**/*.{html,js,css}"
-			],
-			minify: true,
-			dontCacheBustUrlsMatching: /./,
-			runtimeCaching: [
-				{
-					urlPattern: "/",
-					handler: "networkFirst"
-				},
-				{
-					urlPattern: /\/api\/.*/,
-					handler: "networkFirst"
-				}
-			]
-		})
+		// new SWPrecachePlugin({
+		// 	cacheId: "wikitolearn",
+		// 	filename: "service-worker.js",
+		// 	staticFileGlobs: [
+		// 		"dist/img/**/*",
+		// 		"dist/**/*.{html,js,css}"
+		// 	],
+		// 	minify: true,
+		// 	dontCacheBustUrlsMatching: /./,
+		// 	runtimeCaching: [
+		// 		{
+		// 			urlPattern: "/",
+		// 			handler: "networkFirst"
+		// 		},
+		// 		{
+		// 			urlPattern: /\/api\/.*/,
+		// 			handler: "networkFirst"
+		// 		}
+		// 	]
+		// })
+		new WorkboxPlugin.GenerateSW()
 		//new webpack.optimize.ModuleConcatenationPlugin()
 	)
 	// On by default on "mode: production"
