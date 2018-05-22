@@ -40,7 +40,8 @@ const commonPlugins = [
 		"process.env.CERTS_KEY": JSON.stringify(config.certsKey)
 	}),
 	new StyleLintPlugin({
-		files: ["src/**/*.vue", "src/**/*.scss"]
+		files: ["src/**/*.vue", "src/**/*.scss"],
+		emitErrors: false
 	})
 ]
 
