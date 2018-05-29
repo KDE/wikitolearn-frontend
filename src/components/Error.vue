@@ -1,24 +1,37 @@
 <template lang="pug">
-	.Error(v-if="error != null")
-		b.Error__title Error
-		.Error__message {{ error.error }}
+	WTLSnackbar(
+		:text="errorMsg"
+		ref="snackbar"
+	)
 </template>
 
-<style lang="scss">
-@import "~styles/declarations";
-
-.Error {
-	padding: 1rem;
-	border: 1px solid $red;
-}
-</style>
-
 <script>
+import { mapState } from "vuex"
+import WTLSnackbar from "components/ui/WTLSnackbar"
+
 export default {
 	name: "Error",
-	props: {
-		error: {
-			default: null
+	components: { WTLSnackbar },
+	data() {
+		return {
+			errorMsg: ""
+		}
+	},
+	computed: {
+		...mapState([
+			"error"
+		])
+	},
+	watch: {
+		error: function(val) {
+			if (this.error !== null) {
+				this.errorMsg = val.response.data.status + " - " + val.response.data.error
+				const description = val.response.data.error_description
+				if (description !== undefined) {
+					this.errorMsg += " - " + description
+				}
+				this.$refs.snackbar.showSnack()
+			}
 		}
 	}
 }

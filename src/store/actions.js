@@ -102,5 +102,10 @@ export const actions = {
 			.then((response) => {
 				return dispatch("FETCH_COURSE", { courseName })
 			})
+	},
+
+	SET_ERROR({ commit }, { error }) {
+		commit("EMPTY_ERROR")
+		commit("SET_ERROR", { error: error })
 	}
 }

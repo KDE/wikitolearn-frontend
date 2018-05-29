@@ -29,6 +29,10 @@ export const mutations = {
 		state.error = Object.assign({}, error)
 	},
 
+	EMPTY_ERROR(state) {
+		state.error = null
+	},
+
 	CLEAR_ERROR(state) {
 		state.error = null
 	},

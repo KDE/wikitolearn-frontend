@@ -6,10 +6,11 @@
 		.App__content
 			transition(name="fade", mode="out-in")
 				router-view.view
-		transition(name="bounce")
+		transition(name="fade", mode="out-in")
 			WTLSpinner.App__spinner(
 				v-if="activeRequests"
 			)
+		Error
 	//
 		.App__polling-operations
 			PollingBar
@@ -42,7 +43,7 @@ noscript {
 		margin: 0 auto;
 		right: 30%;
 		border-radius: 50%;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 	}
 
 	@include media-breakpoint-up(md) {
@@ -93,11 +94,12 @@ noscript {
 import AppHeader from "components/AppHeader"
 import PollingBar from "components/PollingBar"
 import WTLSpinner from "components/ui/WTLSpinner"
+import Error from "components/Error"
 // import AuthCheck from "components/utils/AuthCheck"
 
 export default {
 	name: "App",
-	components: { AppHeader, PollingBar /* , AuthCheck */, WTLSpinner },
+	components: { AppHeader, PollingBar /* , AuthCheck */, WTLSpinner, Error },
 	data: () => {
 		return {
 			isRTL: LANGUAGE_ISRTL
