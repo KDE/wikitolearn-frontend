@@ -3,7 +3,8 @@
 		h1 {{ courseName }}
 		WTLButton(
 			@click="toggleEditMode"
-		) Toggle edit mode
+			:type="editModeBtnType"
+		) {{ editModeText }}
 		CourseRenderer(
 			v-if="!error && course && !editMode",
 			:course="course",
@@ -13,7 +14,6 @@
 			v-if="editMode && course",
 			:course="course"
 		)
-		Error(:error="error")
 </template>
 
 <style lang="scss">
@@ -33,12 +33,10 @@
 <script>
 import CourseRenderer from "components/CourseRenderer"
 import CourseEditor from "components/CourseEditor"
-import ErrorHandler from "mixins/errorHandler"
 import WTLButton from "components/ui/WTLButton"
 
 export default {
 	name: "Course",
-	mixins: [ErrorHandler],
 	components: { CourseRenderer, CourseEditor, WTLButton },
 	data() {
 		return {
@@ -46,6 +44,20 @@ export default {
 		}
 	},
 	computed: {
+		editModeText() {
+			if (this.editMode) {
+				return "Exit from EDIT MODE"
+			} else {
+				return "Enter EDIT MODE"
+			}
+		},
+		editModeBtnType() {
+			if (this.editMode) {
+				return "warning"
+			} else {
+				return "default"
+			}
+		},
 		courseName() {
 			if (this.course) {
 				return this.course.title
