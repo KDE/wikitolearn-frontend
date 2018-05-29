@@ -26,6 +26,7 @@ class ApiClass {
 		this.baseURL = `${config.hostname}/${config.preamble}`
 	}
 
+
 	get(endpoint, options = {}) {
 		endpoint = this._cleanEndpoint(endpoint)
 
@@ -42,7 +43,18 @@ class ApiClass {
 
 		options = Object.assign(options, defaultOptions)
 
-		return Vue.axios.get(`${this.baseURL}/${endpoint}`, data, options)
+		return Vue.axios.post(`${this.baseURL}/${endpoint}`, data, options)
+			.then((response) => {
+				return Promise.resolve(response.data)
+			})
+	}
+
+	patch(endpoint, data = {}, options = {}) {
+		endpoint = this._cleanEndpoint(endpoint)
+
+		options = Object.assign(options, defaultOptions)
+
+		return Vue.axios.patch(`${this.baseURL}/${endpoint}`, data, options)
 			.then((response) => {
 				return Promise.resolve(response.data)
 			})

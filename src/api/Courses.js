@@ -12,6 +12,10 @@ class CoursesClass {
 			return Api.get(`courses?page=${page}`)
 		}
 	}
+
+	patch(courseName, course, options) {
+		return Api.patch(`courses/${courseName}`, course, options)
+	}
 }
 
 export const Courses = new CoursesClass()

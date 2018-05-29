@@ -95,5 +95,12 @@ export const actions = {
 
 	UPDATE_ACTIVE_REQUESTS({ commit }, { add }) {
 		commit("UPDATE_ACTIVE_REQUESTS", { addNewRequest: add })
+	},
+
+	PATCH_COURSE({ commit, dispatch }, { courseName, course, options }) {
+		return Courses.patch(courseName, course, options)
+			.then((response) => {
+				return dispatch("FETCH_COURSE", { courseName })
+			})
 	}
 }

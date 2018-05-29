@@ -41,6 +41,8 @@ noscript {
 		background: #fff;
 		margin: 0 auto;
 		right: 30%;
+		border-radius: 50%;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	}
 
 	@include media-breakpoint-up(md) {

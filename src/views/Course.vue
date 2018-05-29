@@ -1,10 +1,17 @@
 <template lang="pug">
 	.view--Course
 		h1 {{ courseName }}
+		WTLButton(
+			@click="toggleEditMode"
+		) Toggle edit mode
 		CourseRenderer(
-			v-if="!error && course",
+			v-if="!error && course && !editMode",
 			:course="course",
 			:showName="false"
+		)
+		CourseEditor(
+			v-if="editMode && course",
+			:course="course"
 		)
 		Error(:error="error")
 </template>
@@ -25,12 +32,19 @@
 
 <script>
 import CourseRenderer from "components/CourseRenderer"
+import CourseEditor from "components/CourseEditor"
 import ErrorHandler from "mixins/errorHandler"
+import WTLButton from "components/ui/WTLButton"
 
 export default {
 	name: "Course",
 	mixins: [ErrorHandler],
-	components: { CourseRenderer },
+	components: { CourseRenderer, CourseEditor, WTLButton },
+	data() {
+		return {
+			editMode: false
+		}
+	},
 	computed: {
 		courseName() {
 			if (this.course) {
@@ -48,6 +62,11 @@ export default {
 			.catch((error) => {
 				return store.commit("SET_ERROR", { error: error })
 			})
+	},
+	methods: {
+		toggleEditMode() {
+			this.editMode = !this.editMode
+		}
 	},
 	meta() {
 		return {
