@@ -13,7 +13,6 @@
 						courseName: course._id
 					}
 				}`)
-		Error(:error="error")
 		Pagination(
 			resource="COURSE"
 			:last_page="lastPage"
@@ -35,12 +34,10 @@
 <script>
 import Pagination from "components/Pagination"
 import Badge from "components/home/Badge"
-import ErrorHandler from "mixins/errorHandler"
 import WTLButton from "components/ui/WTLButton"
 
 export default {
 	name: "Course",
-	mixins: [ErrorHandler],
 	components: { WTLButton, Badge, Pagination },
 	data() {
 		return {

@@ -15,11 +15,9 @@
 </template>
 
 <script>
-import ErrorHandler from "mixins/errorHandler"
 
 export default {
 	name: "Chapter",
-	mixins: [ErrorHandler],
 	computed: {
 		chapterName() {
 			if (this.chapter) {

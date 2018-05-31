@@ -13,8 +13,6 @@
 				v-if="!error && page",
 				:page="page"
 			)
-
-		Error(:error="error")
 </template>
 
 <style lang="scss">
@@ -32,11 +30,9 @@
 
 <script>
 import PageRenderer from "components/PageRenderer"
-import ErrorHandler from "mixins/errorHandler"
 
 export default {
 	name: "Page",
-	mixins: [ErrorHandler],
 	components: { PageRenderer },
 	computed: {
 		page() {

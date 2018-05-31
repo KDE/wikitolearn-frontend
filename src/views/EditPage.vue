@@ -5,7 +5,6 @@
 			v-if="!error && page",
 			:content="page.content"
 		)
-		Error(:error="error")
 </template>
 
 <style lang="scss">
@@ -13,11 +12,9 @@
 
 <script>
 import Editor from "components/Editor"
-import ErrorHandler from "mixins/errorHandler"
 
 export default {
 	name: "EditPage",
-	mixins: [ErrorHandler],
 	components: { Editor },
 	computed: {
 		page() {
