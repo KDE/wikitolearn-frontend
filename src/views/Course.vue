@@ -6,7 +6,7 @@
 			:type="editModeBtnType"
 		) {{ editModeText }}
 		CourseRenderer(
-			v-if="!error && course && !editMode",
+			v-if="course && !editMode",
 			:course="course",
 			:showName="false"
 		)

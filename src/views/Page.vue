@@ -1,6 +1,6 @@
 <template lang="pug">
 	.view--Page
-		template(v-if="!error && page")
+		template(v-if="page")
 			.view--Page__buttons
 				router-link(
 					:to=`{
@@ -10,7 +10,7 @@
 				)
 					WTLButton(type="success", icon="mode_edit") Edit Page
 			PageRenderer(
-				v-if="!error && page",
+				v-if="page",
 				:page="page"
 			)
 </template>

@@ -2,7 +2,7 @@
 	.view--EditPage
 		h1.EditPage__title {{ pageTitle }}
 		Editor(
-			v-if="!error && page",
+			v-if="page",
 			:content="page.content"
 		)
 </template>
