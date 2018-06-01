@@ -10,6 +10,7 @@
 		h2 Change chapter order by dragging them
 		hr
 		VueDraggable.CourseEditor__chapters(
+			v-if="newCourse.chapters"
 			v-model="newCourse.chapters"
 			@start="drag=true"
 			@end="drag=false"
@@ -52,8 +53,8 @@ export default {
 	data() {
 		return {
 			newCourse: {
-				title: this.course.title,
-				chapters: this.course.chapters
+				title: this.course.title
+				// chapters: this.course.chapters
 			},
 			newChapter: {
 				title: ""
