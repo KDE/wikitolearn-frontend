@@ -2,6 +2,7 @@
 	.view--Course
 		h1 {{ courseName }}
 		WTLButton(
+			v-if="$keycloak.authenticated"
 			@click="toggleEditMode"
 			:type="editModeBtnType"
 		) {{ editModeText }}

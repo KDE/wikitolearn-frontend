@@ -6,12 +6,15 @@ describe("Badge", () => {
 	it("renders a name", () => {
 		const badge = mount(Badge, {
 			propsData: {
-				departmentName: "Test"
+				link: {
+					view: "Courses",
+					title: "All courses"
+				}
 			}
 		})
 
 		expect(badge.is("div")).to.equal(true)
 		expect(badge.hasClass("Badge")).to.equal(true)
-		expect(badge.find(".Badge__name")[0].text()).to.equal("Test")
+		expect(badge.find(".Badge__name")[0].text()).to.equal("All courses")
 	})
 })
