@@ -4,8 +4,8 @@
 			type ? 'Dialog--' + type : '',
 		]`
 	)
-		.Dialog__wrapper(v-if="active")
-			.Dialog__body
+		.Dialog__wrapper(v-if="active", @click="closeOutside")
+			.Dialog__body(id="dialog-body")
 				.Dialog__header {{ title }}
 				.Dialog__content {{ type }} {{ content }}
 				.Dialog__footer
@@ -53,6 +53,8 @@
 		margin-bottom: 1rem;
 		overflow-y: auto;
 		overflow-x: hidden;
+		word-wrap: break-word;
+		overflow-wrap: break-all;
 	}
 
 	&__footer {
@@ -134,6 +136,11 @@ export default {
 		cancel() {
 			this.onCancel()
 			this.close()
+		},
+		closeOutside(event) {
+			if (!document.getElementById("dialog-body").contains(event.target)) {
+				this.close()
+			}
 		}
 	},
 	beforeMount() {
