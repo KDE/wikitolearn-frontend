@@ -106,6 +106,7 @@ $input-border-color: #dbdbdb;
 	display: inline-flex;
 	align-items: center;
 	position: relative;
+	box-shadow: $shadow-1;
 	min-width: 12.5rem;
 
 	&--full-width {

@@ -43,7 +43,7 @@ noscript {
 		margin: 0 auto;
 		right: 30%;
 		border-radius: 50%;
-		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+		box-shadow: $shadow-2;
 	}
 
 	@include media-breakpoint-up(md) {

@@ -7,9 +7,11 @@
 </template>
 
 <style lang="scss">
+@import "~styles/_variables";
+
 .Badge {
 	display: inline-block;
-	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	box-shadow: $shadow-1;
 	padding: 1rem 2rem;
 	margin: 0.5rem;
 	background-color: white;

@@ -4,10 +4,9 @@
 			template(v-if="$keycloak && $keycloak.ready")
 				WTLButton(v-if="!$keycloak.authenticated", @click=`doLogin()`) Login
 				template(v-if="$keycloak.authenticated")
-					span {{ $keycloak.user.username }}
-						small ({{ $keycloak.user.email }})
-					WTLButton(@click=`$keycloak.logout()`) Logout
-					WTLButton(@click=`checkLogin()`) Get User Data
+					WTLField(grouped=true)
+						WTLButton(@click=`checkLogin()`) View user info
+						WTLButton(@click=`$keycloak.logout()`, type="error") Logout
 </template>
 
 <script>

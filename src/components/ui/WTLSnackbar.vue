@@ -57,9 +57,7 @@ export default {
 	align-items: center;
 
 	&__container {
-		// visibility: hidden; /* Hidden by default. Visible on click */
 		min-width: 5rem; /* Set a default minimum width */
-		// margin-left: -2.5rem; /* Divide value of min-width by 2 */
 		background-color: $red;
 		color: #fff; /* White text color */
 		text-align: center; /* Centered text */
