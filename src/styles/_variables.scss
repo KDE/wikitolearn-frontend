@@ -22,6 +22,8 @@ $disabled-bg: $lightgray !default;
 $disabled-fg: $gray !default;
 $disabled-border: darken(white, 10%) !default;
 
+$border-image-wtl: linear-gradient(to right, $dark-green 20%, $green 20%, $green 40%, $yellow 40%, $yellow 60%, $red 60%, $red 80%, $dark-red 80%) 6;
+
 $card-bg: #f2f2f2 !default;
 
 // global styles

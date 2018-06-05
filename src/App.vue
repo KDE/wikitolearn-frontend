@@ -36,7 +36,7 @@ noscript {
 
 	&__spinner {
 		position: fixed;
-		top: 0;
+		top: 15px;
 		z-index: 3;
 		overflow: hidden;
 		background: #fff;
@@ -93,7 +93,7 @@ noscript {
 <script>
 import AppHeader from "components/AppHeader"
 import PollingBar from "components/PollingBar"
-import WTLSpinner from "components/ui/WTLSpinner"
+import WTLSpinner from "components/ui/WTLSpinner2"
 import Error from "components/Error"
 // import AuthCheck from "components/utils/AuthCheck"
 

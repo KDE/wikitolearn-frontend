@@ -21,6 +21,8 @@
 	font-size: 1.5rem;
 	background-color: white;
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+	border-top: 4px solid;
+	border-image: $border-image-wtl;
 	z-index: 10;
 
 	&__content {
