@@ -104,6 +104,13 @@ export const actions = {
 			})
 	},
 
+	PATCH_COURSE_CHAPTERS({ commit, dispatch }, { courseName, course, options }) {
+		return Courses.patchChapters(courseName, course, options)
+			.then((response) => {
+				return dispatch("FETCH_COURSE", { courseName })
+			})
+	},
+
 	SET_ERROR({ commit }, { error }) {
 		commit("EMPTY_ERROR")
 		commit("SET_ERROR", { error: error })

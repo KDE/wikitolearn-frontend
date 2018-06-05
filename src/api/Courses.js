@@ -16,6 +16,10 @@ class CoursesClass {
 	patch(courseName, course, options) {
 		return Api.patch(`courses/${courseName}`, course, options)
 	}
+
+	patchChapters(courseName, course, options) {
+		return Api.patch(`courses/${courseName}/chapters`, course, options)
+	}
 }
 
 export const Courses = new CoursesClass()

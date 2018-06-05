@@ -2,24 +2,35 @@
 	.CourseEditor
 		h2 Change course's title
 		br
-		WTLInput.CourseEditor__title(
-			v-model="newCourse.title"
-		)
+		WTLField(grouped=true)
+			WTLInput.CourseEditor__title(
+				v-model="newCourse.title"
+			)
+			WTLButton(
+				@click="patchCourse"
+				icon="done"
+				type="success"
+			) Update course title
 		br
 		br
 		h2 Change chapter order by dragging them
 		hr
 		VueDraggable.CourseEditor__chapters(
-			v-if="newCourse.chapters"
-			v-model="newCourse.chapters"
+			v-if="newChapters"
+			v-model="newChapters"
 			@start="drag=true"
 			@end="drag=false"
 		)
 			.CourseEditor__chapter(
-				v-for="chapter in newCourse.chapters"
+				v-for="chapter in newChapters"
 				:key="chapter._id"
 			) {{ chapter.title }}
 		br
+		WTLButton(
+			@click="patchCourseChapters"
+			icon="done"
+			type="success"
+		) Update chapters order
 		h2 Insert new chapter
 		br
 		WTLInput.CourseEditor__new-chapter(
@@ -27,11 +38,6 @@
 			placeholder="Chapter's title"
 		)
 		br
-		WTLButton(
-			@click="pushChanges"
-			icon="done"
-			type="success"
-		) Confirm changes
 </template>
 
 <style lang="scss">
@@ -53,9 +59,10 @@ export default {
 	data() {
 		return {
 			newCourse: {
-				title: this.course.title
-				// chapters: this.course.chapters
+				title: this.course.title,
+				language: this.course.language,
 			},
+			newChapters: this.course.chapters,
 			newChapter: {
 				title: ""
 			},
@@ -72,10 +79,27 @@ export default {
 
 	},
 	methods: {
-		pushChanges() {
+		patchCourse() {
 			this.$store.dispatch("PATCH_COURSE", {
 				courseName: this.course._id,
 				course: this.newCourse,
+				options: {
+					headers: {
+						"If-Match": this.course._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).catch((error) => {
+				return this.$store.dispatch("SET_ERROR", { error: error })
+			})
+		},
+		patchCourseChapters() {
+			this.$store.dispatch("PATCH_COURSE_CHAPTERS", {
+				courseName: this.course._id,
+				course: {
+					...this.course,
+					chapters: this.newChapters
+				},
 				options: {
 					headers: {
 						"If-Match": this.course._etag,
