@@ -5,10 +5,11 @@
 		.WTLSnackbar(
 			v-if="show"
 		)
-			.WTLSnackbar__container {{ text }}
-				.WTLSnackbar__close-button(
-					v-if="closable"
-				) CLOSE
+			.WTLSnackbar__container(
+				:class=`[
+					"WTLSnackbar--" + type
+				]`
+			) {{ text }}
 </template>
 
 <script>
@@ -19,9 +20,9 @@ export default {
 			type: String,
 			required: true
 		},
-		closable: {
-			type: Boolean,
-			default: false
+		type: {
+			type: String,
+			default: "default"
 		}
 	},
 	data() {
@@ -57,16 +58,36 @@ export default {
 	align-items: center;
 
 	&__container {
+		max-width: 80%;
+		max-height: 30%;
 		min-width: 5rem; /* Set a default minimum width */
-		background-color: $red;
+		background-color: $black;
 		color: #fff; /* White text color */
 		text-align: center; /* Centered text */
 		border-radius: 0.25rem; /* Rounded borders */
 		padding: 1rem; /* Padding */
 		position: fixed; /* Sit on top of the screen */
 		z-index: 1; /* Add a z-index if needed */
-		// left: 50%; /* Center the snackbar */
 		bottom: 30px; /* 30px from the bottom */
+		box-shadow: $shadow-2;
+		word-wrap: break-word;
+		overflow-wrap: break-all;
+	}
+
+	&--default {
+		background-color: $black;
+	}
+
+	&--error {
+		background-color: $red;
+	}
+
+	&--warning {
+		background-color: $yellow;
+	}
+
+	&--success {
+		background-color: $green;
 	}
 }
 

@@ -108,6 +108,7 @@ $input-border-color: #dbdbdb;
 	position: relative;
 	box-shadow: $shadow-1;
 	min-width: 12.5rem;
+	border-radius: $input-radius;
 
 	&--full-width {
 		width: 100%;

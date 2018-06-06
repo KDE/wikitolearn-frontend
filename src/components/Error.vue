@@ -1,5 +1,6 @@
 <template lang="pug">
 	WTLSnackbar(
+		type="error"
 		:text="errorMsg"
 		ref="snackbar"
 	)

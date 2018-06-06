@@ -44,7 +44,7 @@
 	box-shadow: $shadow-1;
 
 	&--no-text {
-		padding: 0.5rem;
+		padding: 0.5rem 0.25rem;
 	}
 
 	&--has-icon:not(&--no-text) {
