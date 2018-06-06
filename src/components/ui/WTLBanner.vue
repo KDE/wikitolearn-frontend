@@ -49,12 +49,14 @@ export default {
 	box-shadow: $shadow-1;
 	border-radius: $input-radius;
 	color: #ffffff;
+	background-color: black;
 
 	> * {
 		margin-left: 0.5rem;
 		margin-right: 0.5rem;
 		height: 100%;
 	}
+
 	&--default {
 		background-color: $black;
 	}

@@ -10,8 +10,13 @@
 </template>
 
 <script>
+import WTLButton from "components/ui/WTLButton"
+import WTLField from "components/ui/WTLField"
+import NoSSR from "vue-no-ssr"
+
 export default {
 	name: "SessionInfo",
+	components: { NoSSR, WTLButton, WTLField },
 	methods: {
 		checkLogin() {
 			const _this = this
