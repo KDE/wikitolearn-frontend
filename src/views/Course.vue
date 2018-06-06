@@ -1,5 +1,11 @@
 <template lang="pug">
 	.view--Course
+		.Course__banner
+			WTLBanner.WTLBanner--full-width(
+				v-if="editMode && course"
+				closable=true
+			)
+				span You are in EDIT MODE
 		h1 {{ courseName }}
 		WTLButton(
 			v-if="$keycloak && $keycloak.authenticated"
@@ -28,6 +34,10 @@
 		background-color: white;
 		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 	}
+
+	.Course__banner {
+		margin-bottom: 1rem;
+	}
 }
 </style>
 
@@ -35,10 +45,11 @@
 import CourseRenderer from "components/CourseRenderer"
 import CourseEditor from "components/CourseEditor"
 import WTLButton from "components/ui/WTLButton"
+import WTLBanner from "components/ui/WTLBanner"
 
 export default {
 	name: "Course",
-	components: { CourseRenderer, CourseEditor, WTLButton },
+	components: { CourseRenderer, CourseEditor, WTLButton, WTLBanner },
 	data() {
 		return {
 			editMode: false

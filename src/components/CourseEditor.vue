@@ -60,7 +60,7 @@ export default {
 		return {
 			newCourse: {
 				title: this.course.title,
-				language: this.course.language,
+				language: this.course.language
 			},
 			newChapters: this.course.chapters,
 			newChapter: {
