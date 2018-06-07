@@ -4,6 +4,8 @@ const webpack = require("webpack")
 const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin")
 const StringReplacePlugin = require("string-replace-webpack-plugin")
 const StyleLintPlugin = require("stylelint-webpack-plugin")
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const Vue = require("vue")
 const VueI18n = require("vue-i18n")
@@ -23,6 +25,10 @@ i18n = new VueI18n({
 })
 
 const commonPlugins = [
+	new VueLoaderPlugin(),
+	new MiniCssExtractPlugin({
+		filename: "css/style.[contenthash:16].css"
+	}),
 	new StringReplacePlugin(),
 	new webpack.DefinePlugin({
 		"process.env.NODE_ENV": JSON.stringify(config.nodeEnv),
@@ -77,7 +83,8 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, "../dist"),
 		publicPath: "/dist/",
-		filename: "js/[name].[chunkhash:16].js"
+		filename: "js/[name].[contenthash:16].js",
+		chunkFilename: "js/[name].[contenthash:16].js"
 	},
 
 	mode: config.isProduction ? "production" : "development",
@@ -112,9 +119,33 @@ module.exports = {
 				exclude: /node_modules/
 			},
 			{
+				test: /\.scss$/,
+				use: [
+					process.env.NODE_ENV !== "production"
+            ? "vue-style-loader"
+            : MiniCssExtractPlugin.loader,
+					"css-loader",
+					"scss-loader"
+				]
+			},
+			{
+        test: /\.css$/,
+        use: [
+          process.env.NODE_ENV !== "production"
+            ? "vue-style-loader"
+            : MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      },
+			{
+				test: /\.pug$/,
+				loader: "pug-plain-loader"
+			},
+			{
 				test: /\.vue$/,
 				loader: "vue-loader",
 				options: {
+					// TODO: These options has been deprecated, try configuring them webpack-like
 					preLoaders: {
 						pug: doI18n,
 						html: doI18n
