@@ -2,10 +2,6 @@ import Vue from "vue"
 import "es6-promise/auto"
 import { createApp } from "./app"
 
-import ProgressBar from "components/ProgressBar"
-const bar = Vue.prototype.$bar = new Vue(ProgressBar).$mount()
-document.body.appendChild(bar.$el)
-
 if (!window.location.origin) {
 	window.location.origin = window.location.protocol + "//"
 		+ window.location.hostname
@@ -71,19 +67,14 @@ router.onReady(() => {
 
 		const asyncDataHooks = activated.map((c) => c.asyncData).filter((_) => _)
 		if (!asyncDataHooks.length) {
-			bar.hide(true)
 			return next()
 		}
 
-		bar.start()
 		Promise.all(asyncDataHooks.map((hook) => hook({ store, route: to })))
 			.then(() => {
-				bar.finish()
 				next()
 			})
 			.catch((error) => {
-				bar.set(100)
-				bar.fail()
 				console.error(error)
 			})
 	})
