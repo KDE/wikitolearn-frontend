@@ -37,7 +37,7 @@ import Badge from "components/home/Badge"
 import WTLButton from "components/ui/WTLButton"
 
 export default {
-	name: "Course",
+	name: "Courses",
 	components: { WTLButton, Badge, Pagination },
 	data() {
 		return {

@@ -12,5 +12,3 @@
 		WTLButton(icon="done")
 </template>
 
-<style lang="scss">
-</style>

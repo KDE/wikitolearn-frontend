@@ -7,9 +7,6 @@
 		)
 </template>
 
-<style lang="scss">
-</style>
-
 <script>
 import Editor from "components/Editor"
 
