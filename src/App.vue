@@ -37,7 +37,7 @@ noscript {
 	&__spinner {
 		position: fixed;
 		top: 15px;
-		z-index: 3;
+		z-index: 99999;
 		overflow: hidden;
 		background: #fff;
 		margin: 0 auto;
