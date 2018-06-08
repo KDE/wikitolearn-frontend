@@ -23,6 +23,9 @@ Vue.axios.defaults.baseURL = Api.baseURL
 import metaInfo from "mixins/metaInfo"
 Vue.mixin(metaInfo)
 
+import helpers from "mixins/helpers"
+Vue.mixin(helpers)
+
 import Dialog from "components/ui/Dialog"
 Vue.prototype.$dialog = Dialog
 

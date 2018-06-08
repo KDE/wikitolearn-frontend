@@ -20,6 +20,10 @@ class CoursesClass {
 	patchChapters(courseName, course, options) {
 		return Api.patch(`courses/${courseName}/chapters`, course, options)
 	}
+
+	postChapter(courseName, course, options) {
+		return Api.post(`courses/${courseName}/chapters`, course, options)
+	}
 }
 
 export const Courses = new CoursesClass()

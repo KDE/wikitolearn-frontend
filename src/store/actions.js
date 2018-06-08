@@ -111,6 +111,13 @@ export const actions = {
 			})
 	},
 
+	POST_CHAPTER({ commit, dispatch }, { courseName, course, options }) {
+		return Courses.postChapter(courseName, course, options)
+			.then((response) => {
+				return dispatch("FETCH_COURSE", { courseName })
+			})
+	},
+
 	SET_ERROR({ commit }, { error }) {
 		commit("EMPTY_ERROR")
 		commit("SET_ERROR", { error: error })

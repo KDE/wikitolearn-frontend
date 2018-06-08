@@ -2,7 +2,7 @@
 	.CourseEditor
 		h2 Change course's title
 		br
-		WTLField(grouped=true)
+		WTLField(grouped=true, label="Update course title")
 			WTLInput.CourseEditor__title(
 				v-model="newCourse.title"
 			)
@@ -33,10 +33,16 @@
 		) Update chapters order
 		h2 Insert new chapter
 		br
-		WTLInput.CourseEditor__new-chapter(
-			v-model="newChapter.title"
-			placeholder="Chapter's title"
-		)
+		WTLField(grouped=true, label="Add new chapter")
+			WTLInput.CourseEditor__new-chapter(
+				v-model="newChapter.title"
+				placeholder="Insert title"
+			)
+			WTLButton(
+				@click="postChapter"
+				icon="done"
+				type="success"
+			) Add new chapter
 		br
 </template>
 
@@ -98,7 +104,7 @@ export default {
 				courseName: this.course._id,
 				course: {
 					...this.course,
-					chapters: this.newChapters
+					chapters: this.slice(this.newChapters, ["_id", "_version"])
 				},
 				options: {
 					headers: {
@@ -110,20 +116,29 @@ export default {
 				return this.$store.dispatch("SET_ERROR", { error: error })
 			})
 		},
-		pushChapter() {
-			/* this.$store.dispatch("PATCH_COURSE", {
+		postChapter() {
+			this.$store.dispatch("POST_CHAPTER", {
 				courseName: this.course._id,
-				course: this.newCourse,
+				course: {
+					...this.course,
+					chapters: [
+						...this.slice(this.course.chapters, ["_id", "_version"]),
+						this.newChapter
+					]
+				},
 				options: {
 					headers: {
 						"If-Match": this.course._etag,
 						"Authorization": `bearer ${this.$keycloak.token}`
 					}
 				}
+			}).then((response) => {
+				// Update chapter list
+				this.newChapters = this.course.chapters
 			}).catch((error) => {
 				console.log(error)
 				return this.$store.commit("SET_ERROR", { error: error })
-			})*/
+			})
 		}
 	}
 }

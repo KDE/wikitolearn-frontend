@@ -17,10 +17,6 @@
 export default {
 	name: "WTLBanner",
 	props: {
-		text: {
-			type: String,
-			required: true
-		},
 		type: {
 			type: String,
 			default: "default"
