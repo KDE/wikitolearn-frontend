@@ -26,12 +26,16 @@ export default {
 	watch: {
 		error: function(val) {
 			if (this.error !== null) {
-				this.errorMsg = val.response.data.status + " - " + val.response.data.error
-				const description = val.response.data.error_description
-				if (description !== undefined) {
-					this.errorMsg += " - " + description
+				if (val.response) {
+					this.errorMsg = val.response.data.status + " - " + val.response.data.error
+					const description = val.response.data.error_description
+					if (description !== undefined) {
+						this.errorMsg += " - " + description
+					}
+					this.$refs.snackbar.showSnack()
+				} else {
+					console.log(val)
 				}
-				this.$refs.snackbar.showSnack()
 			}
 		}
 	}
