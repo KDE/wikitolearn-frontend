@@ -127,6 +127,13 @@ export default {
 			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: -1 })
 			return Promise.reject(error)
 		})
+
+		// refresh auth token every 30 sec if necessary
+		setInterval(() => {
+			if (this.$keycloak.authenticated && this.$keycloak.isTokenExpired(60)) {
+				this.$keycloak.updateToken(60)
+			}
+		}, 1000 * 30)
 	}
 }
 </script>
