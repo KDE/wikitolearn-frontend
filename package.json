@@ -1,8 +1,14 @@
 {
-  "name": "vue-webpack-ssr-fully-featured",
-  "version": "0.0.5",
+  "name": "wikitolearn-frontend",
+  "version": "0.1.0",
   "description": "",
   "author": "Cristian Baldi",
+  "contributors": [
+    {
+      "name": "Demetrio Carrara",
+      "url": "https://github.com/sgametrio"
+    }
+  ],
   "license": "GPL-3.0",
   "private": true,
   "scripts": {
