@@ -31,8 +31,8 @@
 			icon="done"
 			type="success"
 		) Update chapters order
-		h2 Insert new chapter
 		br
+		h2 Insert new chapter
 		WTLField(grouped=true, label="Add new chapter")
 			WTLInput.CourseEditor__new-chapter(
 				v-model="newChapter.title"
@@ -51,6 +51,23 @@
 
 .CourseEditor {
 	padding: 2rem;
+
+	&__chapter {
+		padding: 0.5rem;
+		background-color: white;
+		box-shadow: $shadow-1;
+		margin: 0.25rem;
+	}
+
+	@include media-breakpoint-up(md) {
+		&__chapters {
+			width: 50%;
+		}
+
+		&__chapter {
+			width: 100%;
+		}
+	}
 }
 </style>
 

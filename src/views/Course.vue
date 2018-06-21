@@ -3,12 +3,15 @@
 		.Course__banner
 			WTLBanner.WTLBanner--full-width(
 				v-if="editMode && course"
-				closable=true
 			)
 				span You are in EDIT MODE
+				WTLButton(
+					@click="toggleEditMode"
+					icon="close"
+				) Exit
 		h1 {{ courseName }}
 		WTLButton(
-			v-if="$keycloak && $keycloak.authenticated"
+			v-if="$keycloak && $keycloak.authenticated && !editMode"
 			@click="toggleEditMode"
 			:type="editModeBtnType"
 		) {{ editModeText }}
