@@ -7,14 +7,21 @@
 </template>
 
 <style lang="scss">
-@import "~styles/_variables";
+@import "~styles/declarations";
 
 .Badge {
 	display: inline-block;
 	box-shadow: $shadow-1;
-	padding: 1rem 2rem;
-	margin: 0.5rem;
+	padding: 0.5rem 1rem;
+	margin: 0.25rem;
 	background-color: white;
+}
+
+@include media-breakpoint-up(md) {
+	.Badge {
+		padding: 1rem 2rem;
+		margin: 0.5rem;
+	}
 }
 </style>
 

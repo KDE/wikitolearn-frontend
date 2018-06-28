@@ -3,12 +3,14 @@
 
 html {
 	color: $black;
-	font-size: $body-size;
+	//font-size: $body-size;
 	overflow-x: hidden;
 	overflow-y: scroll;
 	text-rendering: optimizeLegibility;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
+
+	@include fluid-font($min-screen, $max-screen, $min-font, $max-font);
 }
 
 html,
