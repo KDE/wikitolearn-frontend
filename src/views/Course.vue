@@ -1,20 +1,33 @@
 <template lang="pug">
 	.view--Course
 		.Course__banner
-			WTLBanner.WTLBanner--full-width(
+			WTLBanner(
 				v-if="editMode && course"
+				closeButtonText="Go back"
+				:onClose="() => { editMode = false }"
 			)
-				span You are in EDIT MODE
-				WTLButton(
-					@click="toggleEditMode"
-					icon="close"
-				) Exit
-		h1 {{ courseName }}
-		WTLButton(
-			v-if="$keycloak && $keycloak.authenticated && !editMode"
-			@click="toggleEditMode"
-			:type="editModeBtnType"
-		) {{ editModeText }}
+				span You are editing the course
+		.Course__banner
+			WTLBanner.WTLBanner--full-width(
+				v-if="history && course"
+			)
+				span You are viewing an old version of this course. See the latest one 
+				router-link(
+					to=`{
+						name: 'Course',
+						params: {
+							courseName: course._id
+						}
+					}`
+				) here
+		.Course__title
+			h1 {{ courseName }}
+			WTLButton(
+				v-if="$keycloak && $keycloak.authenticated && !editMode && !history"
+				@click="toggleEditMode"
+				icon="edit"
+				:type="editModeBtnType"
+			)
 		CourseRenderer(
 			v-if="course && !editMode",
 			:course="course",
@@ -26,24 +39,6 @@
 		)
 </template>
 
-<style lang="scss">
-.view--Course {
-	h1 {
-		text-align: center;
-		margin-bottom: 1rem;
-	}
-
-	.CourseRenderer {
-		background-color: white;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	}
-
-	.Course__banner {
-		margin-bottom: 1rem;
-	}
-}
-</style>
-
 <script>
 import CourseRenderer from "components/CourseRenderer"
 import CourseEditor from "components/CourseEditor"
@@ -53,19 +48,19 @@ import WTLBanner from "components/ui/WTLBanner"
 export default {
 	name: "Course",
 	components: { CourseRenderer, CourseEditor, WTLButton, WTLBanner },
+	props: {
+		history: {
+			required: false,
+			type: Boolean,
+			default: false
+		}
+	},
 	data() {
 		return {
 			editMode: false
 		}
 	},
 	computed: {
-		editModeText() {
-			if (this.editMode) {
-				return "Exit from EDIT MODE"
-			} else {
-				return "Enter EDIT MODE"
-			}
-		},
 		editModeBtnType() {
 			if (this.editMode) {
 				return "warning"
@@ -103,3 +98,27 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+.view--Course {
+	.CourseRenderer {
+		background-color: white;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	}
+
+	.Course__banner {
+		margin-bottom: 1rem;
+	}
+
+	.Course__title {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 1rem;
+
+		> * {
+			margin-right: 0.5rem;
+		}
+	}
+}
+</style>

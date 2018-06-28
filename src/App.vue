@@ -75,7 +75,7 @@ noscript {
 	.view {
 		@include container();
 
-		padding-top: 5rem;
+		padding-top: 4rem;
 	}
 }
 
@@ -130,8 +130,8 @@ export default {
 
 		// refresh auth token every 30 sec if necessary
 		setInterval(() => {
-			if (this.$keycloak.authenticated && this.$keycloak.isTokenExpired(60)) {
-				this.$keycloak.updateToken(60)
+			if (this.$keycloak.authenticated && this.$keycloak.isTokenExpired(75)) {
+				this.$keycloak.updateToken(75)
 			}
 		}, 1000 * 30)
 	}

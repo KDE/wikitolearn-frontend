@@ -7,10 +7,10 @@
 	)
 		slot
 		WTLButton.WTLBanner__close(
-			v-if="closable"
-			@click="opened = false"
+			v-if="closable || closeButtonText"
+			@click="close"
 			icon="close"
-		)
+		) {{ closeButtonText }}
 </template>
 
 <script>
@@ -24,11 +24,25 @@ export default {
 		closable: {
 			type: Boolean,
 			default: false
+		},
+		closeButtonText: {
+			type: String,
+			default: ""
+		},
+		onClose: {
+			type: Function,
+			default: () => {}
 		}
 	},
 	data() {
 		return {
 			opened: true
+		}
+	},
+	methods: {
+		close() {
+			this.onClose()
+			this.opened = false
 		}
 	}
 }
@@ -41,7 +55,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 1rem;
+	padding: 0.5rem;
 	box-shadow: $shadow-1;
 	border-radius: $input-radius;
 	color: #ffffff;

@@ -1,71 +1,100 @@
 <template lang="pug">
 	.CourseEditor
-		h2 Change course's title
-		br
-		WTLField(grouped=true, label="Update course title")
-			WTLInput.CourseEditor__title(
-				v-model="newCourse.title"
+		div
+			h2 Change course's title
+			WTLField(grouped=true)
+				WTLInput.CourseEditor__title(
+					v-model="newCourse.title"
+				)
+				WTLButton(
+					@click="patchCourse"
+					icon="done"
+					type="success"
+				) Update course title
+		div
+			h2 Change chapter order by dragging them
+			VueDraggable.CourseEditor__chapters(
+				v-if="newChapters"
+				v-model="newChapters"
+				@start="drag=true"
+				@end="drag=false"
 			)
-			WTLButton(
-				@click="patchCourse"
-				icon="done"
-				type="success"
-			) Update course title
-		br
-		br
-		h2 Change chapter order by dragging them
-		hr
-		VueDraggable.CourseEditor__chapters(
-			v-if="newChapters"
-			v-model="newChapters"
-			@start="drag=true"
-			@end="drag=false"
-		)
-			.CourseEditor__chapter(
-				v-for="chapter in newChapters"
-				:key="chapter._id"
-			) {{ chapter.title }}
-		br
-		WTLButton(
-			@click="patchCourseChapters"
-			icon="done"
-			type="success"
-		) Update chapters order
-		br
-		h2 Insert new chapter
-		WTLField(grouped=true, label="Add new chapter")
-			WTLInput.CourseEditor__new-chapter(
-				v-model="newChapter.title"
-				placeholder="Insert title"
-			)
-			WTLButton(
-				@click="postChapter"
-				icon="done"
-				type="success"
-			) Add new chapter
-		br
+				.CourseEditor__chapter(
+					v-for="chapter in newChapters"
+					:key="chapter._id"
+				) 
+					WTLIcon(icon="swap_vertical")
+					| {{ chapter.title }}
+			div.flex-container.flex-content-end
+				h3 Confirm changes?
+				WTLButton(
+					@click="patchCourseChapters"
+					icon="done"
+					type="success"
+				) Update chapters order
+		div
+			h2 Insert new chapter
+			WTLField(grouped=true)
+				WTLInput.CourseEditor__new-chapter(
+					v-model="newChapter.title"
+					placeholder="Insert title"
+				)
+				WTLButton(
+					@click="postChapter"
+					icon="done"
+					type="success"
+				) Add new chapter
 </template>
 
 <style lang="scss">
 @import "~styles/declarations";
 
 .CourseEditor {
-	padding: 2rem;
+	background-color: white;
+	box-shadow: $shadow-1;
+	padding: 1rem;
+
+	> div {
+		background-color: $white-bg;
+		border-top: 2px solid;
+		border-image: $border-image-wtl;
+		padding: 1rem;
+		margin-bottom: 1rem;
+
+		> .flex-container {
+			margin-top: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		> h2 {
+			margin-bottom: 0.5rem;
+		}
+	}
 
 	&__chapter {
+		display: flex;
+		align-items: center;
 		padding: 0.5rem;
 		background-color: white;
 		box-shadow: $shadow-1;
 		margin: 0.25rem;
+
+		> .WTLIcon.material-icons {
+			font-size: 1.5rem;
+		}
 	}
 
 	@include media-breakpoint-up(md) {
 		&__chapters {
-			width: 50%;
+			width: 40%;
+			margin-left: auto;
+			margin-right: auto;
 		}
 
 		&__chapter {
 			width: 100%;
+			margin: 0.5rem;
+			padding: 1rem;
 		}
 	}
 }

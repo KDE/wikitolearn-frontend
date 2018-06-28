@@ -22,7 +22,7 @@
 			:value="inputValue"
 			@input="input"
 		)
-		WTLIcon.WTLInput__icon(v-if="icon", :icon="icon", :class="'WTLInput__icon--' + iconPosition")
+		//WTLIcon.WTLInput__icon(v-if="icon", :icon="icon", :class="'WTLInput__icon--' + iconPosition")
 </template>
 
 <script>
@@ -114,8 +114,7 @@ $input-border-color: #dbdbdb;
 		width: 100%;
 	}
 
-	&__icon {
-		position: absolute;
+	/* &__icon {
 		color: #dbdbdb;
 
 		&--left {
@@ -125,7 +124,7 @@ $input-border-color: #dbdbdb;
 		&--right {
 			right: 0.1rem;
 		}
-	}
+	}*/
 
 	&__input {
 		@include input();
@@ -134,7 +133,7 @@ $input-border-color: #dbdbdb;
 		border: 1px solid $input-border-color;
 		border-radius: $input-radius;
 
-		&--has-icon {
+		/* &--has-icon {
 			&--left {
 				padding-left: 2rem;
 			}
@@ -142,7 +141,7 @@ $input-border-color: #dbdbdb;
 			&--right {
 				padding-right: 2rem;
 			}
-		}
+		}*/
 
 		&--full-width {
 			width: 100%;

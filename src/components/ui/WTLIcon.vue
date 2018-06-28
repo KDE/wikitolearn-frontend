@@ -13,14 +13,9 @@ export default {
 
 <style lang="scss">
 .WTLIcon.material-icons {
-	display: flex;
-	align-items: center;
-	justify-content: center;
 	height: 100%;
 	font-size: 1.125rem;
 	width: 2rem;
 	pointer-events: none;
 }
-
-
 </style>

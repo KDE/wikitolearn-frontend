@@ -19,3 +19,20 @@ select,
 textarea {
 	font-family: "Open Sans", sans-serif;
 }
+
+.flex-content-end {
+	justify-content: flex-end;
+
+	> * {
+		margin-left: 0.5rem;
+	}
+}
+
+.flex-container {
+	display: flex;
+	align-items: center;
+}
+
+.text-center {
+	text-align: center;
+}
