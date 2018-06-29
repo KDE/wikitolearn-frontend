@@ -13,18 +13,21 @@
 				) Update course title
 		div
 			h2 Change chapter order by dragging them
-			VueDraggable.CourseEditor__chapters(
-				v-if="newChapters"
-				v-model="newChapters"
-				@start="drag=true"
-				@end="drag=false"
-			)
-				.CourseEditor__chapter(
-					v-for="chapter in newChapters"
-					:key="chapter._id"
-				) 
-					WTLIcon(icon="swap_vertical")
-					| {{ chapter.title }}
+			.CourseEditor__chapters-container
+				ol.CourseEditor__old-chapters
+					li.CourseEditor__chapter(v-for="(chapter, index) in course.chapters") {{ index+1 }}. {{ chapter.title }}
+				VueDraggable.CourseEditor__chapters(
+					v-if="newChapters"
+					v-model="newChapters"
+					@start="drag=true"
+					@end="drag=false"
+				)
+					.CourseEditor__chapter(
+						v-for="chapter in newChapters"
+						:key="chapter._id"
+					) 
+						WTLIcon(icon="swap_vertical")
+						| {{ chapter.title }}
 			div.flex-container.flex-content-end
 				h3 Confirm changes?
 				WTLButton(
@@ -54,6 +57,17 @@
 	box-shadow: $shadow-1;
 	padding: 1rem;
 
+	&__chapters-container {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+
+	&__old-chapters {
+		display:none;
+	}
+
 	> div {
 		background-color: $white-bg;
 		border-top: 2px solid;
@@ -71,13 +85,17 @@
 		}
 	}
 
+	&__chapters {
+		width: 100%;
+	}
+
 	&__chapter {
 		display: flex;
 		align-items: center;
 		padding: 0.5rem;
 		background-color: white;
 		box-shadow: $shadow-1;
-		margin: 0.25rem;
+		margin: 0.25rem 0;
 
 		> .WTLIcon.material-icons {
 			font-size: 1.5rem;
@@ -86,14 +104,17 @@
 
 	@include media-breakpoint-up(md) {
 		&__chapters {
-			width: 40%;
-			margin-left: auto;
-			margin-right: auto;
+			width: 45%;
+		}
+
+		&__old-chapters {
+			width: 45%;
+			display: block;
 		}
 
 		&__chapter {
 			width: 100%;
-			margin: 0.5rem;
+			margin: 0.5rem 0;
 			padding: 1rem;
 		}
 	}
