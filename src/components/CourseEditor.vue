@@ -137,9 +137,9 @@ export default {
 			},
 			newChapters: this.course.chapters,
 			newChapter: {
-				title: ""
-			},
-			errorMsg: ""
+				title: "",
+				language: this.course.language
+			}
 		}
 	},
 	props: {
@@ -154,22 +154,30 @@ export default {
 	methods: {
 		patchCourse() {
 			this.$store.dispatch("PATCH_COURSE", {
-				courseName: this.course._id,
-				course: this.newCourse,
+				urlParams: {
+					courseName: this.course._id
+				},
+				bodyParams: {
+					...this.newCourse
+				},
 				options: {
 					headers: {
 						"If-Match": this.course._etag,
 						"Authorization": `bearer ${this.$keycloak.token}`
 					}
 				}
+			}).then((response) => {
+				// return this.$store.commit("UPDATE_COURSE_FIELDS", { ...this.filterKeys(this.newCourse, ["title"]), _id: this.course._id })
 			}).catch((error) => {
 				return this.$store.dispatch("SET_ERROR", { error: error })
 			})
 		},
 		patchCourseChapters() {
 			this.$store.dispatch("PATCH_COURSE_CHAPTERS", {
-				courseName: this.course._id,
-				course: {
+				urlParams: {
+					courseName: this.course._id
+				},
+				bodyParams: {
 					...this.course,
 					chapters: this.slice(this.newChapters, ["_id", "_version"])
 				},
@@ -179,18 +187,23 @@ export default {
 						"Authorization": `bearer ${this.$keycloak.token}`
 					}
 				}
+			}).then((response) => {
+				return this.$store.commit("UPDATE_COURSE_FIELDS", { chapters: this.newChapters, _id: this.course._id })
 			}).catch((error) => {
 				return this.$store.dispatch("SET_ERROR", { error: error })
 			})
 		},
 		postChapter() {
+			let chapter = Object.assign({}, this.newChapter)
 			this.$store.dispatch("POST_CHAPTER", {
-				courseName: this.course._id,
-				course: {
-					...this.course,
+				urlParams: {
+					courseName: this.course._id
+				},
+				bodyParams: {
+					...this.filterKeys(this.course, ["_id", "title", "language"]),
 					chapters: [
 						...this.slice(this.course.chapters, ["_id", "_version"]),
-						this.newChapter
+						chapter
 					]
 				},
 				options: {
@@ -200,10 +213,13 @@ export default {
 					}
 				}
 			}).then((response) => {
-				// Update chapter list
-				this.newChapters = this.course.chapters
+				chapter._version = 1
+				this.newChapters.push(chapter)
+				this.$store.commit("UPDATE_COURSE_FIELDS", {
+					chapters: this.newChapters,
+					_id: this.course._id
+				})
 			}).catch((error) => {
-				console.log(error)
 				return this.$store.commit("SET_ERROR", { error: error })
 			})
 		}

@@ -10,6 +10,13 @@ export default {
 				array2.push(obj2)
 			}
 			return array2
+		},
+		filterKeys(object, keys) {
+			let obj = {}
+			for (let key of keys) {
+				obj[key] = object[key]
+			}
+			return obj
 		}
 	}
 }

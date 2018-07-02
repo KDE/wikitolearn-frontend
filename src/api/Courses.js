@@ -13,16 +13,16 @@ class CoursesClass {
 		}
 	}
 
-	patch(courseName, course, options) {
-		return Api.patch(`courses/${courseName}`, course, options)
+	patch({ courseName }, params, options) {
+		return Api.patch(`courses/${courseName}`, params, options)
 	}
 
-	patchChapters(courseName, course, options) {
-		return Api.patch(`courses/${courseName}/chapters`, course, options)
+	patchChapters({ courseName }, params, options) {
+		return Api.patch(`courses/${courseName}/chapters`, params, options)
 	}
 
-	postChapter(courseName, course, options) {
-		return Api.post(`courses/${courseName}/chapters`, course, options)
+	postChapter({ courseName }, params, options) {
+		return Api.post(`courses/${courseName}/chapters`, params, options)
 	}
 }
 

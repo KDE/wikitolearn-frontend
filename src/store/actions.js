@@ -97,24 +97,24 @@ export const actions = {
 		commit("UPDATE_ACTIVE_REQUESTS", { addNewRequest: add })
 	},
 
-	PATCH_COURSE({ commit, dispatch }, { courseName, course, options }) {
-		return Courses.patch(courseName, course, options)
+	PATCH_COURSE({ commit, dispatch }, { urlParams, bodyParams, options }) {
+		return Courses.patch(urlParams, bodyParams, options)
 			.then((response) => {
-				return dispatch("FETCH_COURSE", { courseName })
+				commit("UPDATE_COURSE_FIELDS", { ...bodyParams, ...response })
 			})
 	},
 
-	PATCH_COURSE_CHAPTERS({ commit, dispatch }, { courseName, course, options }) {
-		return Courses.patchChapters(courseName, course, options)
+	PATCH_COURSE_CHAPTERS({ commit, dispatch }, { urlParams, bodyParams, options }) {
+		return Courses.patchChapters(urlParams, bodyParams, options)
 			.then((response) => {
-				return dispatch("FETCH_COURSE", { courseName })
+				commit("UPDATE_COURSE_FIELDS", { ...response })
 			})
 	},
 
-	POST_CHAPTER({ commit, dispatch }, { courseName, course, options }) {
-		return Courses.postChapter(courseName, course, options)
+	POST_CHAPTER({ commit, dispatch }, { urlParams, bodyParams, options }) {
+		return Courses.postChapter(urlParams, bodyParams, options)
 			.then((response) => {
-				return dispatch("FETCH_COURSE", { courseName })
+				commit("UPDATE_COURSE_FIELDS", { ...response })
 			})
 	},
 

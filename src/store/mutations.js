@@ -50,6 +50,14 @@ export const mutations = {
 		})
 	},
 
+	UPDATE_COURSE_FIELDS(state, course) {
+		let courseToUpdate = state.courses[course._id]
+		for (let key of Object.keys(course)) {
+			courseToUpdate[key] = course[key]
+		}
+		Vue.set(state.courses, course._id, courseToUpdate)
+	},
+
 	UPDATE_POLLING(state, { pollingId, progress }) {
 		Vue.set(state.pollingOperations[pollingId], "progress", progress)
 	},
