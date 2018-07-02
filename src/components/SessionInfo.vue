@@ -5,7 +5,10 @@
 				WTLButton(v-if="!$keycloak.authenticated", @click=`doLogin()`) Login
 				template(v-if="$keycloak.authenticated")
 					WTLField(grouped=true)
-						WTLButton(@click=`checkLogin()`) View user info
+						WTLButton(
+							@click=`checkLogin()`
+							icon="face"
+						)
 						WTLButton(@click=`$keycloak.logout()`, type="error") Logout
 </template>
 

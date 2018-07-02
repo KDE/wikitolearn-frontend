@@ -42,6 +42,7 @@
 	cursor: pointer;
 	border-radius: $input-radius;
 	box-shadow: $shadow-1;
+	color: $black;
 
 	&--no-text {
 		padding: 0.5rem 0.25rem;
