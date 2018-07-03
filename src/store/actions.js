@@ -101,6 +101,7 @@ export const actions = {
 		return Courses.patch(urlParams, bodyParams, options)
 			.then((response) => {
 				commit("UPDATE_COURSE_FIELDS", { ...bodyParams, ...response })
+				return response
 			})
 	},
 
@@ -108,6 +109,7 @@ export const actions = {
 		return Courses.patchChapters(urlParams, bodyParams, options)
 			.then((response) => {
 				commit("UPDATE_COURSE_FIELDS", { ...response })
+				return response
 			})
 	},
 
@@ -115,6 +117,7 @@ export const actions = {
 		return Courses.postChapter(urlParams, bodyParams, options)
 			.then((response) => {
 				commit("UPDATE_COURSE_FIELDS", { ...response })
+				return response
 			})
 	},
 

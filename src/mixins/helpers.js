@@ -17,6 +17,9 @@ export default {
 				obj[key] = object[key]
 			}
 			return obj
+		},
+		updateMetaTitle(title) {
+			document.title = `${title} - WikiToLearn - collaborative textbooks`
 		}
 	}
 }

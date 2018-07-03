@@ -167,12 +167,15 @@ export default {
 					}
 				}
 			}).then((response) => {
-				// return this.$store.commit("UPDATE_COURSE_FIELDS", { ...this.filterKeys(this.newCourse, ["title"]), _id: this.course._id })
+				// Now update title
+				this.updateMetaTitle(this.course.title)
 			}).catch((error) => {
 				return this.$store.dispatch("SET_ERROR", { error: error })
 			})
 		},
 		patchCourseChapters() {
+			// Assign this to avoid updates in the meantime
+			const newChapters = JSON.parse(JSON.stringify(this.newChapters))
 			this.$store.dispatch("PATCH_COURSE_CHAPTERS", {
 				urlParams: {
 					courseName: this.course._id
@@ -188,12 +191,14 @@ export default {
 					}
 				}
 			}).then((response) => {
-				return this.$store.commit("UPDATE_COURSE_FIELDS", { chapters: this.newChapters, _id: this.course._id })
+				return this.$store.commit("UPDATE_COURSE_FIELDS", { chapters: newChapters, _id: this.course._id })
 			}).catch((error) => {
 				return this.$store.dispatch("SET_ERROR", { error: error })
 			})
 		},
 		postChapter() {
+			// Assign this to avoid updates in the mean time
+			let chapters = JSON.parse(JSON.stringify(this.course.chapters))
 			let chapter = Object.assign({}, this.newChapter)
 			this.$store.dispatch("POST_CHAPTER", {
 				urlParams: {
@@ -202,7 +207,7 @@ export default {
 				bodyParams: {
 					...this.filterKeys(this.course, ["_id", "title", "language"]),
 					chapters: [
-						...this.slice(this.course.chapters, ["_id", "_version"]),
+						...this.slice(chapters, ["_id", "_version"]),
 						chapter
 					]
 				},
@@ -213,12 +218,15 @@ export default {
 					}
 				}
 			}).then((response) => {
-				chapter._version = 1
-				this.newChapters.push(chapter)
+				const chapterAdded = response.chapters[response.chapters.length - 1]
+				chapter._version = chapterAdded._version
+				chapter._id = chapterAdded._id
+				chapters.push(chapter)
 				this.$store.commit("UPDATE_COURSE_FIELDS", {
-					chapters: this.newChapters,
+					chapters: chapters,
 					_id: this.course._id
 				})
+				this.newChapters.push(chapter)
 			}).catch((error) => {
 				return this.$store.commit("SET_ERROR", { error: error })
 			})
