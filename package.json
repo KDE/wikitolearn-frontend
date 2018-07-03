@@ -14,11 +14,11 @@
   "scripts": {
     "dev": "node server",
     "start": "cross-env NODE_ENV=production node server",
-    "build": "rimraf dist && npm run build:client && npm run build:server",
+    "build": "rimraf dist && yarpm run build:client && yarpm run build:server",
     "build:client": "cross-env NODE_ENV=production webpack --config build/webpack.client.config.js --progress --hide-modules",
     "build:server": "cross-env NODE_ENV=production webpack --config build/webpack.server.config.js --progress --hide-modules",
-    "build-and-start": "npm run build && npm run start",
-    "test": "npm run test:unit && npm run test:e2e",
+    "build-and-start": "yarpm run build && yarpm run start",
+    "test": "yarpm run test:unit && yarpm run test:e2e",
     "test:e2e": "rimraf test/e2e/reports && cross-env NODE_ENV=testing node test/e2e/runner.js",
     "test:unit": "rimraf test/unit/coverage && cross-env NODE_ENV=testing karma start test/unit/karma.conf.js "
   },
@@ -85,11 +85,12 @@
     "url-loader": "^0.6.2",
     "vue-loader": "^15.2.4",
     "vue-template-compiler": "^2.5.16",
-    "webpack": "^4.8.3",
-    "webpack-cli": "^2.1.3",
+    "webpack": "^4.14.0",
+    "webpack-cli": "^3.0.8",
     "webpack-dev-middleware": "^3.1.3",
     "webpack-hot-middleware": "^2.22.2",
-    "webpack-merge": "^4.1.2"
+    "webpack-merge": "^4.1.2",
+    "yarpm": "^0.2.1"
   },
   "dependencies": {
     "@vue/test-utils": "^1.0.0-beta.16",
