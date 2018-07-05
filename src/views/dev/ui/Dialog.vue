@@ -17,8 +17,9 @@
 		h2 Modal
 		WTLButton(@click="showModal = true") Open modal test
 
-		WTLModal(:active.sync="showModal")
+		WTLModal(v-if="showModal", ref="modal", @close="showModal = false")
 			h1 Hello
+			WTLButton(@click="closeModal") close me
 </template>
 
 <script>
@@ -26,6 +27,11 @@ export default {
 	data() {
 		return {
 			showModal: false
+		}
+	},
+	methods: {
+		closeModal() {
+			this.$refs.modal.close()
 		}
 	}
 }

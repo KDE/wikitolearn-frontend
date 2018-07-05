@@ -1,7 +1,7 @@
 <template lang="pug">
 	.Modal
-		.Modal__wrapper(v-if="active")
-			.Modal__body
+		.Modal__wrapper(@click="closeOutside")
+			.Modal__body(id="modal-body")
 				slot
 </template>
 
@@ -44,10 +44,20 @@ export default {
 			default: false
 		}
 	},
+	data() {
+		return {
+			show: this.active
+		}
+	},
 	methods: {
 		close() {
 			this.$emit("close")
-			this.active = false
+			this.show = false
+		},
+		closeOutside(event) {
+			if (!document.getElementById("modal-body").contains(event.target)) {
+				this.close()
+			}
 		}
 	}
 }

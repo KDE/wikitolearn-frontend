@@ -7,7 +7,7 @@
 		.Dialog__wrapper(v-if="active", @click="closeOutside")
 			.Dialog__body(id="dialog-body")
 				.Dialog__header {{ title }}
-				.Dialog__content {{ type }} {{ content }}
+				.Dialog__content {{ content }}
 				.Dialog__footer
 					WTLButton(v-if="dialogType == 'confirm'", @click="cancel()") Cancel
 					WTLButton(:type="type", @click="confirm()") OK
