@@ -1,52 +1,64 @@
 <template lang="pug">
-	.CourseEditor
-		div
-			h2 Change course's title
-			WTLField(grouped=true)
-				WTLInput.CourseEditor__title(
-					v-model="newCourse.title"
-				)
-				WTLButton(
-					@click="patchCourse"
-					icon="done"
-					type="success"
-				) Update course title
-		div
-			h2 Change chapter order by dragging them
-			.CourseEditor__chapters-container
-				ol.CourseEditor__old-chapters
-					li.CourseEditor__chapter(v-for="(chapter, index) in course.chapters") {{ index+1 }}. {{ chapter.title }}
-				VueDraggable.CourseEditor__chapters(
-					v-if="newChapters"
-					v-model="newChapters"
-					@start="drag=true"
-					@end="drag=false"
-				)
-					.CourseEditor__chapter(
-						v-for="chapter in newChapters"
-						:key="chapter._id"
-					) 
-						WTLIcon(icon="swap_vertical")
-						| {{ chapter.title }}
-			div.flex-container.flex-content-end
-				h3 Confirm changes?
-				WTLButton(
-					@click="patchCourseChapters"
-					icon="done"
-					type="success"
-				) Update chapters order
-		div
-			h2 Insert new chapter
-			WTLField(grouped=true)
-				WTLInput.CourseEditor__new-chapter(
-					v-model="newChapter.title"
-					placeholder="Insert title"
-				)
-				WTLButton(
-					@click="postChapter"
-					icon="done"
-					type="success"
-				) Add new chapter
+	div
+		.CourseEditor
+			div
+				h2 Change course's title
+				WTLField(grouped=true)
+					WTLInput.CourseEditor__title(
+						v-model="newCourse.title"
+					)
+					WTLButton(
+						@click="patchCourse"
+						icon="done"
+						type="success"
+					) Update course title
+			div
+				h2 Change chapter order by dragging them
+				.CourseEditor__chapters-container
+					ol.CourseEditor__old-chapters
+						li.CourseEditor__chapter(v-for="(chapter, index) in course.chapters") {{ index+1 }}. {{ chapter.title }}
+					VueDraggable.CourseEditor__chapters(
+						v-if="newChapters"
+						v-model="newChapters"
+						@start="drag=true"
+						@end="drag=false"
+					)
+						.CourseEditor__chapter(
+							v-for="(chapter, index) in newChapters"
+							:key="chapter._id"
+						) 
+							WTLIcon(icon="swap_vertical")
+							| {{ chapter.title }}
+							.CourseEditor__chapter-icons
+								WTLIcon(icon="edit", clickable=true, @click.native="editChapter(chapter)")
+								WTLIcon(icon="delete", clickable=true, @click.native="deleteChapterDialog(chapter, index)")
+				div.flex-container.flex-content-end
+					h3 Confirm changes?
+					WTLButton(
+						@click="patchCourseChapters"
+						icon="done"
+						type="success"
+					) Update chapters order
+			div
+				h2 Insert new chapter
+				WTLField(grouped=true)
+					WTLInput.CourseEditor__new-chapter(
+						v-model="newChapter.title"
+						placeholder="Insert title"
+					)
+					WTLButton(
+						@click="postChapter"
+						icon="done"
+						type="success"
+					) Add new chapter
+
+		WTLModal(v-if="showModal", ref="modal", @close="showModal = false", title="Edit chapter")
+			template(slot="content")
+				WTLField(grouped=true, label="Chapter title")
+					WTLInput(v-model="chapter.title")
+			template(slot="actions")
+				WTLButton(@click="closeModal", icon="close") Cancel
+				WTLButton(@click="patchChapter", icon="done", type="success") Confirm edit
 </template>
 
 <style lang="scss">
@@ -63,9 +75,8 @@
 		align-items: center;
 	}
 
-
 	&__old-chapters {
-		display:none;
+		display: none;
 	}
 
 	> div {
@@ -98,7 +109,18 @@
 		margin: 0.25rem 0;
 
 		> .WTLIcon.material-icons {
-			font-size: 1.5rem;
+			font-size: 1.25rem;
+		}
+
+		&-icons {
+			flex-grow: 1;
+			display: inline-flex;
+			justify-content: flex-end;
+			align-items: center;
+
+			> * {
+				margin: 0 0.25rem;
+			}
 		}
 	}
 
@@ -131,12 +153,17 @@ export default {
 	components: { WTLInput, WTLButton, VueDraggable },
 	data() {
 		return {
+			showModal: false,
 			newCourse: {
 				title: this.course.title,
 				language: this.course.language
 			},
 			newChapters: this.course.chapters,
 			newChapter: {
+				title: "",
+				language: this.course.language
+			},
+			chapter: {
 				title: "",
 				language: this.course.language
 			}
@@ -152,6 +179,11 @@ export default {
 
 	},
 	methods: {
+		fetchAndResetInitialState() {
+			this.$store.dispatch("FETCH_COURSE", { courseName: this.course._id }).then((response) => {
+				Object.assign(this.$data, this.$options.data.apply(this))
+			})
+		},
 		patchCourse() {
 			this.$store.dispatch("PATCH_COURSE", {
 				urlParams: {
@@ -227,6 +259,65 @@ export default {
 					_id: this.course._id
 				})
 				this.newChapters.push(chapter)
+			}).catch((error) => {
+				return this.$store.commit("SET_ERROR", { error: error })
+			})
+		},
+		editChapter(chapter) {
+			this.chapter = Object.assign({}, chapter)
+			this.chapter.language = this.course.language
+			this.showModal = true
+		},
+		patchChapter() {
+			let chapter = Object.assign({}, this.chapter)
+			this.$store.dispatch("PATCH_CHAPTER", {
+				urlParams: { chapterId: chapter._id },
+				bodyParams: {
+					...this.filterKeys(chapter, ["title", "language"])
+				},
+				options: {
+					headers: {
+						"If-Match": chapter._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				this.fetchAndResetInitialState()
+				this.closeModal()
+			}).catch((error) => {
+				this.closeModal()
+				return this.$store.commit("SET_ERROR", { error: error })
+			})
+		},
+		closeModal() {
+			this.$refs.modal.close()
+		},
+		deleteChapterDialog(chapter, index) {
+			let pagesString = ""
+			if (chapter.pages) {
+				for (let page of chapter.pages) {
+					pagesString += page.title + ", "
+				}
+			}
+			this.$dialog.confirm({
+				title: `Delete chapter ${chapter.title}?`,
+				content: `Removing this chapter will remove its pages: ${pagesString}`,
+				onConfirm: () => {
+					this.deleteChapter(chapter, index)
+				}
+			})
+		},
+		deleteChapter(chapter, index) {
+			this.$store.dispatch("DELETE_CHAPTER", {
+				urlParams: { chapterId: chapter._id },
+				options: {
+					headers: {
+						"If-Match": chapter._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				this.fetchAndResetInitialState()
 			}).catch((error) => {
 				return this.$store.commit("SET_ERROR", { error: error })
 			})
