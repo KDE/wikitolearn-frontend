@@ -121,6 +121,20 @@ export const actions = {
 			})
 	},
 
+	PATCH_CHAPTER({ commit, dispatch }, { urlParams, bodyParams, options }) {
+		return Chapters.patch(urlParams, bodyParams, options)
+			.then((response) => {
+				return response
+			})
+	},
+
+	DELETE_CHAPTER({ commit, dispatch }, { urlParams, options }) {
+		return Chapters.delete(urlParams, options)
+			.then((response) => {
+				return response
+			})
+	},
+
 	SET_ERROR({ commit }, { error }) {
 		commit("EMPTY_ERROR")
 		commit("SET_ERROR", { error: error })

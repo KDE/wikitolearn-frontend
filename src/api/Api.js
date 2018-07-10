@@ -60,6 +60,17 @@ class ApiClass {
 			})
 	}
 
+	delete(endpoint, options = {}) {
+		endpoint = this._cleanEndpoint(endpoint)
+
+		options = Object.assign(options, defaultOptions)
+
+		return Vue.axios.delete(`${this.baseURL}/${endpoint}`, options)
+			.then((response) => {
+				return Promise.resolve(response.data)
+			})
+	}
+
 	_cleanEndpoint(endpoint) {
 		if (endpoint.startsWith("/")) {
 			endpoint = endpoint.substring("/")
