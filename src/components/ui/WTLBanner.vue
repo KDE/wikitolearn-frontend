@@ -59,7 +59,7 @@ export default {
 	box-shadow: $shadow-1;
 	border-radius: $input-radius;
 	color: #ffffff;
-	background-color: black;
+	background-color: $black;
 
 	> * {
 		margin-left: 0.5rem;

@@ -22,9 +22,11 @@ export default {
 	height: 100%;
 	font-size: 1.125rem;
 	width: 2rem;
-}
+	cursor: pointer;
 
-.WTLIcon--default {
-	pointer-events: none;
+	&.WTLIcon--default {
+		pointer-events: none;
+		cursor: default;
+	}
 }
 </style>

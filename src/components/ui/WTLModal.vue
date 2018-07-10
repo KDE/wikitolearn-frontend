@@ -2,7 +2,11 @@
 	.Modal
 		.Modal__wrapper(@click="closeOutside")
 			.Modal__body(id="modal-body")
-				slot
+				h2.Modal__title(v-if="title") {{ title }}
+				.Modal__content
+					slot(name="content")
+				.Modal__actions
+					slot(name="actions")
 </template>
 
 <style lang="scss">
@@ -31,6 +35,21 @@
 		max-height: calc(100vh - 1rem);
 		border-radius: 3px;
 		background-color: white;
+
+		> *:not(:last-child) {
+			padding: 0.5rem;
+			border-bottom: 1px solid $lightgray;
+			margin-bottom: 0.25rem;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		justify-content: flex-end;
+
+		> *:not(:last-child) {
+			margin-right: 0.5rem;
+		}
 	}
 }
 </style>
@@ -42,7 +61,8 @@ export default {
 		active: {
 			type: Boolean,
 			default: false
-		}
+		},
+		title: String
 	},
 	data() {
 		return {
