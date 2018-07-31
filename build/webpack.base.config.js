@@ -116,7 +116,10 @@ module.exports = {
 				enforce: "pre",
 				test: /\.(vue|js)$/,
 				loader: "eslint-loader",
-				exclude: /node_modules/
+				exclude: /node_modules/,
+				options: {
+					emitWarning: true
+				}
 			},
 			{
 				test: /\.scss$/,

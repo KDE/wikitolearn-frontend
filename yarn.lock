@@ -182,6 +182,18 @@
     lodash "^4.17.5"
     to-fast-properties "^2.0.0"
 
+"@ckeditor/ckeditor5-build-balloon@^11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-balloon/-/ckeditor5-build-balloon-11.0.1.tgz#fa93ce62a2099a80c8ec8f40e3bc8195d3cc010c"
+
+"@ckeditor/ckeditor5-build-classic@^11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-classic/-/ckeditor5-build-classic-11.0.1.tgz#e73203424ca59f254e9ba1f6224d2d6f8793c4b7"
+
+"@ckeditor/ckeditor5-build-decoupled-document@^11.0.1":
+  version "11.0.1"
+  resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-build-decoupled-document/-/ckeditor5-build-decoupled-document-11.0.1.tgz#a71590317b5a6c487e81a9d48139b12c63208912"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -9477,6 +9489,10 @@ vue-add-globals@^2.0.0:
 vue-axios@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-2.1.1.tgz#6167f2db93065d9bcfc90e65d063ccf34f8b1d63"
+
+vue-ckeditor5@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/vue-ckeditor5/-/vue-ckeditor5-0.1.5.tgz#66169fff4a9462f93aa68650457f7391dfb5b678"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.0"

@@ -1,12 +1,15 @@
 <template lang="pug">
 	NoSSR
 		.Editor
-			textarea(id="foo", :value="content")
+			vue-ckeditor(type="classic", :editors="editors", v-model="mutableContent")
 </template>
 
 
 <script>
-import Vue from "vue"
+// import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document"
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
+// import BalloonEditor from '@ckeditor/ckeditor5-build-balloon'
+import VueCkeditor from "vue-ckeditor5"
 
 export default {
 	name: "Editor",
@@ -15,14 +18,18 @@ export default {
 			type: String
 		}
 	},
-	mounted() {
-		Vue.nextTick(() => {
-			window.CKEDITOR.replace("foo", {
-				removeButtons: "About",
-				customConfig: "",
-				height: "100vh"
-			})
-		})
-	}
+	components: {
+		"vue-ckeditor": VueCkeditor.component
+	},
+	data() {
+		return {
+			editors: {
+				// decoupled: DecoupledEditor
+				classic: ClassicEditor
+			},
+			mutableContent: this.content
+		}
+	},
+	mounted() {}
 }
 </script>
