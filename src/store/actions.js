@@ -70,7 +70,7 @@ export const actions = {
 		return Chapters.get(chapterName)
 			.then((response) => {
 				const resp = Object.assign({}, response)
-				commit("SET_CHAPTER", { page: resp })
+				commit("SET_CHAPTER", { chapter: resp })
 				for (const page of resp.pages) {
 					commit("SET_PAGE", { page: page })
 				}
@@ -124,12 +124,44 @@ export const actions = {
 	PATCH_CHAPTER({ commit, dispatch }, { urlParams, bodyParams, options }) {
 		return Chapters.patch(urlParams, bodyParams, options)
 			.then((response) => {
+				commit("UPDATE_CHAPTER_FIELDS", { ...bodyParams, ...response })
 				return response
 			})
 	},
 
 	DELETE_CHAPTER({ commit, dispatch }, { urlParams, options }) {
 		return Chapters.delete(urlParams, options)
+			.then((response) => {
+				return response
+			})
+	},
+
+	PATCH_CHAPTER_PAGES({ commit, dispatch }, { urlParams, bodyParams, options }) {
+		return Chapters.patchPages(urlParams, bodyParams, options)
+			.then((response) => {
+				commit("UPDATE_CHAPTER_FIELDS", { ...response })
+				return response
+			})
+	},
+
+	POST_PAGE({ commit, dispatch }, { urlParams, bodyParams, options }) {
+		return Chapters.postPage(urlParams, bodyParams, options)
+			.then((response) => {
+				commit("UPDATE_CHAPTER_FIELDS", { ...response })
+				return response
+			})
+	},
+
+	PATCH_PAGE({ commit, dispatch }, { urlParams, bodyParams, options }) {
+		return Pages.patch(urlParams, bodyParams, options)
+			.then((response) => {
+				commit("UPDATE_PAGE_FIELDS", { ...bodyParams, ...response })
+				return response
+			})
+	},
+
+	DELETE_PAGE({ commit, dispatch }, { urlParams, options }) {
+		return Pages.delete(urlParams, options)
 			.then((response) => {
 				return response
 			})
