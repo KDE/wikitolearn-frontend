@@ -9,6 +9,7 @@
 				ChapterPages(
 					:chapter="chapter"
 					:number="index + 1"
+					:courseName="course._id"
 				)
 			//
 				router-link(:to=`{

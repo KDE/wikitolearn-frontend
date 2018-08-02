@@ -22,15 +22,18 @@
 						v-model="newChapters"
 						@start="drag=true"
 						@end="drag=false"
+						:options={
+							handle: ".draggable-handle"
+						}
 					)
 						.CourseEditor__chapter(
 							v-for="(chapter, index) in newChapters"
 							:key="chapter._id"
-						) 
-							WTLIcon(icon="swap_vertical")
+						)
+							.draggable-handle
+								WTLIcon(icon="swap_vertical")
 							| {{ chapter.title }}
 							.CourseEditor__chapter-icons
-								WTLIcon(icon="edit", clickable=true, @click.native="editChapter(chapter)")
 								WTLIcon(icon="delete", clickable=true, @click.native="deleteChapterDialog(chapter, index)")
 				div.flex-container.flex-content-end
 					h3 Confirm changes?
@@ -52,7 +55,7 @@
 						type="success"
 					) Add new chapter
 
-		WTLModal(v-if="showModal", ref="modal", @close="showModal = false", title="Edit chapter")
+		// WTLModal(v-if="showModal", ref="modal", @close="showModal = false", title="Edit chapter")
 			template(slot="content")
 				WTLField(grouped=true, label="Chapter title")
 					WTLInput(v-model="chapter.title")
@@ -122,6 +125,10 @@
 				margin: 0 0.25rem;
 			}
 		}
+	}
+
+	.draggable-handle {
+		cursor: row-resize;
 	}
 
 	@include media-breakpoint-up(md) {
@@ -262,35 +269,6 @@ export default {
 			}).catch((error) => {
 				return this.$store.commit("SET_ERROR", { error: error })
 			})
-		},
-		editChapter(chapter) {
-			this.chapter = Object.assign({}, chapter)
-			this.chapter.language = this.course.language
-			this.showModal = true
-		},
-		patchChapter() {
-			let chapter = Object.assign({}, this.chapter)
-			this.$store.dispatch("PATCH_CHAPTER", {
-				urlParams: { chapterId: chapter._id },
-				bodyParams: {
-					...this.filterKeys(chapter, ["title", "language"])
-				},
-				options: {
-					headers: {
-						"If-Match": chapter._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).then((response) => {
-				this.fetchAndResetInitialState()
-				this.closeModal()
-			}).catch((error) => {
-				this.closeModal()
-				return this.$store.commit("SET_ERROR", { error: error })
-			})
-		},
-		closeModal() {
-			this.$refs.modal.close()
 		},
 		deleteChapterDialog(chapter, index) {
 			let pagesString = ""

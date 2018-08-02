@@ -20,8 +20,8 @@ routes = routes.concat([
 	{ path: "/c", component: Courses, name: "Courses" },
 	{ path: "/c/:courseName", component: Course, name: "Course" },
 	{ path: "/c/:courseName/:chapterName/edit", component: EditChapter, name: "EditChapter" },
-	{ path: "/p/:pageTitle(.+)/edit", component: EditPage, name: "EditPage" },
-	{ path: "/p/:pageTitle(.+)", component: Page, name: "Page" }
+	{ path: "/p/:pageTitle/edit", component: EditPage, name: "EditPage" },
+	{ path: "/p/:pageTitle", component: Page, name: "Page" }
 ])
 
 if (process.env.NODE_ENV !== "production") {

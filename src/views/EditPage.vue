@@ -1,18 +1,18 @@
 <template lang="pug">
 	.view--EditPage
 		h1.EditPage__title {{ pageTitle }}
-		Editor(
+		PageEditor(
 			v-if="page",
-			:content="page.content"
+			:page="page"
 		)
 </template>
 
 <script>
-import Editor from "components/Editor"
+import PageEditor from "components/PageEditor"
 
 export default {
 	name: "EditPage",
-	components: { Editor },
+	components: { PageEditor },
 	computed: {
 		page() {
 			return this.$store.state.pages[this.$route.params.pageTitle]

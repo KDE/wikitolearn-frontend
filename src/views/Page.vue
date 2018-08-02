@@ -40,7 +40,7 @@ export default {
 		},
 		pageTitle() {
 			if (this.page) {
-				return this.page.displayTitle
+				return this.page.title
 			} else {
 				return this.$route.params.pageTitle
 			}

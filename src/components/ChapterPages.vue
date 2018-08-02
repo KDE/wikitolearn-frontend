@@ -1,6 +1,13 @@
 <template lang="pug">
 	.ChapterPages
-		h3.ChapterPages__title {{ number }}. {{ chapter.title }}
+		h3.ChapterPages__title
+			WTLIcon(
+				v-if="$keycloak && $keycloak.authenticated",
+				clickable=true,
+				icon="edit",
+				@click.native="goToEditChapter"
+			)
+			| {{ number }}. {{ chapter.title }}
 		ul
 			li(
 				v-for="page in chapter.pages"
@@ -16,8 +23,11 @@
 </template>
 
 <script>
+import WTLIcon from "components/ui/WTLIcon"
+
 export default {
 	name: "ChapterPages",
+	components: { WTLIcon },
 	props: {
 		chapter: {
 			type: Object,
@@ -26,6 +36,17 @@ export default {
 		number: {
 			type: Number,
 			required: true
+		},
+		courseName: {
+			type: String,
+			required: true
+		}
+	}, methods: {
+		goToEditChapter() {
+			this.$router.push({
+				path: `/c/${this.courseName}/${this.chapter._id}/edit`,
+				params: { chapter: this.chapter }
+			})
 		}
 	}
 }
