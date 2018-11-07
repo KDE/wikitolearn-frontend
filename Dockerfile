@@ -4,7 +4,10 @@ RUN mkdir -p /opt/frontend
 WORKDIR /opt/frontend
 
 ADD package.json yarn.lock /opt/frontend/
-RUN yarn
+
+RUN apk add --no-cache --virtual .build-deps alpine-sdk python && \
+yarn && \
+apk del .build-deps
 
 #ARG PUBLIC_PWA_GATEWAY_URI
 #ENV PUBLIC_PWA_GATEWAY_URI=${PUBLIC_PWA_GATEWAY_URI}
