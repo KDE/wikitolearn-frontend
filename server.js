@@ -3,6 +3,7 @@ const path = require("path")
 const compression = require("compression")
 const express = require("express")
 const app = express()
+const LRU = require("lru-cache")
 
 const favicon = require("serve-favicon")
 
@@ -17,7 +18,7 @@ const createRenderer = (bundle, options) => {
 	// https://github.com/vuejs/vue/blob/dev/packages/vue-server-renderer/README.md#why-use-bundlerenderer
 	return require("vue-server-renderer").createBundleRenderer(bundle, Object.assign(options, {
 		template,
-		cache: require("lru-cache")({
+		cache: new LRU({
 			max: 1000,
 			maxAge: 1000 * 60 * 15
 		}),
@@ -88,6 +89,10 @@ app.use(favicon("./static/favicon.png"))
 app.use("/dist", serve("./dist", true))
 app.use("/static", serve("./static", true))
 app.use("/service-worker.js", serve("./dist/service-worker.js"))
+app.use("/workbox-*.js", (req, res, next) => {
+	req.url = path.basename(req.originalUrl)
+	express.static(__dirname + "/dist")(req, res, next)
+})
 
 app.get("/afterLogin", function(req, res) {
 	res.sendFile("dist/afterLogin.html", { "root": __dirname })

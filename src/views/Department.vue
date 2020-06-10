@@ -6,6 +6,29 @@
 			:showName="false")
 </template>
 
+<script>
+import Category from "components/Category"
+
+export default {
+	name: "Department",
+	components: { Category },
+	asyncData({ store, route }) {
+		return store.dispatch("FETCH_CATEGORY", { categoryName: route.params.departmentName })
+	},
+	computed: {
+		category() {
+			return this.$store.state.categories[this.$route.params.departmentName]
+		}
+	},
+	meta() {
+		return {
+			title: this.category.displayName,
+			description: "This is the meta description for the department page"
+		}
+	}
+}
+</script>
+
 <style lang="scss">
 .view--Department {
 	h1 {
@@ -19,27 +42,3 @@
 	}
 }
 </style>
-
-
-<script>
-import Category from "components/Category"
-
-export default {
-	name: "Department",
-	components: { Category },
-	computed: {
-		category() {
-			return this.$store.state.categories[this.$route.params.departmentName]
-		}
-	},
-	asyncData({ store, route }) {
-		return store.dispatch("FETCH_CATEGORY", { categoryName: route.params.departmentName })
-	},
-	meta() {
-		return {
-			title: this.category.displayName,
-			description: "This is the meta description for the department page"
-		}
-	}
-}
-</script>

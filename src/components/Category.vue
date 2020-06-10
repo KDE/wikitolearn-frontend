@@ -18,17 +18,6 @@
 					}`) {{ course.displayName }}
 </template>
 
-<style lang="scss">
-.Category {
-	padding: 1rem;
-	margin-bottom: 2rem;
-
-	&__subcategories {
-		margin-bottom: 1rem;
-	}
-}
-</style>
-
 <script>
 export default {
 	name: "Category",
@@ -44,3 +33,14 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+.Category {
+	padding: 1rem;
+	margin-bottom: 2rem;
+
+	&__subcategories {
+		margin-bottom: 1rem;
+	}
+}
+</style>

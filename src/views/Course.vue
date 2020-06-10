@@ -11,7 +11,7 @@
 			WTLBanner.WTLBanner--full-width(
 				v-if="history && course"
 			)
-				span You are viewing an old version of this course. See the latest one 
+				span You are viewing an old version of this course. See the latest one
 				router-link(
 					to=`{
 						name: 'Course',
@@ -55,6 +55,12 @@ export default {
 			default: false
 		}
 	},
+	asyncData({ store, route }) {
+		return store.dispatch("FETCH_COURSE", { courseName: route.params.courseName })
+			.catch((error) => {
+				return store.commit("SET_ERROR", { error: error })
+			})
+	},
 	data() {
 		return {
 			editMode: false
@@ -78,12 +84,6 @@ export default {
 		course() {
 			return this.$store.state.courses[this.$route.params.courseName]
 		}
-	},
-	asyncData({ store, route }) {
-		return store.dispatch("FETCH_COURSE", { courseName: route.params.courseName })
-			.catch((error) => {
-				return store.commit("SET_ERROR", { error: error })
-			})
 	},
 	methods: {
 		toggleEditMode() {

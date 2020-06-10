@@ -1,35 +1,43 @@
 <template lang="pug">
-	NoSSR
+	div
 		div
 			WTLField(grouped=true, label="Update page title")
 				WTLInput(v-model="newPage.title")
 				WTLButton(type="success", @click="patchPage", icon="done") Update page title
 			// WTLButton(@click="newTheorem") Inserisci teorema
-			.Editor(id="editor")
-				div(id="editor-toolbar")
-				div(id="editor-editable")
+			ckeditor(:editor="editor", v-model="editorData", :config="editorConfig")
+			//- .Editor(id="editor")
+			//- 	div(id="editor-toolbar")
+			//- 	div(id="editor-editable")
 </template>
 
 <script>
 import WTLButton from "components/ui/WTLButton"
-import WTLEditor from "@ckeditor/ckeditor5-build-classic/build/ckeditor"
+import CKEditor from "@ckeditor/ckeditor5-vue"
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
+// import WTLEditor from "@ckeditor/ckeditor5-build-classic/build/ckeditor"
 // import createElement from "@ckeditor/ckeditor5-utils/src/dom/createelement"
 // import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
 
 export default {
 	name: "Editor",
+	components: {
+		WTLButton,
+		ckeditor: CKEditor.component
+	},
 	props: {
 		page: {
 			type: Object,
 			required: true
 		}
 	},
-	components: {
-		WTLButton
-	},
 	data() {
 		return {
-			editor: null,
+			editor: ClassicEditor,
+			editorData: this.page.content,
+			editorConfig: {
+				// The configuration of the editor.
+			},
 			newPage: {
 				title: this.page.title,
 				language: this.page.language,
@@ -38,16 +46,17 @@ export default {
 		}
 	},
 	mounted() {
-		WTLEditor.create(this.$el.querySelector("#editor")).then((editor) => {
-			const toolbarContainer = this.$el.querySelector("#editor-toolbar")
-			const editableContent = this.$el.querySelector("#editor-editable")
-			toolbarContainer.appendChild(editor.ui.view.toolbar.element)
-			editableContent.appendChild(editor.ui.view.editable.element)
-			editor.setData(this.newPage.content)
-			this.editor = editor
-		}).catch((error) => {
-			console.log(error)
-		})
+		// const editorContainer = document.querySelector("#editor")
+		// WTLEditor.create(editorContainer).then((editor) => {
+		// 	const toolbarContainer = editorContainer.querySelector("#editor-toolbar")
+		// 	const editableContent = editorContainer.querySelector("#editor-editable")
+		// 	toolbarContainer.appendChild(editor.ui.view.toolbar.element)
+		// 	editableContent.appendChild(editor.ui.view.editable.element)
+		// 	editor.setData(this.newPage.content)
+		// 	this.editor = editor
+		// }).catch((error) => {
+		// 	console.log(error)
+		// })
 	},
 	methods: {
 		newTheorem() {

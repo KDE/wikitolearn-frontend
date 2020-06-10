@@ -1,23 +1,23 @@
-/// Values
+/* Values */
 $min-font: 14px;
 $max-font: 18px;
 $min-screen: 320px;
 $max-screen: 1280px;
 
-/// Colors
+/* Colors */
 
-// Brand colors
+/* Brand colors */
 $dark-red: #83001f !default;
 $red: #db3e14 !default;
 $yellow: #ffbc31 !default;
 $green: #6ab141 !default;
 $dark-green: #00613a !default;
 
-// typography
+/* typography */
 $black: #333 !default;
 $gray: #888 !default;
 
-// other colors
+/* other colors */
 $blue: #347bff !default;
 $lightgray: darken(white, 5%) !default;
 
@@ -31,16 +31,16 @@ $border-image-wtl: linear-gradient(to right, $dark-green 20%, $green 20%, $green
 
 $card-bg: #f2f2f2 !default;
 
-// global styles
+/* global styles */
 $input-radius: 0.25rem !default;
 $font-weight-semibold: 600 !default;
 $font-weight-bold: 700 !default;
 
-// shadows
+/* shadows */
 $shadow-1: 0 1px 3px rgba(0, 0, 0, 0.1);
 $shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 
-/// Breakpoints
+/* Breakpoints */
 $breakpoints: (
 	xs: 0,
 	sm: 576px,

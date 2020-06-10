@@ -15,16 +15,22 @@ describe("WTLSnackbar", () => {
 
 	it("shows and hides", () => {
 		snackbar.vm.open()
-		expect(snackbar.find(".WTLSnackbar").isVisible()).to.be.true
-		snackbar.vm.close()
-		expect(snackbar.contains(".WTLSnackbar")).to.be.false
+		snackbar.vm.$nextTick().then(() => {
+			expect(snackbar.find(".WTLSnackbar").isVisible()).to.be.true
+			snackbar.vm.close()
+			snackbar.vm.$nextTick().then(() => {
+				expect(snackbar.contains(".WTLSnackbar")).to.be.false
+			})
+		})
 	})
 
 	it("auto shows and hides after 2000ms", () => {
 		snackbar.vm.showSnack()
-		expect(snackbar.find(".WTLSnackbar").isVisible()).to.be.true
-		sleep(2000).then((response) => {
-			expect(snackbar.contains(".WTLSnackbar")).to.be.false
+		snackbar.vm.$nextTick().then(() => {
+			expect(snackbar.find(".WTLSnackbar").isVisible()).to.be.true
+			sleep(2000).then((response) => {
+				expect(snackbar.contains(".WTLSnackbar")).to.be.false
+			})
 		})
 	})
 })

@@ -1,4 +1,4 @@
-<<template lang="pug">
+<template lang="pug">
 	ul
 		li
 			router-link(to="/uidemo/button") Button

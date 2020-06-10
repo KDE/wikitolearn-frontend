@@ -1,5 +1,5 @@
 <template lang="pug">
-	.WTLField(:class="[fieldType]")
+	.WTLField(:class="{ 'WTLField--is-grouped': grouped, 'WTLField--has-addons': hasAddons }")
 		label.WTLField__label(v-if="label") {{ label }}
 		.WTLField__content
 			slot
@@ -10,17 +10,22 @@
 export default {
 	name: "WTLField",
 	props: {
-		label: String,
-		message: String,
+		label: {
+			type: String,
+			default: ""
+		},
+		message: {
+			type: String,
+			default: ""
+		},
 		grouped: Boolean
 	},
 	computed: {
-		fieldType() {
-			if (this.grouped) {
-				return "WTLField--is-grouped"
-			} else if (this.$slots.default !== undefined && this.$slots.default.length > 1) {
-				return "WTLField--has-addons"
-			}
+		hasAddons() {
+			return (
+				// eslint-disable-next-line vue/require-slots-as-functions
+				!this.grouped && this.$slots.default !== undefined && this.$slots.default.length > 1
+			)
 		}
 	}
 }

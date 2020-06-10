@@ -12,14 +12,6 @@
 		router-link(to="/uidemo") Go to UI elements showcase
 </template>
 
-<style lang="scss">
-.view--Home {
-	h1 {
-		text-align: center;
-	}
-}
-</style>
-
 <script>
 import Badge from "components/home/Badge"
 
@@ -50,3 +42,11 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+.view--Home {
+	h1 {
+		text-align: center;
+	}
+}
+</style>

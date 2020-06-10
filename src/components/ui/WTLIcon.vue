@@ -8,7 +8,10 @@
 export default {
 	name: "WTLIcon",
 	props: {
-		icon: String,
+		icon: {
+			type: String,
+			required: true
+		},
 		clickable: {
 			type: Boolean,
 			default: false

@@ -1,7 +1,7 @@
 <template lang="pug">
 	#app.App(:class="{ 'App--rtl': isRTL }")
 		// AuthCheck
-		noscript Your browser does not have JS enabled, you are still able to browse the website but you won't be able to access advanced features such as editing or loggin-in.
+		noscript {{ noJavascriptMessage }}
 		AppHeader
 		.App__content
 			transition(name="fade", mode="out-in")
@@ -16,6 +16,55 @@
 			PollingBar
 
 </template>
+
+<script>
+import AppHeader from "components/AppHeader"
+import PollingBar from "components/PollingBar"
+import WTLSpinner from "components/ui/WTLSpinner2"
+import Error from "components/Error"
+// import AuthCheck from "components/utils/AuthCheck"
+
+export default {
+	name: "App",
+	components: { AppHeader, PollingBar /* , AuthCheck */, WTLSpinner, Error },
+	data: () => {
+		return {
+			isRTL: LANGUAGE_ISRTL,
+			noJavascriptMessage: "Your browser does not have JS enabled, you are still able to browse the website but you won't be able to access advanced features such as editing or loggin-in."
+		}
+	},
+	computed: {
+		activeRequests() {
+			return this.$store.state.activeApiRequests > 0
+		}
+	},
+	mounted() {
+		// Add a request/response interceptor for showing loading spinner
+		this.axios.interceptors.request.use((config) => {
+			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: 1 })
+			return config
+		}, (error) => {
+			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: -1 })
+			return Promise.reject(error)
+		})
+
+		this.axios.interceptors.response.use((response) => {
+			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: -1 })
+			return response
+		}, (error) => {
+			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: -1 })
+			return Promise.reject(error)
+		})
+
+		// refresh auth token every 30 sec if necessary
+		setInterval(() => {
+			if (this.$keycloak.authenticated && this.$keycloak.isTokenExpired(75)) {
+				this.$keycloak.updateToken(75)
+			}
+		}, 1000 * 30)
+	}
+}
+</script>
 
 <style lang="scss">
 @import "~styles/global";
@@ -89,51 +138,3 @@ noscript {
 	opacity: 0;
 }
 </style>
-
-<script>
-import AppHeader from "components/AppHeader"
-import PollingBar from "components/PollingBar"
-import WTLSpinner from "components/ui/WTLSpinner2"
-import Error from "components/Error"
-// import AuthCheck from "components/utils/AuthCheck"
-
-export default {
-	name: "App",
-	components: { AppHeader, PollingBar /* , AuthCheck */, WTLSpinner, Error },
-	data: () => {
-		return {
-			isRTL: LANGUAGE_ISRTL
-		}
-	},
-	computed: {
-		activeRequests() {
-			return this.$store.state.activeApiRequests > 0
-		}
-	},
-	mounted() {
-		// Add a request/response interceptor for showing loading spinner
-		this.axios.interceptors.request.use((config) => {
-			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: 1 })
-			return config
-		}, (error) => {
-			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: -1 })
-			return Promise.reject(error)
-		})
-
-		this.axios.interceptors.response.use((response) => {
-			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: -1 })
-			return response
-		}, (error) => {
-			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: -1 })
-			return Promise.reject(error)
-		})
-
-		// refresh auth token every 30 sec if necessary
-		setInterval(() => {
-			if (this.$keycloak.authenticated && this.$keycloak.isTokenExpired(75)) {
-				this.$keycloak.updateToken(75)
-			}
-		}, 1000 * 30)
-	}
-}
-</script>

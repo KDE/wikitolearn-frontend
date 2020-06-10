@@ -16,7 +16,9 @@
 				h2 Change page order by dragging them
 				.ChapterEditor__pages-container
 					ol.ChapterEditor__old-pages
-						li.ChapterEditor__page(v-for="(page, index) in chapter.pages") {{ index+1 }}. {{ page.title }}
+						li.ChapterEditor__page(
+							v-for="(page, index) in chapter.pages"
+						) {{ index+1 }}. {{ page.title }}
 					VueDraggable.ChapterEditor__pages(
 						v-if="newPages"
 						v-model="newPages"
@@ -26,11 +28,15 @@
 						.ChapterEditor__page(
 							v-for="(page, index) in newPages"
 							:key="page._id"
-						) 
+						)
 							WTLIcon(icon="swap_vertical")
 							| {{ page.title }}
 							.ChapterEditor__page-icons
-								WTLIcon(icon="delete", clickable=true, @click.native="deletePageDialog(page, index)")
+								WTLIcon(
+									icon="delete",
+									clickable=true,
+									@click.native="deletePageDialog(page, index)"
+								)
 				div.flex-container.flex-content-end
 					h3 Confirm changes?
 					WTLButton(
@@ -59,6 +65,155 @@
 				WTLButton(@click="closeModal", icon="close") Cancel
 				WTLButton(@click="patchPage", icon="done", type="success") Confirm edit
 </template>
+
+<script>
+import WTLButton from "components/ui/WTLButton"
+import WTLInput from "components/ui/WTLInput"
+import VueDraggable from "vuedraggable"
+
+export default {
+	name: "ChapterEditor",
+	components: { WTLInput, WTLButton, VueDraggable },
+	props: {
+		chapter: {
+			type: Object,
+			required: true
+		}
+	},
+	data() {
+		return {
+			showModal: false,
+			newChapter: {
+				title: this.chapter.title,
+				language: this.chapter.language
+			},
+			newPages: this.chapter.pages,
+			newPage: {
+				title: "",
+				language: this.chapter.language,
+				content: ""
+			},
+			page: {
+				title: "",
+				language: this.chapter.language
+			}
+		}
+	},
+	mounted() {
+
+	},
+	methods: {
+		fetchAndResetInitialState() {
+			this.$store.dispatch("FETCH_CHAPTER", { chapterName: this.chapter._id }).then((response) => {
+				Object.assign(this.$data, this.$options.data.apply(this))
+			})
+		},
+		patchChapter() {
+			this.$store.dispatch("PATCH_CHAPTER", {
+				urlParams: {
+					chapterId: this.chapter._id
+				},
+				bodyParams: {
+					...this.newChapter
+				},
+				options: {
+					headers: {
+						"If-Match": this.chapter._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).catch((error) => {
+				return this.$store.dispatch("SET_ERROR", { error: error })
+			})
+		},
+		patchChapterPages() {
+			// Assign this to avoid updates in the meantime
+			const newPages = JSON.parse(JSON.stringify(this.newPages))
+			this.$store.dispatch("PATCH_CHAPTER_PAGES", {
+				urlParams: {
+					chapterId: this.chapter._id
+				},
+				bodyParams: {
+					...this.chapter,
+					pages: this.slice(this.newPages, ["_id", "_version"])
+				},
+				options: {
+					headers: {
+						"If-Match": this.chapter._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				return this.$store.commit("UPDATE_CHAPTER_FIELDS", { pages: newPages, _id: this.chapter._id })
+			}).catch((error) => {
+				return this.$store.dispatch("SET_ERROR", { error: error })
+			})
+		},
+		postPage() {
+			// Assign this to avoid updates in the mean time
+			const pages = JSON.parse(JSON.stringify(this.chapter.pages))
+			const page = Object.assign({}, this.newPage)
+			this.$store.dispatch("POST_PAGE", {
+				urlParams: {
+					chapterId: this.chapter._id
+				},
+				bodyParams: {
+					...this.filterKeys(this.chapter, ["_id", "title", "language"]),
+					pages: [
+						...this.slice(pages, ["_id", "_version"]),
+						page
+					]
+				},
+				options: {
+					headers: {
+						"If-Match": this.chapter._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				const pageAdded = response.pages[response.pages.length - 1]
+				page._version = pageAdded._version
+				page._id = pageAdded._id
+				pages.push(page)
+				this.$store.commit("UPDATE_CHAPTER_FIELDS", {
+					pages: pages,
+					_id: this.chapter._id
+				})
+				this.newPages.push(page)
+			}).catch((error) => {
+				return this.$store.commit("SET_ERROR", { error: error })
+			})
+		},
+		closeModal() {
+			this.$refs.modal.close()
+		},
+		deletePageDialog(page, index) {
+			this.$dialog.confirm({
+				title: `Delete page ${page.title}?`,
+				content: "Removing this page will remove all its content",
+				onConfirm: () => {
+					this.deletePage(page, index)
+				}
+			})
+		},
+		deletePage(page, index) {
+			this.$store.dispatch("DELETE_PAGE", {
+				urlParams: { pageId: page._id },
+				options: {
+					headers: {
+						"If-Match": page._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				this.fetchAndResetInitialState()
+			}).catch((error) => {
+				return this.$store.commit("SET_ERROR", { error: error })
+			})
+		}
+	}
+}
+</script>
 
 <style lang="scss">
 @import "~styles/declarations";
@@ -141,152 +296,3 @@
 	}
 }
 </style>
-
-<script>
-import WTLButton from "components/ui/WTLButton"
-import WTLInput from "components/ui/WTLInput"
-import VueDraggable from "vuedraggable"
-
-export default {
-	name: "ChapterEditor",
-	components: { WTLInput, WTLButton, VueDraggable },
-	data() {
-		return {
-			showModal: false,
-			newChapter: {
-				title: this.chapter.title,
-				language: this.chapter.language
-			},
-			newPages: this.chapter.pages,
-			newPage: {
-				title: "",
-				language: this.chapter.language,
-				content: ""
-			},
-			page: {
-				title: "",
-				language: this.chapter.language
-			}
-		}
-	},
-	props: {
-		chapter: {
-			type: Object,
-			required: true
-		}
-	},
-	mounted() {
-
-	},
-	methods: {
-		fetchAndResetInitialState() {
-			this.$store.dispatch("FETCH_CHAPTER", { chapterName: this.chapter._id }).then((response) => {
-				Object.assign(this.$data, this.$options.data.apply(this))
-			})
-		},
-		patchChapter() {
-			this.$store.dispatch("PATCH_CHAPTER", {
-				urlParams: {
-					chapterId: this.chapter._id
-				},
-				bodyParams: {
-					...this.newChapter
-				},
-				options: {
-					headers: {
-						"If-Match": this.chapter._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).catch((error) => {
-				return this.$store.dispatch("SET_ERROR", { error: error })
-			})
-		},
-		patchChapterPages() {
-			// Assign this to avoid updates in the meantime
-			const newPages = JSON.parse(JSON.stringify(this.newPages))
-			this.$store.dispatch("PATCH_CHAPTER_PAGES", {
-				urlParams: {
-					chapterId: this.chapter._id
-				},
-				bodyParams: {
-					...this.chapter,
-					pages: this.slice(this.newPages, ["_id", "_version"])
-				},
-				options: {
-					headers: {
-						"If-Match": this.chapter._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).then((response) => {
-				return this.$store.commit("UPDATE_CHAPTER_FIELDS", { pages: newPages, _id: this.chapter._id })
-			}).catch((error) => {
-				return this.$store.dispatch("SET_ERROR", { error: error })
-			})
-		},
-		postPage() {
-			// Assign this to avoid updates in the mean time
-			let pages = JSON.parse(JSON.stringify(this.chapter.pages))
-			let page = Object.assign({}, this.newPage)
-			this.$store.dispatch("POST_PAGE", {
-				urlParams: {
-					chapterId: this.chapter._id
-				},
-				bodyParams: {
-					...this.filterKeys(this.chapter, ["_id", "title", "language"]),
-					pages: [
-						...this.slice(pages, ["_id", "_version"]),
-						page
-					]
-				},
-				options: {
-					headers: {
-						"If-Match": this.chapter._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).then((response) => {
-				const pageAdded = response.pages[response.pages.length - 1]
-				page._version = pageAdded._version
-				page._id = pageAdded._id
-				pages.push(page)
-				this.$store.commit("UPDATE_CHAPTER_FIELDS", {
-					pages: pages,
-					_id: this.chapter._id
-				})
-				this.newPages.push(page)
-			}).catch((error) => {
-				return this.$store.commit("SET_ERROR", { error: error })
-			})
-		},
-		closeModal() {
-			this.$refs.modal.close()
-		},
-		deletePageDialog(page, index) {
-			this.$dialog.confirm({
-				title: `Delete page ${page.title}?`,
-				content: "Removing this page will remove all its content",
-				onConfirm: () => {
-					this.deletePage(page, index)
-				}
-			})
-		},
-		deletePage(page, index) {
-			this.$store.dispatch("DELETE_PAGE", {
-				urlParams: { pageId: page._id },
-				options: {
-					headers: {
-						"If-Match": page._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).then((response) => {
-				this.fetchAndResetInitialState()
-			}).catch((error) => {
-				return this.$store.commit("SET_ERROR", { error: error })
-			})
-		}
-	}
-}
-</script>

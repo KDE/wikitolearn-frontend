@@ -1,5 +1,5 @@
 <template lang="pug">
-	NoSSR
+	ClientOnly
 		.SessionInfo
 			template(v-if="$keycloak && $keycloak.ready")
 				WTLButton(v-if="!$keycloak.authenticated", @click=`doLogin()`) Login
@@ -15,11 +15,11 @@
 <script>
 import WTLButton from "components/ui/WTLButton"
 import WTLField from "components/ui/WTLField"
-import NoSSR from "vue-no-ssr"
+import ClientOnly from "vue-client-only"
 
 export default {
 	name: "SessionInfo",
-	components: { NoSSR, WTLButton, WTLField },
+	components: { ClientOnly, WTLButton, WTLField },
 	methods: {
 		checkLogin() {
 			const _this = this

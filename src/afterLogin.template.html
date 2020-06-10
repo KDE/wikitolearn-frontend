@@ -10,7 +10,7 @@
 <body>
 	<h1>WikiToLearn - Logging in, please wait</h1>
 	<script>
-		var keycloak = Keycloak({
+		const keycloak = Keycloak({
 			"realm": "<%=htmlWebpackPlugin.options.config.clientAuthRealm%>",
 			"url": "<%=htmlWebpackPlugin.options.config.clientAuthHostname%>/auth",
 			"ssl-required": "external",
@@ -18,10 +18,10 @@
 			"public-client": true,
 			"clientId": "<%=htmlWebpackPlugin.options.config.clientAuthId%>"
 		})
-		keycloak.init({ onLoad: 'check-sso' })
+		keycloak.init({ onLoad: "check-sso" })
 			.success(function(auth) {
-					window.location.href = "/"
-				}
+				window.location.href = "/"
+			}
 			)
 	</script>
 </body>

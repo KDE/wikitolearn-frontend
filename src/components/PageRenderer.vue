@@ -4,6 +4,22 @@
 		.PageRenderer__content(v-html="page.content")
 </template>
 
+<script>
+export default {
+	name: "PageRenderer",
+	props: {
+		page: {
+			type: Object,
+			required: true
+		},
+		showName: {
+			type: Boolean,
+			default: true
+		}
+	}
+}
+</script>
+
 <style lang="scss">
 .PageRenderer {
 	padding: 2rem;
@@ -26,19 +42,3 @@
 	}
 }
 </style>
-
-<script>
-export default {
-	name: "PageRenderer",
-	props: {
-		page: {
-			type: Object,
-			required: true
-		},
-		showName: {
-			type: Boolean,
-			default: true
-		}
-	}
-}
-</script>

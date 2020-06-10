@@ -15,25 +15,18 @@
 			)
 </template>
 
-<style lang="scss">
-.view--Page {
-	.PageRenderer {
-		background-color: white;
-	}
-
-	&__buttons {
-		margin-bottom: 1rem;
-		text-align: right;
-	}
-}
-</style>
-
 <script>
 import PageRenderer from "components/PageRenderer"
 
 export default {
 	name: "Page",
 	components: { PageRenderer },
+	asyncData({ store, route }) {
+		return store.dispatch("FETCH_PAGE", { pageTitle: route.params.pageTitle })
+			.catch((error) => {
+				return store.commit("SET_ERROR", { error: error })
+			})
+	},
 	computed: {
 		page() {
 			return this.$store.state.pages[this.$route.params.pageTitle]
@@ -46,12 +39,6 @@ export default {
 			}
 		}
 	},
-	asyncData({ store, route }) {
-		return store.dispatch("FETCH_PAGE", { pageTitle: route.params.pageTitle })
-			.catch((error) => {
-				return store.commit("SET_ERROR", { error: error })
-			})
-	},
 	meta() {
 		return {
 			title: this.pageTitle,
@@ -61,3 +48,16 @@ export default {
 	}
 }
 </script>
+
+<style lang="scss">
+.view--Page {
+	.PageRenderer {
+		background-color: white;
+	}
+
+	&__buttons {
+		margin-bottom: 1rem;
+		text-align: right;
+	}
+}
+</style>

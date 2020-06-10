@@ -13,6 +13,33 @@
 			slot
 </template>
 
+<script>
+export default {
+	name: "WTLButton",
+	props: {
+		type: {
+			type: String,
+			default: "default"
+		},
+		disabled: {
+			type: Boolean,
+			default: false
+		},
+		icon: {
+			type: String,
+			default: ""
+		}
+	},
+	methods: {
+		click(e) {
+			if (this.disabled) return
+
+			this.$emit("click")
+		}
+	}
+}
+</script>
+
 <style lang="scss">
 @import "~styles/declarations";
 
@@ -87,29 +114,3 @@
 	}
 }
 </style>
-
-<script>
-export default {
-	name: "WTLButton",
-	props: {
-		type: {
-			type: String,
-			default: "default"
-		},
-		disabled: {
-			type: Boolean,
-			default: false
-		},
-		icon: {
-			type: String
-		}
-	},
-	methods: {
-		click(e) {
-			if (this.disabled) return
-
-			this.$emit("click")
-		}
-	}
-}
-</script>

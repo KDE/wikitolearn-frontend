@@ -92,11 +92,13 @@ export default {
 }
 
 
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.25s ease-out;
+.fade-enter-active,
+.fade-leave-active {
+	transition: opacity 0.25s ease-out;
 }
 
-.fade-enter, .fade-leave-to {
-  opacity: 0;
+.fade-enter,
+.fade-leave-to {
+	opacity: 0;
 }
 </style>

@@ -20,6 +20,6 @@ module.exports = merge(base, {
 			"process.env.API_HOSTNAME": JSON.stringify(config.serverApiHostname),
 			"process.env.AUTH_HOSTNAME": JSON.stringify(config.serverAuthHostname)
 		}),
-		new VueSSRServerPlugin()
+		new VueSSRServerPlugin({ filename: "vue-ssr-server-bundle.json" })
 	]
 })

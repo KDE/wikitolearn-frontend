@@ -1,28 +1,29 @@
-const path = require("path")
-const webpack = require("webpack")
+const path = require("path");
+const webpack = require("webpack");
 
-const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin")
-const StringReplacePlugin = require("string-replace-webpack-plugin")
-const StyleLintPlugin = require("stylelint-webpack-plugin")
-const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const FriendlyErrorsPlugin = require("friendly-errors-webpack-plugin");
+const StringReplacePlugin = require("string-replace-webpack-plugin");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const Vue = require("vue")
-const VueI18n = require("vue-i18n")
-const config = require("../config")
+const Vue = require("vue");
+const VueI18n = require("vue-i18n");
+const config = require("../config");
 
 const messages = {
-	main:	require(`../i18n/${config.language.filename}`),
-	fallback: config.fallbackLanguage ?
-		require(`../i18n/${config.fallbackLanguage.filename}`) : null
-}
+	main: require(`../i18n/${config.language.filename}`),
+	fallback: config.fallbackLanguage
+		? require(`../i18n/${config.fallbackLanguage.filename}`)
+		: null
+};
 
-Vue.use(VueI18n)
+Vue.use(VueI18n);
 i18n = new VueI18n({
 	locale: "main",
 	fallbackLocale: messages.fallback ? "fallback" : null,
 	messages
-})
+});
 
 const commonPlugins = [
 	new VueLoaderPlugin(),
@@ -32,11 +33,13 @@ const commonPlugins = [
 	new StringReplacePlugin(),
 	new webpack.DefinePlugin({
 		"process.env.NODE_ENV": JSON.stringify(config.nodeEnv),
-		"PRODUCTION": config.isProduction,
+		PRODUCTION: config.isProduction,
 
-		"LANGUAGE_MAIN_FILENAME": JSON.stringify(config.language.filename),
-		"LANGUAGE_FALLBACK_FILENAME": config.fallbackLanguage ? JSON.stringify(config.fallbackLanguage.filename) : null,
-		"LANGUAGE_ISRTL": config.language.isRTL,
+		LANGUAGE_MAIN_FILENAME: JSON.stringify(config.language.filename),
+		LANGUAGE_FALLBACK_FILENAME: config.fallbackLanguage
+			? JSON.stringify(config.fallbackLanguage.filename)
+			: null,
+		LANGUAGE_ISRTL: config.language.isRTL,
 
 		"process.env.RUNNING_ENV": JSON.stringify(config.runningEnv),
 
@@ -49,32 +52,37 @@ const commonPlugins = [
 		files: ["src/**/*.vue", "src/**/*.scss"],
 		emitErrors: false
 	})
-]
+];
 
 const doI18n = StringReplacePlugin.replace({
-	replacements: [{
-		pattern: /\$ts\((.+)\)/g,
-		replacement: function(fullMatch, params, offset, string) {
-			params = params.split(",").map((p) => eval(p))
-			if (i18n.tc(...params) === params[0]) {
-				// check if the translation key is defined
-				// We could have used i18n.te but it does not account for fallback languages
-				// We are using this instead. Uglier but does the job
-				if (config.isProduction) {
-					throw new Error(`[i18n] Translation key "${params[0]}" does not exist`)
-				} else { // just warn in development mode
-					console.warn(`[i18n] Translation key "${params[0]}" does not exist`)
+	replacements: [
+		{
+			pattern: /\$ts\((.+)\)/g,
+			replacement: function(fullMatch, params, offset, string) {
+				params = params.split(",").map(p => eval(p));
+				if (i18n.tc(...params) === params[0]) {
+					// check if the translation key is defined
+					// We could have used i18n.te but it does not account for fallback languages
+					// We are using this instead. Uglier but does the job
+					if (config.isProduction) {
+						throw new Error(
+							`[i18n] Translation key "${params[0]}" does not exist`
+						);
+					} else {
+						// just warn in development mode
+						console.warn(
+							`[i18n] Translation key "${params[0]}" does not exist`
+						);
+					}
 				}
+				return i18n.tc(...params);
 			}
-			return i18n.tc(...params)
 		}
-	}]
-})
+	]
+});
 
 module.exports = {
-	devtool: config.isProduction
-		? false
-		: "inline-source-map",
+	devtool: config.isProduction ? false : "inline-source-map",
 
 	entry: {
 		app: "./src/entry-client.js"
@@ -91,16 +99,16 @@ module.exports = {
 
 	resolve: {
 		alias: {
-			"static": path.resolve(__dirname, "../static"),
-			"src": path.resolve(__dirname, "../src"),
-			"components": path.resolve(__dirname, "../src/components"),
-			"images": path.resolve(__dirname, "../src/images"),
-			"router": path.resolve(__dirname, "../src/router"),
-			"store": path.resolve(__dirname, "../src/store"),
-			"styles": path.resolve(__dirname, "../src/styles"),
-			"mixins": path.resolve(__dirname, "../src/mixins"),
-			"views": path.resolve(__dirname, "../src/views"),
-			"api": path.resolve(__dirname, "../src/api")
+			static: path.resolve(__dirname, "../static"),
+			src: path.resolve(__dirname, "../src"),
+			components: path.resolve(__dirname, "../src/components"),
+			images: path.resolve(__dirname, "../src/images"),
+			router: path.resolve(__dirname, "../src/router"),
+			store: path.resolve(__dirname, "../src/store"),
+			styles: path.resolve(__dirname, "../src/styles"),
+			mixins: path.resolve(__dirname, "../src/mixins"),
+			views: path.resolve(__dirname, "../src/views"),
+			api: path.resolve(__dirname, "../src/api")
 		},
 		extensions: [".js", ".vue", ".scss"]
 	},
@@ -125,40 +133,34 @@ module.exports = {
 				test: /\.scss$/,
 				use: [
 					process.env.NODE_ENV !== "production"
-            ? "vue-style-loader"
-            : MiniCssExtractPlugin.loader,
+						? "vue-style-loader"
+						: MiniCssExtractPlugin.loader,
 					"css-loader",
+					{ loader: "postcss-loader", options: { parser: "postcss-scss" } },
 					"scss-loader"
 				]
 			},
 			{
-        test: /\.css$/,
-        use: [
-          process.env.NODE_ENV !== "production"
-            ? "vue-style-loader"
-            : MiniCssExtractPlugin.loader,
-          "css-loader"
-        ]
-      },
+				test: /\.css$/,
+				use: [
+					process.env.NODE_ENV !== "production"
+						? "vue-style-loader"
+						: MiniCssExtractPlugin.loader,
+					"css-loader",
+					"postcss-loader"
+				]
+			},
 			{
 				test: /\.pug$/,
 				loader: "pug-plain-loader"
 			},
 			{
+				test: /\.pug$/,
+				use: doI18n
+			},
+			{
 				test: /\.vue$/,
-				loader: "vue-loader",
-				options: {
-					// TODO: These options has been deprecated, try configuring them webpack-like
-					preLoaders: {
-						pug: doI18n,
-						html: doI18n
-					},
-					preserveWhitespace: false,
-					postcss: [
-						require("autoprefixer")({ browsers: ["last 3 versions"] }),
-						require("cssnano")
-					]
-				}
+				loader: "vue-loader"
 			},
 			{
 				test: /\.js$/,
@@ -170,7 +172,8 @@ module.exports = {
 				loader: "url-loader",
 				options: {
 					limit: 10000,
-					name: "img/[name].[hash:16].[ext]"
+					name: "img/[name].[hash:16].[ext]",
+					esModule: false
 				}
 			}
 		]
@@ -181,7 +184,8 @@ module.exports = {
 		hints: config.isProduction ? "warning" : false
 	},
 
-	plugins: config.isProduction ? commonPlugins : commonPlugins.concat([
-		new FriendlyErrorsPlugin()
-	])
-}
+	plugins: config.isProduction
+		? commonPlugins
+		: commonPlugins.concat([new FriendlyErrorsPlugin()]),
+
+};

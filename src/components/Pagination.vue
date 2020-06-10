@@ -1,16 +1,16 @@
 <template lang="pug">
 	.Pagination(
-		v-if="!isNaN(last_page)"
+		v-if="!isNaN(lastPage)"
 	)
 		.Pagination__container
 			WTLButton(
-				:disabled="current_page <= 1"
-				@click="fetchPage(current_page-1)"
+				:disabled="currentPage <= 1"
+				@click="fetchPage(currentPage-1)"
 			) Pagina precedente
-			.Pagination__current-page Pagina {{ current_page }} / {{ last_page }}
+			.Pagination__current-page Pagina {{ currentPage }} / {{ lastPage }}
 			WTLButton(
-				:disabled="current_page >= last_page"
-				@click="fetchPage(current_page+1)"
+				:disabled="currentPage >= lastPage"
+				@click="fetchPage(currentPage+1)"
 			) Pagina successiva
 </template>
 
@@ -18,29 +18,30 @@
 import WTLButton from "components/ui/WTLButton"
 
 export default {
+	components: { WTLButton },
 	props: {
 		resource: {
 			type: String,
 			required: true
 		},
 		page: {
-			type: Number
+			type: Number,
+			default: 0
 		},
-		last_page: {
+		lastPage: {
 			type: Number,
 			required: true
 		}
 	},
-	components: { WTLButton },
 	data() {
 		return {
-			current_page: this.page ? this.page : 1
+			currentPage: this.page ? this.page : 1
 		}
 	},
 	methods: {
 		fetchPage(page) {
-			this.current_page = page
-			let data = this.$store.dispatch(`FETCH_${this.resource}S`, { page: page })
+			this.currentPage = page
+			const data = this.$store.dispatch(`FETCH_${this.resource}S`, { page: page })
 				.catch((error) => {
 					console.log(error)
 					return this.$store.commit("SET_ERROR", { error: error })

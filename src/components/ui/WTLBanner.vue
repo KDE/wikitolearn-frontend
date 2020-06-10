@@ -58,7 +58,7 @@ export default {
 	padding: 0.5rem;
 	box-shadow: $shadow-1;
 	border-radius: $input-radius;
-	color: #ffffff;
+	color: #fff;
 	background-color: $black;
 
 	> * {

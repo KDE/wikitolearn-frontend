@@ -3,9 +3,11 @@ import "es6-promise/auto"
 import { createApp } from "./app"
 
 if (!window.location.origin) {
-	window.location.origin = window.location.protocol + "//"
-		+ window.location.hostname
-		+ (window.location.port ? ":" + window.location.port : "")
+	window.location.origin =
+		window.location.protocol +
+		"//" +
+		window.location.hostname +
+		(window.location.port ? ":" + window.location.port : "")
 }
 
 // a global mixin that calls `asyncData` when a route component's params change
@@ -16,7 +18,9 @@ Vue.mixin({
 			asyncData({
 				store: this.$store,
 				route: to
-			}).then(next).catch(next)
+			})
+				.then(next)
+				.catch(next)
 		} else {
 			next()
 		}
@@ -62,7 +66,7 @@ router.onReady(() => {
 		if (store.state.error) store.commit("CLEAR_ERROR")
 
 		const activated = matched.filter((c, i) => {
-			return diffed || (diffed = (prevMatched[i] !== c))
+			return diffed || (diffed = prevMatched[i] !== c)
 		})
 
 		const asyncDataHooks = activated.map((c) => c.asyncData).filter((_) => _)
@@ -89,7 +93,7 @@ if (process.env.NODE_ENV === "production" && "serviceWorker" in navigator) {
 } else {
 	navigator.serviceWorker.getRegistrations().then(function(registrations) {
 		console.log("Unregistering service workers for development")
-		for (let registration of registrations) {
+		for (const registration of registrations) {
 			registration.unregister()
 		}
 	})

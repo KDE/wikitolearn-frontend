@@ -10,6 +10,18 @@
 				WTLButton.WTLButton--full-width(type="info") Log In
 </template>
 
+<script>
+export default {
+	name: "Login",
+	meta() {
+		return {
+			title: "Login",
+			description: "This is the meta description for the login page"
+		}
+	}
+}
+</script>
+
 <style lang="scss">
 @import "~styles/declarations";
 
@@ -44,16 +56,3 @@
 	}
 }
 </style>
-
-<script>
-export default {
-	name: "Login",
-	meta() {
-		return {
-			title: "Login",
-			description: "This is the meta description for the login page"
-		}
-	}
-}
-</script>
-

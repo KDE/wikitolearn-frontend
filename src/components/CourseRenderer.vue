@@ -21,6 +21,25 @@
 				}`) {{ chapter.title }}
 </template>
 
+<script>
+import ChapterPages from "components/ChapterPages"
+
+export default {
+	name: "CourseRenderer",
+	components: { ChapterPages },
+	props: {
+		course: {
+			type: Object,
+			required: true
+		},
+		showName: {
+			type: Boolean,
+			default: true
+		}
+	}
+}
+</script>
+
 <style lang="scss">
 @import "~styles/declarations";
 
@@ -58,22 +77,3 @@
 	}
 }
 </style>
-
-<script>
-import ChapterPages from "components/ChapterPages"
-
-export default {
-	name: "CourseRenderer",
-	components: { ChapterPages },
-	props: {
-		course: {
-			type: Object,
-			required: true
-		},
-		showName: {
-			type: Boolean,
-			default: true
-		}
-	}
-}
-</script>

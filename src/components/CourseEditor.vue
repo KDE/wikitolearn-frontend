@@ -16,7 +16,9 @@
 				h2 Change chapter order by dragging them
 				.CourseEditor__chapters-container
 					ol.CourseEditor__old-chapters
-						li.CourseEditor__chapter(v-for="(chapter, index) in course.chapters") {{ index+1 }}. {{ chapter.title }}
+						li.CourseEditor__chapter(
+							v-for="(chapter, index) in course.chapters"
+						) {{ index+1 }}. {{ chapter.title }}
 					VueDraggable.CourseEditor__chapters(
 						v-if="newChapters"
 						v-model="newChapters"
@@ -34,7 +36,11 @@
 								WTLIcon(icon="swap_vertical")
 							| {{ chapter.title }}
 							.CourseEditor__chapter-icons
-								WTLIcon(icon="delete", clickable=true, @click.native="deleteChapterDialog(chapter, index)")
+								WTLIcon(
+									icon="delete",
+									clickable=true,
+									@click.native="deleteChapterDialog(chapter, index)"
+								)
 				div.flex-container.flex-content-end
 					h3 Confirm changes?
 					WTLButton(
@@ -63,6 +69,160 @@
 				WTLButton(@click="closeModal", icon="close") Cancel
 				WTLButton(@click="patchChapter", icon="done", type="success") Confirm edit
 </template>
+
+<script>
+import WTLButton from "components/ui/WTLButton"
+import WTLInput from "components/ui/WTLInput"
+import VueDraggable from "vuedraggable"
+
+export default {
+	name: "CourseEditor",
+	components: { WTLInput, WTLButton, VueDraggable },
+	props: {
+		course: {
+			type: Object,
+			required: true
+		}
+	},
+	data() {
+		return {
+			showModal: false,
+			newCourse: {
+				title: this.course.title,
+				language: this.course.language
+			},
+			newChapters: this.course.chapters,
+			newChapter: {
+				title: "",
+				language: this.course.language
+			},
+			chapter: {
+				title: "",
+				language: this.course.language
+			}
+		}
+	},
+	mounted() {
+
+	},
+	methods: {
+		fetchAndResetInitialState() {
+			this.$store.dispatch("FETCH_COURSE", { courseName: this.course._id }).then((response) => {
+				Object.assign(this.$data, this.$options.data.apply(this))
+			})
+		},
+		patchCourse() {
+			this.$store.dispatch("PATCH_COURSE", {
+				urlParams: {
+					courseName: this.course._id
+				},
+				bodyParams: {
+					...this.newCourse
+				},
+				options: {
+					headers: {
+						"If-Match": this.course._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				// Now update title
+				this.updateMetaTitle(this.course.title)
+			}).catch((error) => {
+				return this.$store.dispatch("SET_ERROR", { error: error })
+			})
+		},
+		patchCourseChapters() {
+			// Assign this to avoid updates in the meantime
+			const newChapters = JSON.parse(JSON.stringify(this.newChapters))
+			this.$store.dispatch("PATCH_COURSE_CHAPTERS", {
+				urlParams: {
+					courseName: this.course._id
+				},
+				bodyParams: {
+					...this.course,
+					chapters: this.slice(this.newChapters, ["_id", "_version"])
+				},
+				options: {
+					headers: {
+						"If-Match": this.course._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				return this.$store.commit("UPDATE_COURSE_FIELDS", { chapters: newChapters, _id: this.course._id })
+			}).catch((error) => {
+				return this.$store.dispatch("SET_ERROR", { error: error })
+			})
+		},
+		postChapter() {
+			// Assign this to avoid updates in the mean time
+			const chapters = JSON.parse(JSON.stringify(this.course.chapters))
+			const chapter = Object.assign({}, this.newChapter)
+			this.$store.dispatch("POST_CHAPTER", {
+				urlParams: {
+					courseName: this.course._id
+				},
+				bodyParams: {
+					...this.filterKeys(this.course, ["_id", "title", "language"]),
+					chapters: [
+						...this.slice(chapters, ["_id", "_version"]),
+						chapter
+					]
+				},
+				options: {
+					headers: {
+						"If-Match": this.course._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				const chapterAdded = response.chapters[response.chapters.length - 1]
+				chapter._version = chapterAdded._version
+				chapter._id = chapterAdded._id
+				chapters.push(chapter)
+				this.$store.commit("UPDATE_COURSE_FIELDS", {
+					chapters: chapters,
+					_id: this.course._id
+				})
+				this.newChapters.push(chapter)
+			}).catch((error) => {
+				return this.$store.commit("SET_ERROR", { error: error })
+			})
+		},
+		deleteChapterDialog(chapter, index) {
+			let pagesString = ""
+			if (chapter.pages) {
+				for (const page of chapter.pages) {
+					pagesString += page.title + ", "
+				}
+			}
+			this.$dialog.confirm({
+				title: `Delete chapter ${chapter.title}?`,
+				content: `Removing this chapter will remove its pages: ${pagesString}`,
+				onConfirm: () => {
+					this.deleteChapter(chapter, index)
+				}
+			})
+		},
+		deleteChapter(chapter, index) {
+			this.$store.dispatch("DELETE_CHAPTER", {
+				urlParams: { chapterId: chapter._id },
+				options: {
+					headers: {
+						"If-Match": chapter._etag,
+						"Authorization": `bearer ${this.$keycloak.token}`
+					}
+				}
+			}).then((response) => {
+				this.fetchAndResetInitialState()
+			}).catch((error) => {
+				return this.$store.commit("SET_ERROR", { error: error })
+			})
+		}
+	}
+}
+</script>
 
 <style lang="scss">
 @import "~styles/declarations";
@@ -149,157 +309,3 @@
 	}
 }
 </style>
-
-<script>
-import WTLButton from "components/ui/WTLButton"
-import WTLInput from "components/ui/WTLInput"
-import VueDraggable from "vuedraggable"
-
-export default {
-	name: "CourseEditor",
-	components: { WTLInput, WTLButton, VueDraggable },
-	data() {
-		return {
-			showModal: false,
-			newCourse: {
-				title: this.course.title,
-				language: this.course.language
-			},
-			newChapters: this.course.chapters,
-			newChapter: {
-				title: "",
-				language: this.course.language
-			},
-			chapter: {
-				title: "",
-				language: this.course.language
-			}
-		}
-	},
-	props: {
-		course: {
-			type: Object,
-			required: true
-		}
-	},
-	mounted() {
-
-	},
-	methods: {
-		fetchAndResetInitialState() {
-			this.$store.dispatch("FETCH_COURSE", { courseName: this.course._id }).then((response) => {
-				Object.assign(this.$data, this.$options.data.apply(this))
-			})
-		},
-		patchCourse() {
-			this.$store.dispatch("PATCH_COURSE", {
-				urlParams: {
-					courseName: this.course._id
-				},
-				bodyParams: {
-					...this.newCourse
-				},
-				options: {
-					headers: {
-						"If-Match": this.course._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).then((response) => {
-				// Now update title
-				this.updateMetaTitle(this.course.title)
-			}).catch((error) => {
-				return this.$store.dispatch("SET_ERROR", { error: error })
-			})
-		},
-		patchCourseChapters() {
-			// Assign this to avoid updates in the meantime
-			const newChapters = JSON.parse(JSON.stringify(this.newChapters))
-			this.$store.dispatch("PATCH_COURSE_CHAPTERS", {
-				urlParams: {
-					courseName: this.course._id
-				},
-				bodyParams: {
-					...this.course,
-					chapters: this.slice(this.newChapters, ["_id", "_version"])
-				},
-				options: {
-					headers: {
-						"If-Match": this.course._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).then((response) => {
-				return this.$store.commit("UPDATE_COURSE_FIELDS", { chapters: newChapters, _id: this.course._id })
-			}).catch((error) => {
-				return this.$store.dispatch("SET_ERROR", { error: error })
-			})
-		},
-		postChapter() {
-			// Assign this to avoid updates in the mean time
-			let chapters = JSON.parse(JSON.stringify(this.course.chapters))
-			let chapter = Object.assign({}, this.newChapter)
-			this.$store.dispatch("POST_CHAPTER", {
-				urlParams: {
-					courseName: this.course._id
-				},
-				bodyParams: {
-					...this.filterKeys(this.course, ["_id", "title", "language"]),
-					chapters: [
-						...this.slice(chapters, ["_id", "_version"]),
-						chapter
-					]
-				},
-				options: {
-					headers: {
-						"If-Match": this.course._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).then((response) => {
-				const chapterAdded = response.chapters[response.chapters.length - 1]
-				chapter._version = chapterAdded._version
-				chapter._id = chapterAdded._id
-				chapters.push(chapter)
-				this.$store.commit("UPDATE_COURSE_FIELDS", {
-					chapters: chapters,
-					_id: this.course._id
-				})
-				this.newChapters.push(chapter)
-			}).catch((error) => {
-				return this.$store.commit("SET_ERROR", { error: error })
-			})
-		},
-		deleteChapterDialog(chapter, index) {
-			let pagesString = ""
-			if (chapter.pages) {
-				for (let page of chapter.pages) {
-					pagesString += page.title + ", "
-				}
-			}
-			this.$dialog.confirm({
-				title: `Delete chapter ${chapter.title}?`,
-				content: `Removing this chapter will remove its pages: ${pagesString}`,
-				onConfirm: () => {
-					this.deleteChapter(chapter, index)
-				}
-			})
-		},
-		deleteChapter(chapter, index) {
-			this.$store.dispatch("DELETE_CHAPTER", {
-				urlParams: { chapterId: chapter._id },
-				options: {
-					headers: {
-						"If-Match": chapter._etag,
-						"Authorization": `bearer ${this.$keycloak.token}`
-					}
-				}
-			}).then((response) => {
-				this.fetchAndResetInitialState()
-			}).catch((error) => {
-				return this.$store.commit("SET_ERROR", { error: error })
-			})
-		}
-	}
-}
-</script>

@@ -3,6 +3,7 @@ node_modules/
 dist/
 npm-debug.log
 selenium-debug.log
+selenium-server.log
 test/e2e/reports
 test/unit/coverage
 phantomjsdriver.log

@@ -51,24 +51,24 @@ export const mutations = {
 	},
 
 	UPDATE_COURSE_FIELDS(state, course) {
-		let courseToUpdate = state.courses[course._id]
-		for (let key of Object.keys(course)) {
+		const courseToUpdate = state.courses[course._id]
+		for (const key of Object.keys(course)) {
 			courseToUpdate[key] = course[key]
 		}
 		Vue.set(state.courses, course._id, courseToUpdate)
 	},
 
 	UPDATE_CHAPTER_FIELDS(state, chapter) {
-		let chapterToUpdate = state.chapters[chapter._id]
-		for (let key of Object.keys(chapter)) {
+		const chapterToUpdate = state.chapters[chapter._id]
+		for (const key of Object.keys(chapter)) {
 			chapterToUpdate[key] = chapter[key]
 		}
 		Vue.set(state.chapters, chapter._id, chapterToUpdate)
 	},
 
 	UPDATE_PAGE_FIELDS(state, page) {
-		let pageToUpdate = state.pages[page._id]
-		for (let key of Object.keys(page)) {
+		const pageToUpdate = state.pages[page._id]
+		for (const key of Object.keys(page)) {
 			pageToUpdate[key] = page[key]
 		}
 		Vue.set(state.pages, page._id, pageToUpdate)

@@ -1,10 +1,10 @@
 export default {
 	methods: {
 		slice(array, keys) {
-			let array2 = []
-			for (let obj of array) {
-				let obj2 = {}
-				for (let key of keys) {
+			const array2 = []
+			for (const obj of array) {
+				const obj2 = {}
+				for (const key of keys) {
 					obj2[key] = obj[key]
 				}
 				array2.push(obj2)
@@ -12,8 +12,8 @@ export default {
 			return array2
 		},
 		filterKeys(object, keys) {
-			let obj = {}
-			for (let key of keys) {
+			const obj = {}
+			for (const key of keys) {
 				obj[key] = object[key]
 			}
 			return obj

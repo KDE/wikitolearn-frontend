@@ -22,14 +22,21 @@
 			:value="inputValue"
 			@input="input"
 		)
-		//WTLIcon.WTLInput__icon(v-if="icon", :icon="icon", :class="'WTLInput__icon--' + iconPosition")
+		// WTLIcon.WTLInput__icon(
+			v-if="icon",
+			:icon="icon",
+			:class="'WTLInput__icon--' + iconPosition")
 </template>
 
 <script>
+/* eslint-disable vue/require-default-prop */
 export default {
 	name: "WTLInput",
 	props: {
-		value: [Number, String],
+		value: {
+			type: [Number, String],
+			default: ""
+		},
 		type: {
 			type: String,
 			default: "text"
@@ -39,7 +46,10 @@ export default {
 			type: Boolean,
 			default: false
 		},
-		placeholder: String,
+		placeholder: {
+			type: String,
+			default: ""
+		},
 		maxlength: [Number, String],
 		minlength: [Number, String],
 		readonly: Boolean,
@@ -124,7 +134,7 @@ $input-border-color: #dbdbdb;
 		&--right {
 			right: 0.1rem;
 		}
-	}*/
+	} */
 
 	&__input {
 		@include input();
@@ -141,7 +151,7 @@ $input-border-color: #dbdbdb;
 			&--right {
 				padding-right: 2rem;
 			}
-		}*/
+		} */
 
 		&--full-width {
 			width: 100%;

@@ -1,9 +1,4 @@
 # This must be executed via `source ./setup-dev-env`
-
-export PUBLIC_PWA_GATEWAY_URI=http://172.17.0.1:12000
-export PUBLIC_KEYCLOAK_URI=http://172.17.0.1:9080
-export KEYCLOAK_AUTH_REALM=wikitolearn-local
-export KEYCLOAK_FRONTEND_CLIENT_ID=frontend
-export PWA_GATEWAY_URI=http://172.17.0.1:12000
-export KEYCLOAK_URI=http://172.17.0.1:9080
-export SERVICE_PORT=13000
+set -a
+  [ -f .env ] && . .env
+set +a

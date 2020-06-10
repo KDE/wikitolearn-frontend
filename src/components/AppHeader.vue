@@ -3,11 +3,24 @@
 		.AppHeader__content
 			.AppHeader__left
 				router-link.AppHeader__link(to="/")
-					img.AppHeader__logo(src="~images/logo.png", alt="WikiToLearn - collaborative textbooks")
-					img.AppHeader__name(src="~images/name.svg", alt="WikiToLearn - collaborative textbooks")
+					img.AppHeader__logo(
+						src="~images/logo.png", alt="WikiToLearn - collaborative textbooks"
+					)
+					img.AppHeader__name(
+						src="~images/name.svg", alt="WikiToLearn - collaborative textbooks"
+					)
 			.AppHeader__right
 				SessionInfo
 </template>
+
+<script>
+import SessionInfo from "components/SessionInfo"
+
+export default {
+	name: "AppHeader",
+	components: { SessionInfo }
+}
+</script>
 
 <style lang="scss">
 @import "~styles/declarations";
@@ -52,12 +65,3 @@
 	}
 }
 </style>
-
-<script>
-import SessionInfo from "components/SessionInfo"
-
-export default {
-	name: "AppHeader",
-	components: { SessionInfo }
-}
-</script>

@@ -1,6 +1,6 @@
 import Vue from "vue"
 
-const	config = {
+const config = {
 	hostname: process.env.API_HOSTNAME,
 	preamble: "api/v1"
 }

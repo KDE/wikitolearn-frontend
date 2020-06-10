@@ -13,6 +13,12 @@ import PageEditor from "components/PageEditor"
 export default {
 	name: "EditPage",
 	components: { PageEditor },
+	asyncData({ store, route }) {
+		return store.dispatch("FETCH_PAGE", { pageTitle: route.params.pageTitle })
+			.catch((error) => {
+				return store.commit("SET_ERROR", { error: error })
+			})
+	},
 	computed: {
 		page() {
 			return this.$store.state.pages[this.$route.params.pageTitle]
@@ -24,12 +30,6 @@ export default {
 				return this.$route.params.pageTitle
 			}
 		}
-	},
-	asyncData({ store, route }) {
-		return store.dispatch("FETCH_PAGE", { pageTitle: route.params.pageTitle })
-			.catch((error) => {
-				return store.commit("SET_ERROR", { error: error })
-			})
 	},
 	meta() {
 		return {

@@ -1,5 +1,5 @@
 <template lang="pug">
-	NoSSR
+	ClientOnly
 		.PollingBar
 			.PollingBar__header
 				.PollingBar__title Running operations
@@ -13,6 +13,17 @@
 						@click="$store.commit('DELETE_POLLING', { id: operation.id })"
 					) close
  </template>
+
+<script>
+export default {
+	name: "PollingBar",
+	computed: {
+		pollingOperations() {
+			return this.$store.state.pollingOperations
+		}
+	}
+}
+</script>
 
 <style lang="scss">
 @import "~styles/declarations";
@@ -53,14 +64,3 @@
 	}
 }
 </style>
-
-<script>
-export default {
-	name: "PollingBar",
-	computed: {
-		pollingOperations() {
-			return this.$store.state.pollingOperations
-		}
-	}
-}
-</script>

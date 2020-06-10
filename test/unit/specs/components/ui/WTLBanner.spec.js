@@ -20,7 +20,8 @@ describe("WTLBanner", () => {
 	it("closes on button click", () => {
 		expect(banner.is(".WTLBanner")).to.be.true
 		let button = banner.find(".WTLBanner__close")
-		button.trigger("click")
-		expect(banner.is(".WTLBanner")).to.be.false
+		button.trigger("click").then(() => {
+			expect(banner.is(".WTLBanner")).to.be.false
+		})
 	})
 })

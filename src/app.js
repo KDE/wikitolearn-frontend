@@ -40,8 +40,8 @@ Vue.component("WTLField", WTLField)
 import WTLModal from "components/ui/WTLModal"
 Vue.component("WTLModal", WTLModal)
 
-import NoSSR from "vue-no-ssr"
-Vue.component("NoSSR", NoSSR)
+import ClientOnly from "vue-client-only"
+Vue.component("ClientOnly", ClientOnly)
 
 // we use "primaryLanguage" as a key because it does not really matter
 // we can do this since the file is loaded using the `LANGUAGE_FILENAME` key

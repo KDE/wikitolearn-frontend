@@ -9,6 +9,38 @@
 					slot(name="actions")
 </template>
 
+<script>
+export default {
+	name: "WTLModal",
+	props: {
+		active: {
+			type: Boolean,
+			default: false
+		},
+		title: {
+			type: String,
+			default: ""
+		}
+	},
+	data() {
+		return {
+			show: this.active
+		}
+	},
+	methods: {
+		close() {
+			this.$emit("close")
+			this.show = false
+		},
+		closeOutside(event) {
+			if (!document.getElementById("modal-body").contains(event.target)) {
+				this.close()
+			}
+		}
+	}
+}
+</script>
+
 <style lang="scss">
 @import "~styles/declarations";
 
@@ -53,32 +85,3 @@
 	}
 }
 </style>
-
-<script>
-export default {
-	name: "WTLModal",
-	props: {
-		active: {
-			type: Boolean,
-			default: false
-		},
-		title: String
-	},
-	data() {
-		return {
-			show: this.active
-		}
-	},
-	methods: {
-		close() {
-			this.$emit("close")
-			this.show = false
-		},
-		closeOutside(event) {
-			if (!document.getElementById("modal-body").contains(event.target)) {
-				this.close()
-			}
-		}
-	}
-}
-</script>

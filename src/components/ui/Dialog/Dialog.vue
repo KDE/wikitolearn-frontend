@@ -13,6 +13,84 @@
 					WTLButton(:type="type", @click="confirm()") OK
 </template>
 
+<script>
+import WTLButton from "components/ui/WTLButton"
+
+export default {
+	name: "Dialog",
+	components: {
+		WTLButton
+	},
+	props: {
+		title: {
+			type: String,
+			default: "No Title"
+		},
+		content: {
+			type: String,
+			default: ""
+		},
+		type: {
+			type: String,
+			default: "info"
+		},
+		dialogType: {
+			type: String,
+			required: true
+		},
+		onConfirm: {
+			type: Function,
+			default: () => {}
+		},
+		onCancel: {
+			type: Function,
+			default: () => {}
+		},
+		onClose: {
+			type: Function,
+			default: () => {}
+		}
+	},
+	data() {
+		return {
+			active: false
+		}
+	},
+	beforeMount() {
+		document.body.appendChild(this.$el)
+	},
+	mounted() {
+		this.active = true
+	},
+	methods: {
+		close() {
+			this.onClose()
+			this.active = false
+
+			// remove the dom element after 1sec
+			setTimeout(() => {
+				this.$destroy()
+				this.$el.remove()
+			}, 1000)
+		},
+		confirm() {
+			this.onConfirm()
+			this.close()
+		},
+		cancel() {
+			this.onCancel()
+			this.close()
+		},
+		closeOutside(event) {
+			const dialogBody = document.getElementById("dialog-body")
+			if (dialogBody && !dialogBody.contains(event.target)) {
+				this.close()
+			}
+		}
+	}
+}
+</script>
+
 <style lang="scss">
 @import "~styles/declarations";
 
@@ -78,76 +156,3 @@
 	}
 }
 </style>
-
-<script>
-import WTLButton from "components/ui/WTLButton"
-
-export default {
-	name: "Dialog",
-	components: {
-		WTLButton
-	},
-	props: {
-		active: {
-			type: Boolean,
-			default: false
-		},
-		title: {
-			type: String,
-			default: "No Title"
-		},
-		content: String,
-		type: {
-			type: String,
-			default: "info"
-		},
-		dialogType: {
-			type: String,
-			required: true
-		},
-		onConfirm: {
-			type: Function,
-			default: () => {}
-		},
-		onCancel: {
-			type: Function,
-			default: () => {}
-		},
-		onClose: {
-			type: Function,
-			default: () => {}
-		}
-	},
-	methods: {
-		close() {
-			this.onClose()
-			this.active = false
-
-			// remove the dom element after 1sec
-			setTimeout(() => {
-				this.$destroy()
-				this.$el.remove()
-			}, 1000)
-		},
-		confirm() {
-			this.onConfirm()
-			this.close()
-		},
-		cancel() {
-			this.onCancel()
-			this.close()
-		},
-		closeOutside(event) {
-			if (!document.getElementById("dialog-body").contains(event.target)) {
-				this.close()
-			}
-		}
-	},
-	beforeMount() {
-		document.body.appendChild(this.$el)
-	},
-	mounted() {
-		this.active = true
-	}
-}
-</script>

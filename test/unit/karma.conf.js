@@ -18,7 +18,7 @@ module.exports = function(config) {
 		frameworks: ["mocha", "sinon-chai"],
 		reporters: ["spec", "coverage"],
 		files: [
-			"../../node_modules/babel-polyfill/dist/polyfill.js",
+			// "../../node_modules/babel-polyfill/dist/polyfill.js",
 			"./index.js"
 		],
 		coverageReporter: {

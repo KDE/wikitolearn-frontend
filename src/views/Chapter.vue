@@ -18,6 +18,12 @@
 
 export default {
 	name: "Chapter",
+	asyncData({ store, route }) {
+		return store.dispatch("FETCH_CHAPTER", { chapterName: route.params.chapterName })
+			.catch((error) => {
+				return store.commit("SET_ERROR", { error: error })
+			})
+	},
 	computed: {
 		chapterName() {
 			if (this.chapter) {
@@ -29,12 +35,6 @@ export default {
 		chapter() {
 			return this.$store.state.chapters[this.$route.params.chapterName]
 		}
-	},
-	asyncData({ store, route }) {
-		return store.dispatch("FETCH_CHAPTER", { chapterName: route.params.chapterName })
-			.catch((error) => {
-				return store.commit("SET_ERROR", { error: error })
-			})
 	},
 	meta() {
 		return {
