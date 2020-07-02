@@ -1,32 +1,35 @@
 <template lang="pug">
-	div
-		h1.view--Courses__title Corsi disponibili
-		.view--Courses__container
-			div.view--Course__item(
-				v-for="course in courses"
-				:key="course._id"
+	ViewFrame
+		template(slot="title")
+			h1 {{$t("available_courses")}}
+		template(slot="content")
+			.view--Courses__container
+				div.view--Course__item(
+					v-for="course in courses"
+					:key="course._id"
+				)
+					Badge(:link=`{
+						view: "Course",
+						title: course.title,
+						params: {
+							courseName: course._id
+						}
+					}`)
+			Pagination(
+				resource="COURSE"
+				:last_page="lastPage"
 			)
-				Badge(:link=`{
-					view: "Course",
-					title: course.title,
-					params: {
-						courseName: course._id
-					}
-				}`)
-		Pagination(
-			resource="COURSE"
-			:last_page="lastPage"
-		)
 </template>
 
 <script>
 import Pagination from "components/Pagination"
+import ViewFrame from "components/ViewFrame"
 import Badge from "components/home/Badge"
 import WTLButton from "components/ui/WTLButton"
 
 export default {
 	name: "Courses",
-	components: { WTLButton, Badge, Pagination },
+	components: { WTLButton, Badge, Pagination, ViewFrame },
 	asyncData({ store, route }) {
 		return store.dispatch("FETCH_COURSES", { page: 1 })
 			.catch((error) => {
@@ -80,11 +83,6 @@ export default {
 </script>
 
 <style lang="scss">
-.view--Courses__title {
-	text-align: center;
-	margin-bottom: 1rem;
-}
-
 .view--Courses__container {
 	display: flex;
 	flex-wrap: wrap;

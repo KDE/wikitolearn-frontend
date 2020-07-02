@@ -29,6 +29,9 @@ Vue.mixin(helpers)
 import Dialog from "components/ui/Dialog"
 Vue.prototype.$dialog = Dialog
 
+import VTooltip from "v-tooltip"
+Vue.use(VTooltip)
+
 import WTLButton from "components/ui/WTLButton"
 Vue.component("WTLButton", WTLButton)
 import WTLInput from "components/ui/WTLInput"

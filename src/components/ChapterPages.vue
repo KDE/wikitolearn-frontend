@@ -5,6 +5,7 @@
 				v-if="$keycloak && $keycloak.authenticated",
 				clickable=true,
 				icon="edit",
+				tooltip="edit",
 				@click.native="goToEditChapter"
 			)
 			| {{ number }}. {{ chapter.title }}

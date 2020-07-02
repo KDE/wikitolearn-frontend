@@ -1,0 +1,46 @@
+@import "@ckeditor/ckeditor5-ui/theme/mixins/_rwd.css";
+
+.ck.ck-math-form {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	padding: var(--ck-spacing-standard);
+
+	&:focus {
+		outline: none;
+	}
+
+	@mixin ck-media-phone {
+		flex-wrap: wrap;
+
+		& .ck-math-view {
+			flex-basis: 100%;
+
+			& .ck-labeled-input {
+				flex-basis: 100%;
+			}
+
+			& .ck-label {
+				flex-basis: 100%;
+			}
+		}
+
+		& .ck-button {
+			flex-basis: 50%;
+		}
+	}
+}
+
+// Increase toolbar default z-index by one because math preview should be below of it
+.ck.ck-toolbar-container {
+	z-index: calc(var(--ck-z-modal) + 2);
+}
+
+.ck-math-tex.ck-math-tex-display.ck-widget.ck-widget_selected {
+	padding: 3px;
+}
+
+.ck-math-view .ck.ck-input {
+	width: 100%;
+}

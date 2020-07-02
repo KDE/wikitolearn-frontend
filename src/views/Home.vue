@@ -1,23 +1,26 @@
 <template lang="pug">
-	main.view--Home
-		h1 Welcome to WikiToLearn!
-		h2 Sections
-		.badges
-			Badge(
-				:link="coursesLink"
-			)
-		h2 Other Links
-		router-link(to="/showcase") Go to feature showcase
-		br
-		router-link(to="/uidemo") Go to UI elements showcase
+	ViewFrame(:hasBackButton="false")
+		template(slot="title")
+			h1 Welcome to WikiToLearn!
+		template(slot="content")
+			h2 Sections
+			.badges
+				Badge(
+					:link="coursesLink"
+				)
+			h2 Other Links
+			router-link(to="/showcase") Go to feature showcase
+			br
+			router-link(to="/uidemo") Go to UI elements showcase
 </template>
 
 <script>
 import Badge from "components/home/Badge"
+import ViewFrame from "components/ViewFrame"
 
 export default {
 	name: "Home",
-	components: { Badge },
+	components: { Badge, ViewFrame },
 	data() {
 		return {
 			coursesLink: {
@@ -44,9 +47,4 @@ export default {
 </script>
 
 <style lang="scss">
-.view--Home {
-	h1 {
-		text-align: center;
-	}
-}
 </style>

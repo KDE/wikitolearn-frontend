@@ -1,0 +1,78 @@
+.ck .wtlenvironment {
+	margin: 1em 0;
+	padding: 0.5em;
+	background: hsla(0,0%,0%,5%);
+}
+
+.ck .beginenvironment,
+.ck .environmentcontent {
+	padding: 0.5em;
+	margin: 0;
+	background: #FFF;
+}
+
+.ck .beginenvironment {
+	font-weight: bolder;
+	margin-bottom: 0.1em;
+}
+
+.ck .environmentcontent {
+	margin-top: 0.5em;
+}
+
+.ck .begindefinition::before {
+	content: 'Definition: ';
+}
+
+.ck .begintheorem::before {
+	content: "Theorem: ";
+}
+
+.ck .beginproof::before {
+	content: "Proof: ";
+}
+
+.ck .beginexample::before {
+	content: "Example: ";
+}
+
+.ck .beginproposition::before {
+	content: "Proposition: ";
+}
+
+.ck .begincorollary::before {
+	content: "Corollary: ";
+}
+
+.ck .beginaxiom::before {
+	content: "Axiom: ";
+}
+
+.ck .beginremark::before {
+	content: "Remark: ";
+}
+
+.ck .beginlemma::before {
+	content: "Lemma: ";
+}
+
+.ck .beginexercise::before {
+	content: "Exercise: ";
+}
+
+.ck.ck-environment-form {
+	padding: 0.5em;
+	display: flex;
+}
+
+.ck.ck-environment-form .ck-environment-view {
+	padding-right: 0.5em;
+}
+
+.ck.ck-environment-form .ck.ck-dropdown {
+	border: 1px solid #eee;
+}
+
+.ck.ck-environment-form .ck.ck-labeled-input {
+	display: none;
+}

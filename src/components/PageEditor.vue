@@ -1,29 +1,31 @@
 <template lang="pug">
-	div
-		div
-			WTLField(grouped=true, label="Update page title")
-				WTLInput(v-model="newPage.title")
-				WTLButton(type="success", @click="patchPage", icon="done") Update page title
-			// WTLButton(@click="newTheorem") Inserisci teorema
-			ckeditor(:editor="editor", v-model="editorData", :config="editorConfig")
-			//- .Editor(id="editor")
-			//- 	div(id="editor-toolbar")
-			//- 	div(id="editor-editable")
+	ViewFrame
+		template(slot="title")
+			Editable(as="h1", v-model="newPage.title")
+		template(slot="actions")
+			WTLButton(
+					type="success",
+					icon="save",
+					:tooltip="$t('save')"
+					:disabled="!canSavePage"
+					@click="patchPage",
+				)
+		template(slot="content")
+			WTLEditor(v-model="newPage.content")
 </template>
 
 <script>
+import Editable from "components/ui/Editable"
+import ViewFrame from "components/ViewFrame"
 import WTLButton from "components/ui/WTLButton"
-import CKEditor from "@ckeditor/ckeditor5-vue"
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
-// import WTLEditor from "@ckeditor/ckeditor5-build-classic/build/ckeditor"
-// import createElement from "@ckeditor/ckeditor5-utils/src/dom/createelement"
-// import ClassicEditor from "@ckeditor/ckeditor5-build-classic"
 
 export default {
 	name: "Editor",
 	components: {
+		Editable,
+		ViewFrame,
 		WTLButton,
-		ckeditor: CKEditor.component
+		WTLEditor: () => import("components/ui/WTLEditor")
 	},
 	props: {
 		page: {
@@ -33,50 +35,29 @@ export default {
 	},
 	data() {
 		return {
-			editor: ClassicEditor,
-			editorData: this.page.content,
-			editorConfig: {
-				// The configuration of the editor.
-			},
 			newPage: {
 				title: this.page.title,
 				language: this.page.language,
-				content: this.page.content
+				content: this.parseMediaWikiText(this.page.content)
 			}
 		}
 	},
-	mounted() {
-		// const editorContainer = document.querySelector("#editor")
-		// WTLEditor.create(editorContainer).then((editor) => {
-		// 	const toolbarContainer = editorContainer.querySelector("#editor-toolbar")
-		// 	const editableContent = editorContainer.querySelector("#editor-editable")
-		// 	toolbarContainer.appendChild(editor.ui.view.toolbar.element)
-		// 	editableContent.appendChild(editor.ui.view.editable.element)
-		// 	editor.setData(this.newPage.content)
-		// 	this.editor = editor
-		// }).catch((error) => {
-		// 	console.log(error)
-		// })
+	computed: {
+		initialPage() {
+			return {
+				title: this.page.title,
+				language: this.page.language,
+				content: this.parseMediaWikiText(this.page.content)
+			}
+		},
+		isDirty() {
+			return ["title", "language", "content"].some((property) => this.initialPage[property] !== this.newPage[property])
+		},
+		canSavePage() {
+			return this.newPage.title.trim() !== "" && this.isDirty
+		}
 	},
 	methods: {
-		newTheorem() {
-			if (!this.editor) {
-				return
-			}
-			/* Use model to change what user sees
-			this.editor.model.change((writer) => {
-				writer.insertText('<p>foo</p>', this.editor.model.document.selection.getFirstPosition())
-			})*/
-			/* Non funziona la createElement
-			this.editor.model.change((writer) => {
-				let element = createElement(this.editor.model.document, "div", {
-					"data-tag": "dimostrazione"
-				})
-				element.innerHTML = "div di prova"
-				console.log(element)
-				writer.insertElement(element, this.editor.model.document.selection.getFirstPosition())
-			})*/
-		},
 		patchPage() {
 			this.$store.dispatch("PATCH_PAGE", {
 				urlParams: {
@@ -100,12 +81,4 @@ export default {
 </script>
 
 <style lang="scss">
-@import "~styles/_variables";
-
-.Editor {
-	#editor-editable {
-		background-color: $white-bg;
-		border-color: $gray;
-	}
-}
 </style>

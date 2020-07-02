@@ -1,10 +1,10 @@
 <template lang="pug">
 	.view--EditPage
-		h1.EditPage__title {{ pageTitle }}
-		PageEditor(
-			v-if="page",
-			:page="page"
-		)
+		ClientOnly
+			PageEditor(
+				v-if="page",
+				:page="page"
+			)
 </template>
 
 <script>

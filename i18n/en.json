@@ -1,4 +1,10 @@
 {
+	"available_courses": "Available courses",
+	"close": "Close",
+	"edit": "Edit",
+	"go_back": "Go back",
+	"page_title": "Page title",
+	"save": "Save",
 	"showcase_static": "Hello world!",
 	"showcase_dynamic": "no elements | single element | {counter} elements",
 	"site_name": "Site Name",

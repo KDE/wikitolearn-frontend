@@ -1,5 +1,7 @@
 import Vue from "vue"
 import "es6-promise/auto"
+import "core-js/stable"
+import "regenerator-runtime/runtime"
 import { createApp } from "./app"
 
 if (!window.location.origin) {

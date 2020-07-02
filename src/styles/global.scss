@@ -37,3 +37,171 @@ textarea {
 .text-center {
 	text-align: center;
 }
+
+ul {
+	list-style: disc;
+}
+
+li > ul {
+	list-style: circle;
+}
+
+pre {
+	position: relative;
+	padding: 1em;
+	color: #353535;
+	background: hsla(0, 0%, 78%, 0.3);
+	border: 1px solid #c4c4c4;
+	border-radius: 2px;
+	text-align: left;
+	direction: ltr;
+	tab-size: 4;
+	white-space: pre-wrap;
+	font-style: normal;
+}
+
+pre[data-language]::after {
+	content: attr(data-language);
+	position: absolute;
+	top: -1px;
+	right: 10px;
+	background: #353535;
+	font-size: 0.8em;
+	line-height: 0.8em;
+	padding: 0.4em;
+	color: #fff;
+	white-space: nowrap;
+}
+
+code {
+	background-color: hsla(0, 0%, 78%, 0.3);
+	padding: 0.15em;
+	border-radius: 2px;
+}
+
+pre code {
+	background: unset;
+	padding: 0;
+	border-radius: 0;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 1em auto;
+	max-width: 100%;
+	height: 100%;
+	border: 1px double #b3b3b3;
+}
+
+th {
+	font-weight: 700;
+	background: hsla(0, 0%, 78%, 0.3);
+}
+
+th,
+td {
+	min-width: 2em;
+	padding: 0.4em;
+	border: 1px solid #bfbfbf;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin-bottom: 1rem;
+	font-family: inherit;
+	line-height: 1.1;
+	color: inherit;
+}
+
+h1 {
+	font-size: 2.5rem;
+}
+
+h2 {
+	font-size: 2.1rem;
+}
+
+h3 {
+	font-size: 1.8rem;
+}
+
+h4 {
+	font-size: 1.5rem;
+}
+
+h5 {
+	font-size: 1.2rem;
+}
+
+h6 {
+	font-size: 1rem;
+}
+
+p {
+	margin-bottom: 1rem;
+}
+
+figure {
+	clear: both;
+	margin: 1rem auto;
+}
+
+figure.image {
+	display: table;
+	text-align: center;
+	margin: 1em auto;
+}
+
+figure.image.image-style-side {
+	float: right;
+	margin-left: 1.5em;
+	max-width: 50%;
+}
+
+img {
+	margin: 0 auto;
+	max-width: 100%;
+	min-width: 50px;
+}
+
+blockquote {
+	overflow: hidden;
+	padding-right: 1.5em;
+	padding-left: 1.5em;
+	margin-left: 0;
+	margin-right: 0;
+	font-style: italic;
+	border-left: 5px solid #ccc;
+}
+
+.marker-yellow {
+	background-color: #fdfd77;
+}
+
+.marker-green {
+	background-color: #62f962;
+}
+
+.marker-pink {
+	background-color: #fc7899;
+}
+
+.marker-blue {
+	background-color: #72ccfd;
+}
+
+.pen-red {
+	color: #e71313;
+	background-color: transparent;
+}
+
+.pen-green {
+	color: #128a00;
+	background-color: transparent;
+}
+

@@ -1,6 +1,6 @@
 <template lang="pug">
 	.Pagination(
-		v-if="!isNaN(lastPage)"
+		v-if="!isNaN(lastPage) && lastPage > 1"
 	)
 		.Pagination__container
 			WTLButton(
@@ -26,11 +26,11 @@ export default {
 		},
 		page: {
 			type: Number,
-			default: 0
+			default: 1
 		},
 		lastPage: {
 			type: Number,
-			required: true
+			default: 1
 		}
 	},
 	data() {
@@ -40,7 +40,7 @@ export default {
 	},
 	methods: {
 		fetchPage(page) {
-			this.currentPage = page
+			this.currentPage = !isNaN(page) ? page : 1
 			const data = this.$store.dispatch(`FETCH_${this.resource}S`, { page: page })
 				.catch((error) => {
 					console.log(error)

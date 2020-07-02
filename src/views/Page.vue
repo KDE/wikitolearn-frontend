@@ -1,18 +1,11 @@
 <template lang="pug">
 	.view--Page
 		template(v-if="page")
-			.view--Page__buttons
-				router-link(
-					:to=`{
-						name: 'EditPage',
-						params: { pageTitle: $route.params.pageTitle }
-					}`
+			ClientOnly
+				PageRenderer(
+					v-if="page",
+					:page="page"
 				)
-					WTLButton(type="success", icon="mode_edit") Edit Page
-			PageRenderer(
-				v-if="page",
-				:page="page"
-			)
 </template>
 
 <script>
@@ -51,10 +44,6 @@ export default {
 
 <style lang="scss">
 .view--Page {
-	.PageRenderer {
-		background-color: white;
-	}
-
 	&__buttons {
 		margin-bottom: 1rem;
 		text-align: right;

@@ -1,3 +1,5 @@
+import mediaWikiUtils from "../utils/mediaWiki"
+
 export default {
 	methods: {
 		slice(array, keys) {
@@ -20,6 +22,7 @@ export default {
 		},
 		updateMetaTitle(title) {
 			document.title = `${title} - WikiToLearn - collaborative textbooks`
-		}
+		},
+		parseMediaWikiText: mediaWikiUtils.parseMediaWikiText
 	}
 }

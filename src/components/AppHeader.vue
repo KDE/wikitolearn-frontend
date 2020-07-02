@@ -36,7 +36,7 @@ export default {
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
 	border-top: 4px solid;
 	border-image: $border-image-wtl;
-	z-index: 10;
+	z-index: 9999;
 
 	&__content {
 		@include container();

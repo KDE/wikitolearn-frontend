@@ -44,7 +44,9 @@ export default {
 @import "~styles/declarations";
 
 .CourseRenderer {
-	padding: 2rem;
+	background-color: white;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	padding: 1rem;
 
 	&__description {
 		font-style: italic;
@@ -61,6 +63,7 @@ export default {
 
 	&__chapter {
 		flex: 0 0 95%;
+		list-style: none;
 	}
 
 	@include media-breakpoint-up(md) {

@@ -1,60 +1,36 @@
 <template lang="pug">
-	.view--Course
-		.Course__banner
-			WTLBanner(
-				v-if="editMode && course"
-				closeButtonText="Go back"
-				:onClose="() => { editMode = false }"
-			)
-				span You are editing the course
-		.Course__banner
-			WTLBanner.WTLBanner--full-width(
-				v-if="history && course"
-			)
-				span You are viewing an old version of this course. See the latest one
-				router-link(
-					to=`{
-						name: 'Course',
-						params: {
-							courseName: course._id
-						}
-					}`
-				) here
-		.Course__title
+	ViewFrame
+		template(slot="title")
 			h1 {{ courseName }}
+		template(slot="actions")
 			WTLButton(
-				v-if="$keycloak && $keycloak.authenticated && !editMode && !history"
+				v-if="$keycloak && $keycloak.authenticated"
 				@click="toggleEditMode"
-				icon="edit"
-				:type="editModeBtnType"
+				:icon="editButton.icon"
+				:tooltip="$t(editButton.tooltip)"
+				:type="editButton.type"
 			)
-		CourseRenderer(
-			v-if="course && !editMode",
-			:course="course",
-			:showName="false"
-		)
-		CourseEditor(
-			v-if="editMode && course",
-			:course="course"
-		)
+		template(slot="content")
+			CourseRenderer(
+				v-if="course && !editMode",
+				:course="course",
+				:showName="false"
+			)
+			CourseEditor(
+				v-if="editMode && course",
+				:course="course"
+			)
 </template>
 
 <script>
 import CourseRenderer from "components/CourseRenderer"
 import CourseEditor from "components/CourseEditor"
+import ViewFrame from "components/ViewFrame"
 import WTLButton from "components/ui/WTLButton"
-import WTLBanner from "components/ui/WTLBanner"
 
 export default {
 	name: "Course",
-	components: { CourseRenderer, CourseEditor, WTLButton, WTLBanner },
-	props: {
-		history: {
-			required: false,
-			type: Boolean,
-			default: false
-		}
-	},
+	components: { CourseRenderer, CourseEditor, ViewFrame, WTLButton },
 	asyncData({ store, route }) {
 		return store.dispatch("FETCH_COURSE", { courseName: route.params.courseName })
 			.catch((error) => {
@@ -67,11 +43,15 @@ export default {
 		}
 	},
 	computed: {
-		editModeBtnType() {
-			if (this.editMode) {
-				return "warning"
-			} else {
-				return "default"
+		editButton() {
+			return this.editMode ? {
+				type: "default",
+				icon: "close",
+				tooltip: "close"
+			} : {
+				type: "success",
+				icon: "edit",
+				tooltip: "edit"
 			}
 		},
 		courseName() {
@@ -100,25 +80,4 @@ export default {
 </script>
 
 <style lang="scss">
-.view--Course {
-	.CourseRenderer {
-		background-color: white;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-	}
-
-	.Course__banner {
-		margin-bottom: 1rem;
-	}
-
-	.Course__title {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-bottom: 1rem;
-
-		> * {
-			margin-right: 0.5rem;
-		}
-	}
-}
 </style>
