@@ -3,23 +3,17 @@
 		template(slot="title")
 			h1 {{ courseName }}
 		template(slot="actions")
-			router-link(
-				:to=`{
-					name: 'EditCourse',
-					params: { courseName: $route.params.courseName }
-				}`
+			WTLButton(
+				v-if="$keycloak && $keycloak.authenticated && false"
+				@click="() => {}"
+				icon="save"
+				:tooltip="$t('save')"
+				type="success"
 			)
-				WTLButton(
-					v-if="$keycloak && $keycloak.authenticated"
-					type="success",
-					icon="mode_edit"
-					:tooltip="$t('edit')"
-				)
 		template(slot="content")
-			CourseRenderer(
+			CourseEditor(
 				v-if="course",
-				:course="course",
-				:showName="false"
+				:course="course"
 			)
 </template>
 

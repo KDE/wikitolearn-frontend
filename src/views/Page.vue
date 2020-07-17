@@ -1,19 +1,34 @@
 <template lang="pug">
-	.view--Page
-		template(v-if="page")
+	ViewFrame(v-if="page")
+		template(slot="title")
+			h1 {{page.title}}
+		template(slot="actions")
+			router-link(
+				:to=`{
+					name: 'EditPage',
+					params: { pageTitle: $route.params.pageTitle }
+				}`
+			)
+				WTLButton(
+					v-if="$keycloak && $keycloak.authenticated"
+					type="success",
+					icon="mode_edit"
+					:tooltip="$t('edit')"
+				)
+		template(slot="content")
 			ClientOnly
 				PageRenderer(
-					v-if="page",
 					:page="page"
 				)
 </template>
 
 <script>
 import PageRenderer from "components/PageRenderer"
+import ViewFrame from "components/ViewFrame"
 
 export default {
 	name: "Page",
-	components: { PageRenderer },
+	components: { PageRenderer, ViewFrame },
 	asyncData({ store, route }) {
 		return store.dispatch("FETCH_PAGE", { pageTitle: route.params.pageTitle })
 			.catch((error) => {
@@ -43,10 +58,4 @@ export default {
 </script>
 
 <style lang="scss">
-.view--Page {
-	&__buttons {
-		margin-bottom: 1rem;
-		text-align: right;
-	}
-}
 </style>

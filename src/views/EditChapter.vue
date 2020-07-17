@@ -1,7 +1,17 @@
 <template lang="pug">
-	.view--EditChapter
-		h1.EditChapter__title {{ chapterName }}
-		ChapterEditor(
+	ViewFrame
+		template(slot="title")
+			h1 {{ chapterName }}
+		template(slot="actions")
+			WTLButton(
+				v-if="$keycloak && $keycloak.authenticated && false"
+				@click="() => {}"
+				icon="save"
+				:tooltip="$t('save')"
+				type="success"
+			)
+		template(slot="content")
+			ChapterEditor(
 			v-if="chapter",
 			:chapter="chapter"
 		)
@@ -9,10 +19,11 @@
 
 <script>
 import ChapterEditor from "components/ChapterEditor"
+import ViewFrame from "components/ViewFrame"
 
 export default {
 	name: "EditChapter",
-	components: { ChapterEditor },
+	components: { ChapterEditor, ViewFrame },
 	asyncData({ store, route }) {
 		return store.dispatch("FETCH_CHAPTER", { chapterName: route.params.chapterName })
 			.catch((error) => {
@@ -42,10 +53,4 @@ export default {
 </script>
 
 <style>
-.EditChapter__title {
-	width: 100%;
-	text-align: center;
-	margin-bottom: 1rem;
-	margin-top: 1rem;
-}
 </style>

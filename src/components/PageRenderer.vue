@@ -1,28 +1,13 @@
 <template lang="pug">
-	ViewFrame
-		template(slot="title")
-			h1 {{page.title}}
-		template(slot="actions")
-			router-link(
-				:to=`{
-					name: 'EditPage',
-					params: { pageTitle: $route.params.pageTitle }
-				}`
-			)
-				WTLButton(
-					type="success",
-					icon="mode_edit"
-					:tooltip="$t('edit')"
-				)
-		template(slot="content")
-			.PageRenderer__content(v-html="parsedContent")
-			script(
-				type="application/javascript",
-				defer,
-				src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mathtex-script-type.min.js",
-				integrity="sha384-LJ2FmexL77rmGm6SIpxq7y+XA6bkLzGZEgCywzKOZG/ws4va9fUVu2neMjvc3zdv",
-				crossorigin="anonymous"
-			)
+	div(v-if="page")
+		.PageRenderer__content(v-html="parsedContent")
+		script(
+			type="application/javascript",
+			defer,
+			src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/mathtex-script-type.min.js",
+			integrity="sha384-LJ2FmexL77rmGm6SIpxq7y+XA6bkLzGZEgCywzKOZG/ws4va9fUVu2neMjvc3zdv",
+			crossorigin="anonymous"
+		)
 </template>
 
 <script>
