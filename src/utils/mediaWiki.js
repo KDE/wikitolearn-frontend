@@ -1,8 +1,8 @@
-import _ from "lodash"
+import unescape from "lodash/unescape"
 
 const parseMathElements = (documentNode) => {
 	const parseMath = (math) => {
-		return _.unescape(math.replace(/\\mbox/ig, "\\text"))
+		return unescape(math.replace(/\\mbox/ig, "\\text"))
 	}
 	for (const element of documentNode.querySelectorAll("span[typeof=\"mw:Extension/math\"]")) {
 		const math = element.querySelector("annotation[encoding=\"application/x-tex\"]").innerHTML.trim()
