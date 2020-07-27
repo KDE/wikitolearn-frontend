@@ -31,7 +31,7 @@ Vue.mixin({
 
 const { app, router, store } = createApp()
 
-import VueKeycloak from "vue-keycloak"
+import VueKeycloak from "./plugins/VueKeycloak"
 
 Vue.use(VueKeycloak, {
 	keycloakOptions: {
@@ -43,7 +43,8 @@ Vue.use(VueKeycloak, {
 		"clientId": process.env.KEYCLOAK_FRONTEND_CLIENT_ID
 	},
 	keycloakInitOptions: {
-		onLoad: "check-sso"
+		onLoad: "check-sso",
+		silentCheckSsoRedirectUri: window.location.origin + "/silent-check-sso.html"
 	}
 })
 

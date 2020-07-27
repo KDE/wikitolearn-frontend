@@ -94,6 +94,10 @@ app.use("/workbox-*.js", (req, res, next) => {
 	express.static(__dirname + "/dist")(req, res, next)
 })
 
+app.get("/silent-check-sso.html", function(req, res) {
+	res.sendFile("dist/silent-check-sso.html", { "root": __dirname })
+})
+
 app.get("*", (req, res) => {
 	const context = {
 		url: req.url

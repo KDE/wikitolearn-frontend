@@ -37,6 +37,14 @@ const clientConfig = merge(base, {
 			alwaysWriteToDisk: false,
 			config
 		}),
+		new HTMLPlugin({
+			filename: "silent-check-sso.html",
+			template: "src/silent-check-sso.template.html",
+			minify: config.isProduction ? minifyOptions : {},
+			inject: false,
+			alwaysWriteToDisk: false,
+			config
+		}),
 		new HtmlWebpackHarddiskPlugin(),
 		new VueSSRClientPlugin()
 	]
