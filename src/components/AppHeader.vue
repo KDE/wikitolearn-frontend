@@ -10,15 +10,17 @@
 						src="~images/name.svg", alt="WikiToLearn - collaborative textbooks"
 					)
 			.AppHeader__right
-				SessionInfo
+				WTLField(grouped=true)
+					UserMenu
 </template>
 
 <script>
-import SessionInfo from "components/SessionInfo"
+import UserMenu from "components/UserMenu"
+import WTLField from "components/ui/WTLField"
 
 export default {
 	name: "AppHeader",
-	components: { SessionInfo }
+	components: { UserMenu, WTLField }
 }
 </script>
 

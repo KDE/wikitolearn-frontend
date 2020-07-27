@@ -32,6 +32,9 @@ Vue.prototype.$dialog = Dialog
 import VTooltip from "v-tooltip"
 Vue.use(VTooltip)
 
+import vClickOutside from "v-click-outside"
+Vue.use(vClickOutside)
+
 import WTLButton from "components/ui/WTLButton"
 Vue.component("WTLButton", WTLButton)
 import WTLInput from "components/ui/WTLInput"

@@ -116,6 +116,7 @@
 		"regenerator-runtime": "^0.13.5",
 		"require-env": "^0.2.1",
 		"serve-favicon": "^2.4.3",
+		"v-click-outside": "^3.0.1",
 		"v-tooltip": "^2.0.3",
 		"vue": "^2.5.16",
 		"vue-axios": "^2.1.1",

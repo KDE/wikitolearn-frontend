@@ -94,10 +94,6 @@ app.use("/workbox-*.js", (req, res, next) => {
 	express.static(__dirname + "/dist")(req, res, next)
 })
 
-app.get("/afterLogin", function(req, res) {
-	res.sendFile("dist/afterLogin.html", { "root": __dirname })
-})
-
 app.get("*", (req, res) => {
 	const context = {
 		url: req.url

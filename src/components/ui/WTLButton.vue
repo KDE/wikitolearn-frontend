@@ -3,7 +3,8 @@
 		:class=`[
 			type ? 'WTLButton--' + type : '',
 			{ 'WTLButton--has-icon': icon },
-			{ 'WTLButton--no-text': !$slots.default }
+			{ 'WTLButton--no-text': !$slots.default },
+			{ 'WTLButton--no-border': !border }
 		]`
 		:disabled="disabled"
 		@click="click"
@@ -33,6 +34,10 @@ export default {
 		tooltip: {
 			type: String,
 			default: ""
+		},
+		border: {
+			type: Boolean,
+			default: true
 		}
 	},
 	methods: {
@@ -116,6 +121,10 @@ export default {
 		color: $disabled-fg;
 		background-color: $disabled-bg;
 		border-color: $disabled-border;
+	}
+
+	&--no-border {
+		border-color: transparent;
 	}
 }
 

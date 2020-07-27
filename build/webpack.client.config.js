@@ -37,15 +37,6 @@ const clientConfig = merge(base, {
 			alwaysWriteToDisk: false,
 			config
 		}),
-		// generate afterLogin HTML
-		new HTMLPlugin({
-			filename: "afterLogin.html",
-			template: "src/afterLogin.template.html",
-			minify: config.isProduction ? minifyOptions : {},
-			inject: false,
-			alwaysWriteToDisk: true,
-			config
-		}),
 		new HtmlWebpackHarddiskPlugin(),
 		new VueSSRClientPlugin()
 	]
