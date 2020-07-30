@@ -10,8 +10,9 @@
 		@click="click"
 		v-tooltip="tooltip"
 	)
-		WTLIcon(v-if="icon", :icon="icon")
-		.WTLButton__content
+		WTLIcon(v-if="icon && !loading", :icon="icon")
+		WTLSpinner.WTLButton__spinner(v-if="loading")
+		.WTLButton__content(v-if="!loading")
 			slot
 </template>
 
@@ -30,6 +31,10 @@ export default {
 		icon: {
 			type: String,
 			default: ""
+		},
+		loading: {
+			type: Boolean,
+			default: false
 		},
 		tooltip: {
 			type: String,
@@ -125,6 +130,11 @@ export default {
 
 	&--no-border {
 		border-color: transparent;
+	}
+
+	&__spinner {
+		position: relative;
+		margin: -0.416em 0.167em !important;
 	}
 }
 

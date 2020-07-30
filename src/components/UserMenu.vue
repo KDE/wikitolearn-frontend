@@ -1,11 +1,13 @@
 <template lang="pug">
 	ClientOnly
+		.UserMenu(slot="placeholder")
+			WTLButton(loading)
 		.UserMenu
-			WTLButton(v-if="!$keycloak || !$keycloak.ready", icon="face")
+			WTLButton(v-if="!$keycloak || !$keycloak.ready", loading)
 			Dropdown(v-if="$keycloak && $keycloak.ready")
 				template
-					WTLButton(v-if="$keycloak.authenticated", icon="face")
-					WTLButton(v-if="!$keycloak.authenticated", icon="face", type="success")
+					WTLButton(v-if="$keycloak.authenticated", icon="face", type="success")
+					WTLButton(v-if="!$keycloak.authenticated", icon="face")
 				template(slot="menu", v-if="$keycloak.authenticated")
 					div.UserMenu__option {{ $keycloak.user.username }}
 					WTLButton(@click=`$keycloak.logout`, type="error", :border="false") Logout

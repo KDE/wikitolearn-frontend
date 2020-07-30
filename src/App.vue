@@ -19,12 +19,11 @@
 <script>
 import AppHeader from "components/AppHeader"
 import PollingBar from "components/PollingBar"
-import WTLSpinner from "components/ui/WTLSpinner2"
 import Error from "components/Error"
 
 export default {
 	name: "App",
-	components: { AppHeader, PollingBar, WTLSpinner, Error },
+	components: { AppHeader, PollingBar, Error },
 	data: () => {
 		return {
 			isRTL: LANGUAGE_ISRTL,

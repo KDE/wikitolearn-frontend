@@ -45,6 +45,8 @@ import WTLField from "components/ui/WTLField"
 Vue.component("WTLField", WTLField)
 import WTLModal from "components/ui/WTLModal"
 Vue.component("WTLModal", WTLModal)
+import WTLSpinner from "components/ui/WTLSpinner2"
+Vue.component("WTLSpinner", WTLSpinner)
 
 import ClientOnly from "vue-client-only"
 Vue.component("ClientOnly", ClientOnly)
