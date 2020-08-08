@@ -34,12 +34,12 @@ export default {
 		},
 		doLogin() {
 			this.$keycloak.login({
-				redirectUri: `${window.location.origin}/`
+				redirectUri: window.location.href
 			})
 		},
 		doRegistration() {
 			this.$keycloak.register({
-				redirectUri: `${window.location.origin}/`
+				redirectUri: window.location.href
 			})
 		}
 	}
