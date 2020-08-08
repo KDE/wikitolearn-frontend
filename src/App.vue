@@ -52,6 +52,9 @@ export default {
 			this.$store.dispatch("UPDATE_ACTIVE_REQUESTS", { add: -1 })
 			return Promise.reject(error)
 		})
+	},
+	meta: {
+		language: LANGUAGE_MAIN_FILENAME
 	}
 }
 </script>

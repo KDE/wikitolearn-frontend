@@ -1,13 +1,23 @@
 {
 	"available_courses": "Available courses",
+	"axiom": "Axiom",
 	"close": "Close",
+	"corollary": "Corollary",
+	"definition": "Definition",
 	"department": "Department",
 	"edit": "Edit",
+	"example": "Example",
+	"exercise": "Exercise",
 	"go_back": "Go back",
+	"lemma": "Lemma",
 	"page_title": "Page title",
+	"proof": "Proof",
+	"proposition": "Proposition",
+	"remark": "Remark",
 	"save": "Save",
 	"showcase_static": "Hello world!",
 	"showcase_dynamic": "no elements | single element | {counter} elements",
 	"site_name": "Site Name",
-	"site_subtitle": "collaborative textbooks"
+	"site_subtitle": "collaborative textbooks",
+	"theorem": "Theorem"
 }

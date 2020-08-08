@@ -1,12 +1,23 @@
 {
 	"available_courses": "Corsi disponibili",
+	"axiom": "Assioma",
 	"close": "Chiudi",
+	"corollary": "Corollario",
+	"definition": "Definizione",
 	"department": "Dipartimento",
 	"edit": "Modifica",
+	"example": "Esempio",
+	"exercise": "Esercizio",
 	"go_back": "Torna indietro",
+	"lemma": "Lemma",
 	"page_title": "Titolo della pagina",
+	"proof": "Dimostrazione",
+	"proposition": "Proposizione",
+	"remark": "Osservazione",
 	"save": "Salva",
 	"showcase_static": "Ciao Mondo!",
 	"showcase_dynamic": "nessun elemento | un elemento | {counter} elementi",
-	"site_name": "Nome del Sito"
+	"site_name": "Nome del Sito",
+	"site_subtitle": "libri collaborativi",
+	"theorem": "Teorema"
 }

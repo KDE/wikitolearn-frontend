@@ -1,4 +1,30 @@
 .ck .wtlenvironment {
+	--i18n-definition: "Definition: ";
+	--i18n-theorem: "Theorem: ";
+	--i18n-proof: "Proof: ";
+	--i18n-example: "Example: ";
+	--i18n-proposition: "Proposition: ";
+	--i18n-corollary: "Corollary: ";
+	--i18n-axiom: "Axiom: ";
+	--i18n-remark: "Remark: ";
+	--i18n-lemma: "Lemma: ";
+	--i18n-exercise: "Exercise: ";
+}
+
+:lang(it) .ck .wtlenvironment {
+	--i18n-definition: "Definizione: ";
+	--i18n-theorem: "Teorema: ";
+	--i18n-proof: "Dimostrazione: ";
+	--i18n-example: "Esempio: ";
+	--i18n-proposition: "Proposizione: ";
+	--i18n-corollary: "Corollario: ";
+	--i18n-axiom: "Assioma: ";
+	--i18n-remark: "Osservazione: ";
+	--i18n-lemma: "Lemma: ";
+	--i18n-exercise: "Esercizio: ";
+}
+
+.ck .wtlenvironment {
 	margin: 1em 0;
 	padding: 0.5em;
 	background: hsla(0,0%,0%,5%);
@@ -16,48 +42,54 @@
 	margin-bottom: 0.1em;
 }
 
+.beginenvironment:focus {
+	border: var(--ck-focus-ring);
+    box-shadow: var(--ck-inner-shadow),0 0;
+    outline: none;
+}
+
 .ck .environmentcontent {
 	margin-top: 0.5em;
 }
 
-.ck .begindefinition::before {
-	content: 'Definition: ';
+.ck .wtlenvironment[data-environmenttype="definition"] .beginenvironment::before {
+	content: var(--i18n-definition);
 }
 
-.ck .begintheorem::before {
-	content: "Theorem: ";
+.ck .wtlenvironment[data-environmenttype="theorem"] .beginenvironment::before {
+	content: var(--i18n-theorem);
 }
 
-.ck .beginproof::before {
-	content: "Proof: ";
+.ck .wtlenvironment[data-environmenttype="proof"] .beginenvironment::before {
+	content: var(--i18n-proof);
 }
 
-.ck .beginexample::before {
-	content: "Example: ";
+.ck .wtlenvironment[data-environmenttype="example"] .beginenvironment::before {
+	content: var(--i18n-example);
 }
 
-.ck .beginproposition::before {
-	content: "Proposition: ";
+.ck .wtlenvironment[data-environmenttype="proposition"] .beginenvironment::before {
+	content: var(--i18n-proposition);
 }
 
-.ck .begincorollary::before {
-	content: "Corollary: ";
+.ck .wtlenvironment[data-environmenttype="corollary"] .beginenvironment::before {
+	content: var(--i18n-corollary);
 }
 
-.ck .beginaxiom::before {
-	content: "Axiom: ";
+.ck .wtlenvironment[data-environmenttype="axiom"] .beginenvironment::before {
+	content: var(--i18n-axiom);
 }
 
-.ck .beginremark::before {
-	content: "Remark: ";
+.ck .wtlenvironment[data-environmenttype="remark"] .beginenvironment::before {
+	content: var(--i18n-remark);
 }
 
-.ck .beginlemma::before {
-	content: "Lemma: ";
+.ck .wtlenvironment[data-environmenttype="lemma"] .beginenvironment::before {
+	content: var(--i18n-lemma);
 }
 
-.ck .beginexercise::before {
-	content: "Exercise: ";
+.ck .wtlenvironment[data-environmenttype="exercise"] .beginenvironment::before {
+	content: var(--i18n-exercise);
 }
 
 .ck.ck-environment-form {

@@ -64,44 +64,44 @@ export default {
 		font-weight: bolder;
 	}
 
-	.begindefinition::before {
-		content: "Definition: ";
+	.wtlenvironment[data-environmenttype="definition"] .beginenvironment::before {
+		content: "$ts('definition'): ";
 	}
 
-	.begintheorem::before {
-		content: "Theorem: ";
+	.wtlenvironment[data-environmenttype="theorem"] .beginenvironment::before {
+		content: "$ts('theorem'): ";
 	}
 
-	.beginproof::before {
-		content: "Proof: ";
+	.wtlenvironment[data-environmenttype="proof"] .beginenvironment::before {
+		content: "$ts('proof'): ";
 	}
 
-	.beginexample::before {
-		content: "Example: ";
+	.wtlenvironment[data-environmenttype="example"] .beginenvironment::before {
+		content: "$ts('example'): ";
 	}
 
-	.beginproposition::before {
-		content: "Proposition: ";
+	.wtlenvironment[data-environmenttype="proposition"] .beginenvironment::before {
+		content: "$ts('proposition'): ";
 	}
 
-	.begincorollary::before {
-		content: "Corollary: ";
+	.wtlenvironment[data-environmenttype="corollary"] .beginenvironment::before {
+		content: "$ts('corollary'): ";
 	}
 
-	.beginaxiom::before {
-		content: "Definition: ";
+	.wtlenvironment[data-environmenttype="axiom"] .beginenvironment::before {
+		content: "$ts('axiom'): ";
 	}
 
-	.beginremark::before {
-		content: "Remark: ";
+	.wtlenvironment[data-environmenttype="remark"] .beginenvironment::before {
+		content: "$ts('remark'): ";
 	}
 
-	.beginlemma::before {
-		content: "Lemma: ";
+	.wtlenvironment[data-environmenttype="lemma"] .beginenvironment::before {
+		content: "$ts('lemma'): ";
 	}
 
-	.beginexercise::before {
-		content: "Exercise: ";
+	.wtlenvironment[data-environmenttype="exercise"] .beginenvironment::before {
+		content: "$ts('exercise'): ";
 	}
 
 	.environmentcontent {

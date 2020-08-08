@@ -155,7 +155,7 @@ module.exports = {
 				loader: "pug-plain-loader"
 			},
 			{
-				test: /\.pug$/,
+				test: /\.(pug|s?css)$/,
 				use: doI18n
 			},
 			{

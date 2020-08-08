@@ -24,6 +24,9 @@ const clientMetaInfoMixin = {
 			document
 				.querySelector("meta[name=description]")
 				.setAttribute("content", meta.description)
+			document
+				.querySelector("html")
+				.setAttribute("lang", meta.language)
 		}
 	}
 }
