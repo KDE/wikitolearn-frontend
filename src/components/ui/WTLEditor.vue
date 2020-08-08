@@ -100,15 +100,15 @@ export default {
 
 .ck.ck-sticky-panel__content {
 	/* AppHeadear + AppHeader's border */
-	padding-top: calc(3.5rem + 4px);
+	padding-top: calc(3.5rem + 4px) !important;
 }
 
 .ck.ck-editor {
-	pointer-events: none;
+	pointer-events: none !important;
 }
 
 .ck.ck-editor__main,
 .ck.ck-sticky-panel__content * {
-	pointer-events: auto;
+	pointer-events: auto !important;
 }
 </style>
