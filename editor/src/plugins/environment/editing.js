@@ -201,7 +201,14 @@ class InsertEnvironmentCommand extends Command {
 		this.editor.model.change((writer) => {
 			// Insert <environment>*</environment> at the current selection position
 			// in a way that will result in creating a valid model structure.
-			this.editor.model.insertContent(createEnvironment(writer, environmentType))
+			const selection = this.editor.model.document.selection
+			const selectedEnvironment = getSelectedEnvironmentModelWidget(selection)
+			if (!selectedEnvironment) {
+				return this.editor.model.insertContent(createEnvironment(writer, environmentType))
+			}
+			const newEnvironment = writer.cloneElement(selectedEnvironment)
+			writer.setAttribute("environmentType", environmentType, newEnvironment)
+			this.editor.model.insertContent(newEnvironment)
 		})
 	}
 
@@ -227,9 +234,9 @@ function getSelectedEnvironmentModelWidget(selection) {
 function createEnvironment(writer, environmentType) {
 	const environmentClass = (environmentType || "definition").trim().toLowerCase()
 	const environment = writer.createElement("environment", { environmentType: environmentClass })
-	const environmentHeader = writer.createElement("environmentHeader", { class: `beginenvironment begin${environmentClass}` })
-	const environmentContent = writer.createElement("environmentContent")
-	const environmentFooter = writer.createElement("environmentFooter", { class: `endenvironment end${environmentClass}` })
+	const environmentHeader = writer.createElement("environmentHeader", { class: "beginenvironment" })
+	const environmentContent = writer.createElement("environmentContent", { class: "environmentcontent" })
+	const environmentFooter = writer.createElement("environmentFooter", { class: "endenvironment" })
 	writer.append(environmentHeader, environment)
 	writer.append(environmentContent, environment)
 	writer.append(environmentFooter, environment)
