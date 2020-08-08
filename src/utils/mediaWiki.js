@@ -59,7 +59,6 @@ const parseEnvironmentTypeAttribute = (environmentNode) => {
 }
 
 const parseEnvironmentTitle = (beginEnvironmentNode) => {
-	beginEnvironmentNode.innerHTML = beginEnvironmentNode.innerHTML.replace(/[^(]*\(?([^)]*).*/, "$1")
 }
 
 const addMissingEnvironmentWrappers = (documentNode) => {
